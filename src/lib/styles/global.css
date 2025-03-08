@@ -1,0 +1,172 @@
+/* Import Inter font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas,
+    monospace;
+  
+  /* Light mode colors (default) */
+  --background-color: #ffffff;
+  --surface-color: #f9f9f9;
+  --text-color: #272727;
+  --text-muted: #666666;
+  --border-color: #ededed;
+  --primary-color: #4c6ef5;
+  --hover-color: #3b5bdb;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark mode styles - applied when .dark class is on html */
+.dark {
+  --background-color: #121212;
+  --surface-color: #1e1e1e;
+  --text-color: #f5f5f5;
+  --text-muted: #a0a0a0;
+  --border-color: #333333;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Fallback for older browsers that don't support the dark class approach */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background-color: #121212;
+    --surface-color: #1e1e1e;
+    --text-color: #f5f5f5;
+    --text-muted: #a0a0a0;
+    --border-color: #333333;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--hover-color);
+}
+
+/* Basic Layout */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Flexible Grid */
+.grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+/* Components */
+.card {
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: var(--hover-color);
+}
+
+/* Utility Classes */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.gap-sm {
+  gap: 0.5rem;
+}
+
+.gap-md {
+  gap: 1rem;
+}
+
+.gap-lg {
+  gap: 1.5rem;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+} 
