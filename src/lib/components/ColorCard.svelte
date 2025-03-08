@@ -8,7 +8,7 @@
     size?: 'small' | 'medium' | 'large';
   }>();
   
-  let textColor = $state('#000000');
+  let textColor = $state('');
   let colorInfo = $state('');
   
   onMount(() => {
@@ -55,8 +55,9 @@
 
 <style>
   .color-card {
-    position: relative;
+    margin-bottom: 8px;
     border-radius: 6px;
+    position: relative;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     user-select: none;
   }
@@ -70,9 +71,10 @@
   .card-content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
+    align-items: end;
+    padding: 0.8rem;
     height: 100%;
+    
   }
   
   .color-info {
@@ -81,14 +83,19 @@
   }
   
   .color-name {
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: 400;
+    font-size: 0.75rem;
+    transition: font-size 0.2s ease;
+    
   }
   
   .color-value {
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    opacity: 0.8;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.2s ease, max-height 0.2s ease;
   }
   
   .copy-button {
@@ -96,14 +103,25 @@
     border: none;
     color: inherit;
     cursor: pointer;
-    opacity: 0.7;
+    opacity: 0;
     padding: 0.25rem;
     border-radius: 4px;
     transition: opacity 0.2s ease;
+    transform: scale(0.8);
+  }
+  
+  .color-card:hover .color-value {
+    opacity: 0.8;
+    max-height: 20px;
+  }
+  
+  .color-card:hover .copy-button {
+    opacity: 0.7;
+    transform: scale(1);
   }
   
   .copy-button:hover {
-    opacity: 1;
+    opacity: 1 !important;
     background-color: rgba(255, 255, 255, 0.1);
   }
   

@@ -43,12 +43,12 @@
 
 <style>
   .theme-toggle {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.2);
     border: none;
-    color: var(--text-color);
+    color: white;
     cursor: pointer;
-    padding: 0.25rem;
-    border-radius: 4px;
+    padding: 0.5rem;
+    border-radius: 50%;
     transition: background-color 0.2s ease;
     display: flex;
     align-items: center;
@@ -56,6 +56,6 @@
   }
   
   .theme-toggle:hover {
-    background-color: var(--border-color);
+    background-color: rgba(255, 255, 255, 0.3);
   }
 </style> 

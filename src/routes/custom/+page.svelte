@@ -234,13 +234,13 @@
           <div class="component-group">
             <h3>Buttons</h3>
             <div class="component-row">
-              <button class="demo-button primary" style="--button-bg: {colorScale[11]?.value}">
+              <button class="demo-button primary" style="--button-bg: {colorScale[8]?.value}">
                 Primary Button
               </button>
-              <button class="demo-button secondary" style="--button-border: {colorScale[7]?.value}; --button-hover: {colorScale[3]?.value}">
+              <button class="demo-button secondary" style="--button-border: {colorScale[10]?.value}; --button-hover: {colorScale[3]?.value}">
                 Secondary Button
               </button>
-              <button class="demo-button subtle" style="--button-hover: {colorScale[3]?.value}; --button-text: {colorScale[10]?.value}">
+              <button class="demo-button subtle" style="--button-hover: {colorScale[1]?.value}; --button-text: {colorScale[10]?.value}">
                 Text Button
               </button>
             </div>
@@ -252,9 +252,9 @@
             <h3>Cards</h3>
             <div class="cards-container">
               <div class="demo-card" style="--card-bg: {colorScale[1]?.value}; --card-border: {colorScale[5]?.value}">
-                <h3 style="color: {colorScale[11]?.value}">Card Title</h3>
-                <p style="color: {colorScale[10]?.value}">Card content with custom colors applied based on your selected color scheme.</p>
-                <button class="demo-button small" style="--button-bg: {colorScale[9]?.value}">
+                <h3 style="color: {colorScale[14]?.value}">Card Title</h3>
+                <p style="color: {colorScale[13]?.value}">Card content with custom colors applied based on your selected color scheme.</p>
+                <button class="demo-button small" style="--button-bg: {colorScale[6]?.value}">
                   Button
                 </button>
               </div>
@@ -263,7 +263,7 @@
                 <h3 style="color: {colorScale[11]?.value}">Elevated Card</h3>
                 <p style="color: {colorScale[10]?.value}">Card with elevation using custom shadow colors.</p>
                 <button class="demo-button small primary" style="--button-bg: {colorScale[8]?.value}">
-                  Button
+                  Buttonnb
                 </button>
               </div>
             </div>
@@ -281,7 +281,7 @@
                   id="demo-input" 
                   placeholder="Type something..." 
                   class="demo-input" 
-                  style="--input-border: {colorScale[6]?.value}; --input-focus: {colorScale[8]?.value}"
+                  style="--input-border: {colorScale[11]?.value}; --background-color:transparent; --input-focus: {colorScale[10]?.value}"
                 />
               </div>
               
@@ -441,7 +441,7 @@
   
   .color-picker {
     height: 40px;
-    width: 40px;
+    width: 140px;
     border: none;
     padding: 0;
     background: none;
@@ -539,6 +539,8 @@
   .demo-button.small {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
+    background-color: var(--button-bg, var(--primary-color));
+    border: 0px;
   }
   
   .demo-button.primary {
@@ -705,6 +707,7 @@
     display: inline-flex;
     align-items: center;
     transition: all 0.2s ease;
+    color: var(--text-color);
   }
   
   .copy-button:hover {

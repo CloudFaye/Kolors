@@ -3,12 +3,18 @@ import { browser } from '$app/environment';
 
 type Theme = 'light' | 'dark' | 'system';
 
-// Default to light theme instead of system
-const initialTheme: Theme = browser 
-  ? (localStorage.getItem('theme') as Theme) || 'light'
-  : 'light';
+// Get stored theme or use system preference as default
+const getInitialTheme = (): Theme => {
+  if (!browser) return 'light';
+  
+  const storedTheme = localStorage.getItem('theme') as Theme;
+  if (storedTheme) return storedTheme;
+  
+  // Default to system preference
+  return 'system';
+};
 
-export const theme = writable<Theme>(initialTheme);
+export const theme = writable<Theme>(getInitialTheme());
 
 // Apply theme to document
 export function applyTheme(newTheme: Theme) {
@@ -21,20 +27,24 @@ export function applyTheme(newTheme: Theme) {
     // Use system preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     document.documentElement.classList.toggle('dark', prefersDark);
+    document.documentElement.style.colorScheme = prefersDark ? 'dark' : 'light';
   } else {
     // Use selected theme
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    document.documentElement.style.colorScheme = newTheme;
   }
 }
 
-// Initialize theme
+// Initialize theme on page load
 if (browser) {
+  const initialTheme = getInitialTheme();
   applyTheme(initialTheme);
   
   // Watch for system preference changes
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (initialTheme === 'system') {
+    if (theme.subscribe(current => current === 'system')) {
       document.documentElement.classList.toggle('dark', e.matches);
+      document.documentElement.style.colorScheme = e.matches ? 'dark' : 'light';
     }
   });
 } 

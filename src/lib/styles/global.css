@@ -25,6 +25,8 @@
   --text-color: #f5f5f5;
   --text-muted: #a0a0a0;
   --border-color: #333333;
+  --primary-color: #5d7bf7;
+  --hover-color: #4c6ef5;
   --shadow-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -36,6 +38,8 @@
     --text-color: #f5f5f5;
     --text-muted: #a0a0a0;
     --border-color: #333333;
+    --primary-color: #5d7bf7;
+    --hover-color: #4c6ef5;
     --shadow-color: rgba(0, 0, 0, 0.2);
   }
 }

@@ -14,9 +14,9 @@ let { children } = $props()
       </div>
       <nav>
         <ul class="flex gap-md items-center">
-          <li><a href="/">Home</a></li>
-          <li><a href="/custom">Custom Colors</a></li>
-          <li><a href="/about">About</a></li>
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/custom" class="nav-link">Custom Colors</a></li>
+          <li><a href="/about" class="nav-link">About</a></li>
           <li><ThemeToggle /></li>
         </ul>
       </nav>
@@ -44,7 +44,9 @@ let { children } = $props()
   }
   
   header {
+  
     border-bottom: 1px solid var(--border-color);
+    color: white;
   }
   
   footer {
@@ -58,12 +60,23 @@ let { children } = $props()
     font-size: 1.7rem;
     font-weight: 700;
     margin: 0;
-    color: var(--primary-color);
+    color: white;
   }
   
   nav ul {
     list-style: none;
     display: flex;
+  }
+  
+  .nav-link {
+    color: white;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+  }
+  
+  .nav-link:hover {
+    color: white;
+    opacity: 0.8;
   }
   
   main {

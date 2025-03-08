@@ -7,7 +7,7 @@
 </svelte:head>
 
 <section class="hero">
-  <h1>Design System Color Explorer</h1>
+  <h1>Color Explorer</h1>
   <p class="lead">
     Explore color systems from popular design systems and brand guidelines. Compare, contrast, and get inspiration for your next project.
   </p>
@@ -31,12 +31,7 @@
               </div>
             {/each}
           </div>
-          <div class="card-arrow">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-          </div>
+        
         </a>
       </li>
     {/each}
