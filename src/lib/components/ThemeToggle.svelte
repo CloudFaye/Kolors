@@ -45,11 +45,11 @@
   .theme-toggle {
     background: rgba(255, 255, 255, 0.2);
     border: none;
-    color: white;
+   
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 50%;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,5 +57,10 @@
   
   .theme-toggle:hover {
     background-color: rgba(255, 255, 255, 0.3);
+    transform: rotate(12deg);
+  }
+  
+  .theme-toggle:active {
+    transform: scale(0.95);
   }
 </style> 

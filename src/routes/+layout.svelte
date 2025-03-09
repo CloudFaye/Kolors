@@ -46,7 +46,7 @@ let { children } = $props()
   header {
   
     border-bottom: 1px solid var(--border-color);
-    color: white;
+   
   }
   
   footer {
@@ -60,7 +60,7 @@ let { children } = $props()
     font-size: 1.7rem;
     font-weight: 700;
     margin: 0;
-    color: white;
+   
   }
   
   nav ul {
@@ -69,13 +69,13 @@ let { children } = $props()
   }
   
   .nav-link {
-    color: white;
+  
     font-weight: 500;
     transition: opacity 0.2s ease;
   }
   
   .nav-link:hover {
-    color: white;
+    
     opacity: 0.8;
   }
   

@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable, get } from 'svelte/store';
 import { browser } from '$app/environment';
 
 type Theme = 'light' | 'dark' | 'system';
@@ -8,10 +8,12 @@ const getInitialTheme = (): Theme => {
   if (!browser) return 'light';
   
   const storedTheme = localStorage.getItem('theme') as Theme;
-  if (storedTheme) return storedTheme;
+  if (storedTheme && ['light', 'dark', 'system'].includes(storedTheme)) {
+    return storedTheme;
+  }
   
-  // Default to system preference
-  return 'system';
+  // Default to light
+  return 'light';
 };
 
 export const theme = writable<Theme>(getInitialTheme());
@@ -20,17 +22,23 @@ export const theme = writable<Theme>(getInitialTheme());
 export function applyTheme(newTheme: Theme) {
   if (!browser) return;
   
+  // Set the theme in the store
   theme.set(newTheme);
+  
+  // Save to localStorage
   localStorage.setItem('theme', newTheme);
   
+  // Apply the appropriate class to document
   if (newTheme === 'system') {
     // Use system preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    document.documentElement.classList.toggle('dark', prefersDark);
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(prefersDark ? 'dark' : 'light');
     document.documentElement.style.colorScheme = prefersDark ? 'dark' : 'light';
   } else {
-    // Use selected theme
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    // Use explicit theme setting
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(newTheme);
     document.documentElement.style.colorScheme = newTheme;
   }
 }
@@ -41,9 +49,11 @@ if (browser) {
   applyTheme(initialTheme);
   
   // Watch for system preference changes
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (theme.subscribe(current => current === 'system')) {
-      document.documentElement.classList.toggle('dark', e.matches);
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    const currentTheme = get(theme);
+    if (currentTheme === 'system') {
+      document.documentElement.classList.remove('light', 'dark');
+      document.documentElement.classList.add(e.matches ? 'dark' : 'light');
       document.documentElement.style.colorScheme = e.matches ? 'dark' : 'light';
     }
   });
