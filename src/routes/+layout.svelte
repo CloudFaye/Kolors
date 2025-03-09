@@ -1,15 +1,14 @@
 <script lang='ts'>
-  import '../app.css'
+import '../app.css'
 import '$lib/styles/global.css';
 import ToastContainer from '$lib/components/ToastContainer.svelte';
 import ThemeToggle from '$lib/components/ThemeToggle.svelte';
-	import Navbar from '$lib/components/Navbar.svelte';
+import Navbar from '$lib/components/Navbar.svelte';
 
 let { children } = $props()
 </script>
 
 <Navbar />
-
 <main>
   <div class="container ">
     {@render children()}
@@ -18,7 +17,7 @@ let { children } = $props()
 
 <footer>
   <div class="container">
-    <p>© {new Date().getFullYear()} ColorSystems - Explore design system colors by <a href="https://github.com/cloudfaye">Adefaye O Samuel</a></p>
+    <p>© {new Date().getFullYear()} ColorSystems - Explore design system colors by <a href="https://github.com/cloudfaye">Faye Seun</a></p>
   </div>
 </footer>
 

@@ -97,12 +97,12 @@
 					
 				{/each}
 
-				<ThemeToggle />
+				<ThemeToggle  />
 
 			</div>
 
 			<!-- Mobile Navigation Button -->
-			<button class="p-2 md:hidden" onclick={toggleMobileMenu} aria-label="Toggle mobile menu">
+			<button class="p-2  md:hidden" onclick={toggleMobileMenu} aria-label="Toggle mobile menu">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"

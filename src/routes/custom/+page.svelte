@@ -441,7 +441,7 @@
   
   .color-picker {
     height: 40px;
-    width: 140px;
+    width: 30%;
     border: none;
     padding: 0;
     background: none;
@@ -454,6 +454,7 @@
     border: 1px solid var(--border-color);
     border-radius: 4px;
     font-family: var(--font-mono);
+    width: 100%;
   }
   
   .scale-preview {
