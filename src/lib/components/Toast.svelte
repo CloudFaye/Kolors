@@ -48,6 +48,7 @@
 
 <style>
   .toast {
+    color: white;
     position: fixed;
     bottom: 20px;
     left: 50%;
@@ -55,7 +56,7 @@
     background-color: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border-radius: var(--radius-md);
-    padding: var(--spacing-sm) var(--spacing-md);
+    padding: 12px 8px;
     z-index: 1000;
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;

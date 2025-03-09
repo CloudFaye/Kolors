@@ -56,6 +56,16 @@ export const colorSystems: ColorSystem[] = [
           { name: "90", value: "#262626" },
           { name: "100", value: "#161616" }
         ]
+      },
+      {
+        name: "Green palette",
+        description: "IBM Green colors",
+        shades: [
+          {name: "10", value: "#defbe6"},
+          {name: "20", value: "#A7F0BA"},
+          {name: "30", value: "#6fdc8c"}
+          
+        ]
       }
     ]
   },

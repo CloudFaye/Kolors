@@ -37,7 +37,7 @@
           </div>
           
           <div class="color-meta">
-            <span class="color-count">{countUniqueColors(system)} unique colors</span>
+            <span class="color-count">  {countUniqueColors(system)} unique colors</span>
           </div>
           
           <div class="color-preview">
@@ -137,18 +137,17 @@
   .color-count {
     font-family: 'Inter', sans-serif;
     font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    background-color: rgba(76, 110, 245, 0.1);
+    font-weight: 400;
     padding: 0.25rem 0.75rem;
     border-radius: 12px;
     display: inline-block;
+    color: rgb(245, 163, 133);
   }
   
   .color-preview {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    
     margin-bottom: 0.5rem;
     margin-top: auto;
   }
@@ -156,7 +155,7 @@
   .preview-group {
     display: flex;
     height: 12px;
-    border-radius: 6px;
+    border-radius: 1px;
     overflow: hidden;
   }
   
@@ -164,14 +163,7 @@
     flex: 1;
   }
   
-  .card-arrow {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: var(--primary-color);
-    opacity: 0.7;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
+
   
   .system-card:hover .card-arrow {
     opacity: 1;

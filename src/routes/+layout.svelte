@@ -1,31 +1,17 @@
 <script lang='ts'>
+  import '../app.css'
 import '$lib/styles/global.css';
 import ToastContainer from '$lib/components/ToastContainer.svelte';
 import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import Navbar from '$lib/components/Navbar.svelte';
 
 let { children } = $props()
 </script>
 
-<header>
-  <div class="container">
-    <div class="flex justify-between items-center">
-      <div class="logo">
-        <h1>ColorSystems</h1>
-      </div>
-      <nav>
-        <ul class="flex gap-md items-center">
-          <li><a href="/" class="nav-link">Home</a></li>
-          <li><a href="/custom" class="nav-link">Custom Colors</a></li>
-          <li><a href="/about" class="nav-link">About</a></li>
-          <li><ThemeToggle /></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</header>
+<Navbar />
 
 <main>
-  <div class="container">
+  <div class="container ">
     {@render children()}
   </div>
 </main>
@@ -56,7 +42,7 @@ let { children } = $props()
     font-size: 0.9rem;
   }
   
-  .logo h1 {
+  .logo a {
     font-size: 1.7rem;
     font-weight: 700;
     margin: 0;

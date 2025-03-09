@@ -13,7 +13,7 @@
   --text-color: #272727;
   --text-muted: #666666;
   --border-color: #ededed;
-  --primary-color: #4c6ef5;
+  --primary-color: #111111;
   --hover-color: #3b5bdb;
   --shadow-color: rgba(0, 0, 0, 0.05);
 }
@@ -25,7 +25,7 @@
   --text-color: #f5f5f5;
   --text-muted: #a0a0a0;
   --border-color: #333333;
-  --primary-color: #5d7bf7;
+  --primary-color: #ffffff;
   --hover-color: #4c6ef5;
   --shadow-color: rgba(0, 0, 0, 0.2);
 }
@@ -38,8 +38,8 @@
     --text-color: #f5f5f5;
     --text-muted: #a0a0a0;
     --border-color: #333333;
-    --primary-color: #5d7bf7;
-    --hover-color: #4c6ef5;
+    --primary-color: #ffffff;
+    --hover-color: #ebecf1;
     --shadow-color: rgba(0, 0, 0, 0.2);
   }
 }
@@ -100,7 +100,7 @@ a:hover {
 .container {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 80px auto;
   padding: 0 1.5rem;
 }
 

@@ -15,11 +15,13 @@
   </div>
   
   <div class="card about-section">
-    <h2>Why We Built This</h2>
+    <h2>Why I Built This</h2>
     <p>
       Color is a fundamental aspect of design. Major brands and design systems have carefully crafted their color
       palettes to express their identity and ensure accessibility across various platforms. By bringing these 
-      systems together, we hope to:
+      systems together, it's easier to see common patterns between different brand colors and general accessible colors in use. 
+      This list is carefully curated, all the brands mentione dhave products and digital experience that serves millions of users.
+      This list also
     </p>
     <ul>
       <li>Provide inspiration for your own design projects</li>
