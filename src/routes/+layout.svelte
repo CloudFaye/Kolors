@@ -16,7 +16,7 @@ let { children } = $props()
 </main>
 
 <footer>
-  <div class="container">
+  <div class="">
     <p>© {new Date().getFullYear()} ColorSystems - Explore design system colors by <a href="https://github.com/cloudfaye">Faye Seun</a></p>
   </div>
 </footer>
@@ -24,8 +24,8 @@ let { children } = $props()
 <ToastContainer />
 
 <style>
-  header, footer {
-    padding: 1.5rem 0;
+  header {
+    padding: 0.8rem 0;
   }
   
   header {
@@ -38,7 +38,12 @@ let { children } = $props()
     margin-top: 3rem;
     border-top: 1px solid var(--border-color);
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 0.75rem;
+    padding-top: 0.5rem;
+    height: fit-content;
+    padding-left: 1rem;
+   
+    
   }
   
   .logo a {

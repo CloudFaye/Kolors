@@ -16,6 +16,7 @@
   --primary-color: #111111;
   --hover-color: #3b5bdb;
   --shadow-color: rgba(0, 0, 0, 0.05);
+  --button-text: #ffffff;
 }
 
 /* Dark mode styles - applied when .dark class is on html */
@@ -28,6 +29,7 @@
   --primary-color: #ffffff;
   --hover-color: #4c6ef5;
   --shadow-color: rgba(0, 0, 0, 0.2);
+  --button-text: #ffffff;
 }
 
 /* Fallback for older browsers that don't support the dark class approach */

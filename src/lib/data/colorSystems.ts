@@ -1293,6 +1293,113 @@ export const colorSystems: ColorSystem[] = [
           { name: "Blue-Indigo", value: "#49516d" },
           { name: "Crown-Blue", value: "#464b65" }
         ]
+      },
+      {
+        name: "New Reds",
+        description: "Rich red and burgundy tones",
+        shades: [
+          { name: "aura-orange", value: "#b4262a" },
+          { name: "toreador", value: "#b61032" },
+          { name: "lychee", value: "#ba0b32" },
+          { name: "goji-berry", value: "#b91228" },
+          { name: "jalapeno-red", value: "#b2103c" },
+          { name: "love-potion", value: "#c01352" },
+          { name: "merlot", value: "#72262c" },
+          { name: "red-pear", value: "#7b3539" },
+          { name: "smoked-paprika", value: "#6e362c" },
+          { name: "cherry-mahogany", value: "#66352b" }
+        ]
+      },
+      {
+        name: "New Purples",
+        description: "Deep purple and plum shades",
+        shades: [
+          { name: "pink-peacock", value: "#c62168" },
+          { name: "grape-kiss", value: "#7b4368" },
+          { name: "willowherb", value: "#8e4483" },
+          { name: "charisma", value: "#632a60" },
+          { name: "plum-jam", value: "#624076" },
+          { name: "lavender-crystal", value: "#936a98" },
+          { name: "purple-sapphire", value: "#6f4685" },
+          { name: "chive-blossom", value: "#7d5d99" },
+          { name: "purple-corallite", value: "#5a4e8f" },
+          { name: "pickled-beet", value: "#4d233d" },
+          { name: "plum-caspia", value: "#61224a" },
+          { name: "winter-bloom", value: "#47243b" },
+          { name: "spiced-plum", value: "#6d4773" },
+          { name: "violet-indigo", value: "#3e285c" }
+        ]
+      },
+      {
+        name: "New Blues",
+        description: "Ocean-inspired blues and teals",
+        shades: [
+          { name: "gray-blue", value: "#4d587a" },
+          { name: "blue-horizon", value: "#4e6482" },
+          { name: "iris-bloom", value: "#5b609e" },
+          { name: "nebulas-blue", value: "#2d62a3" },
+          { name: "indigo-bunting", value: "#006ca9" },
+          { name: "fjord-blue", value: "#007290" },
+          { name: "hawaiian-surf", value: "#0078a7" },
+          { name: "tahitian-tide", value: "#006b7e" },
+          { name: "maritime-blue", value: "#27293d" },
+          { name: "navy-peony", value: "#223a5e" },
+          { name: "sargasso-sea", value: "#35435a" },
+          { name: "sailor-blue", value: "#0e3a53" },
+          { name: "gibraltar-sea", value: "#123850" },
+          { name: "lapis-blue", value: "#004b8d" },
+          { name: "baleine-blue", value: "#155187" },
+          { name: "galaxy-blue", value: "#2a4b7c" },
+          { name: "blue-opal", value: "#0f3b57" },
+          { name: "moonlit-ocean", value: "#293b4d" },
+          { name: "deep-dive", value: "#29495c" }
+        ]
+      },
+      {
+        name: "New Greens",
+        description: "Natural and forest greens",
+        shades: [
+          { name: "quetzal-green", value: "#006865" },
+          { name: "lush-meadow", value: "#006e51" },
+          { name: "sea-turtle", value: "#5e5749" },
+          { name: "deep-depths", value: "#46483c" },
+          { name: "crystal-teal", value: "#00637c" },
+          { name: "deep-lagoon", value: "#005265" },
+          { name: "sea-moss", value: "#254445" },
+          { name: "forest-biome", value: "#184a45" },
+          { name: "rain-forest", value: "#15463e" }
+        ]
+      },
+      {
+        name: "New Earth Tones",
+        description: "Rich browns and neutral earth tones",
+        shades: [
+          { name: "kalamata", value: "#5f5b4c" },
+          { name: "crocodile", value: "#5d5348" },
+          { name: "chocolate-plum", value: "#3c2d2e" },
+          { name: "chocolate-lab", value: "#5c3e35" },
+          { name: "shaved-chocolate", value: "#543b35" },
+          { name: "fondue-fudge", value: "#5d4236" },
+          { name: "tiramisu", value: "#634235" },
+          { name: "rocky-road", value: "#5a3e36" },
+          { name: "chicory-coffee", value: "#4a342e" },
+          { name: "chocolate-fondant", value: "#56352d" }
+        ]
+      },
+      {
+        name: "Grays",
+        description: "Sophisticated gray and neutral tones",
+        shades: [
+          { name: "arctic-dusk", value: "#735b6a" },
+          { name: "ephemera", value: "#6f5965" },
+          { name: "volcanic-glass", value: "#615c60" },
+          { name: "granite-gray", value: "#615e5f" },
+          { name: "gray-pinstripe", value: "#49494d" },
+          { name: "obsidian", value: "#3a363b" },
+          { name: "blackened-pearl", value: "#4d4b50" },
+          { name: "odyssey-gray", value: "#434452" },
+          { name: "black-onyx", value: "#2b272b" }
+        ]
       }
     ]
   }
