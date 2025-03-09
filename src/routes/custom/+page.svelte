@@ -4,14 +4,33 @@
   import { addToast } from '$lib/stores/toast';
   import { colorSystems } from '$lib/data/colorSystems';
   import ColorSelect, { type RGB } from 'svelte-color-select'
+	import { fade, fly, slide } from 'svelte/transition';
   
   // Base colors for customization
-  const baseColor = writable('#4c6ef5'); // Default primary color
-  const secondaryColor = writable('#c62168'); // Default secondary color
+  const baseColor = writable('#e5484d'); // Default primary accent color // red
+  const secondaryColor = writable('#78716c'); // Default secondary accent color //stone
+  
+  // Define pantone accent and base colors for quick selection
+  const accentColors = [
+    { name: "blue", value: "#4c6ef5", description: "Primary accent" },
+    { name: "purple", value: "#8e4ec6", description: "Creative accent" },
+    { name: "green", value: "#30a46c", description: "Success accent" },
+    { name: "red", value: "#e5484d", description: "Error/alert accent" },
+    { name: "amber", value: "#ffb224", description: "Warning accent" },
+    { name: "pink", value: "#f670c7", description: "Highlight accent" }
+  ];
+  
+  const baseColors = [
+    { name: "slate", value: "#64748b", description: "Cool neutral" },
+    { name: "gray", value: "#6e6e6e", description: "Balanced neutral" },
+    { name: "zinc", value: "#71717a", description: "Modern neutral" },
+    { name: "stone", value: "#78716c", description: "Warm neutral" },
+    { name: "cool", value: "#425466", description: "Deep neutral" }
+  ];
   
   // RGB versions of the colors for the color picker
-  let primaryRgb = $state<RGB>(hexToRgb('#4c6ef5'));
-  let secondaryRgb = $state<RGB>(hexToRgb('#c62168'));
+  let primaryRgb = $state<RGB>(hexToRgb('#e5484d'));
+  let secondaryRgb = $state<RGB>(hexToRgb('#78716c'));
   
   // Color picker visibility state
   let showPrimaryPicker = $state(false);
@@ -64,6 +83,10 @@
   // Color system preset state
   let showPresets = $state(false);
   let selectedSystem = $state<string | null>(null);
+  
+  // Keep track of selected color swatch
+  let selectedAccentColor = $state('red');
+  let selectedBaseColor = $state('stone');
   
   function hexToHSL(hex: string) {
     const r = parseInt(hex.substring(1, 3), 16) / 255;
@@ -144,11 +167,6 @@
   function updateColorScales() {
     colorScale = generateColorScale($baseColor, isDarkMode);
     secondaryColorScale = generateColorScale($secondaryColor, isDarkMode);
-    
-    // Update CSS code when colors change
-    if (showCssExport) {
-      updateCssCode();
-    }
   }
   
   function copyColorCode(color: ColorItem, format: 'hex' | 'hsl') {
@@ -187,6 +205,11 @@
   $effect(() => {
     if ($baseColor || $secondaryColor || isDarkMode !== undefined) {
       updateColorScales();
+      
+      // Only update CSS if export panel is shown, but not in reaction to format change
+      if (showCssExport) {
+        updateCssCode();
+      }
     }
   });
   
@@ -224,32 +247,39 @@
     
     let code = exportFormat === 'scss' ? '// SCSS Variables\n' : ':root {\n';
     
-    // Primary color scale
-    code += '\n  /* Primary Color Scale */\n';
+    // Accent color scale (primary interactive elements)
+    code += '\n  /* Accent Color Scale */\n';
     colorScale.forEach(color => {
-      code += `  ${prefix}color-${color.name}${separator}${color.value}${terminator}\n`;
+      code += `  ${prefix}accent-${color.name}${separator}${color.value}${terminator}\n`;
     });
     
-    // Secondary color scale
-    code += '\n  /* Secondary Color Scale */\n';
+    // Base color scale (backgrounds, structure)
+    code += '\n  /* Base Color Scale */\n';
     secondaryColorScale.forEach(color => {
-      code += `  ${prefix}color-secondary-${color.name}${separator}${color.value}${terminator}\n`;
+      code += `  ${prefix}base-${color.name}${separator}${color.value}${terminator}\n`;
     });
     
     // Semantic color variables
     code += '\n  /* Semantic Colors */\n';
-    code += `  ${prefix}color-background${separator}${colorScale[0]?.value}${terminator}\n`;
-    code += `  ${prefix}color-surface${separator}${colorScale[1]?.value}${terminator}\n`;
-    code += `  ${prefix}color-border${separator}${colorScale[5]?.value}${terminator}\n`;
-    code += `  ${prefix}color-primary${separator}${colorScale[8]?.value}${terminator}\n`;
-    code += `  ${prefix}color-secondary${separator}${secondaryColorScale[8]?.value}${terminator}\n`;
-    code += `  ${prefix}color-text${separator}${colorScale[11]?.value}${terminator}\n`;
-    code += `  ${prefix}color-text-muted${separator}${colorScale[10]?.value}${terminator}\n`;
+    code += `  ${prefix}background${separator}${secondaryColorScale[1]?.value}${terminator}\n`;
+    code += `  ${prefix}surface${separator}${secondaryColorScale[2]?.value}${terminator}\n`;
+    code += `  ${prefix}border${separator}${secondaryColorScale[5]?.value}${terminator}\n`;
+    code += `  ${prefix}overlay${separator}${secondaryColorScale[3]?.value}${terminator}\n`;
+    code += `  ${prefix}text${separator}${secondaryColorScale[11]?.value}${terminator}\n`;
+    code += `  ${prefix}text-muted${separator}${secondaryColorScale[10]?.value}${terminator}\n`;
+    
+    code += '\n  /* Interactive Elements */\n';
+    code += `  ${prefix}accent-primary${separator}${colorScale[8]?.value}${terminator}\n`;
+    code += `  ${prefix}accent-hover${separator}${colorScale[7]?.value}${terminator}\n`;
+    code += `  ${prefix}accent-subtle${separator}${colorScale[3]?.value}${terminator}\n`;
+    code += `  ${prefix}accent-text${separator}${colorScale[11]?.value}${terminator}\n`;
     
     if (exportFormat === 'scss') {
-      code += '\n// Usage example: color: $color-primary;';
+      code += '\n// Usage example: background-color: $background;';
+      code += '\n// Interactive example: color: $accent-primary;';
     } else {
-      code += '}\n\n/* Usage example: color: var(--color-primary); */';
+      code += '}\n\n/* Usage example: background-color: var(--background); */';
+      code += '\n/* Interactive example: color: var(--accent-primary); */';
     }
     
     cssCode = code;
@@ -265,6 +295,29 @@
         addToast('Failed to copy CSS code', 'error');
       });
   }
+  
+  // Download CSS/SCSS as a file
+  function downloadCssCode() {
+    const fileExtension = exportFormat === 'scss' ? 'scss' : 'css';
+    const fileName = `custom-color-system.${fileExtension}`;
+    
+    const blob = new Blob([cssCode], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    
+    // Clean up
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+      document.body.removeChild(link);
+    }, 100);
+    
+    addToast(`${exportFormat.toUpperCase()} file downloaded!`, 'success');
+  }
 
   // Toggle CSS export panel
   function toggleCssExportPanel() {
@@ -272,6 +325,13 @@
     if (showCssExport) {
       updateCssCode();
     }
+  }
+  
+  // Handle format change separately to avoid infinite loop
+  function handleFormatChange(format: 'css' | 'scss') {
+    exportFormat = format;
+    // Only update when needed, not in a reactive context
+    updateCssCode();
   }
 
   // Color picker related functions
@@ -369,13 +429,31 @@
   <div class="layout">
     <aside class="color-controls">
       <div class="controls-container">
-        <div class="control-group">
-          <label for="baseColor">Primary Color</label>
-          <div class="color-input-wrapper">
+        <div class="color-section">
+          <h3>Accent Color</h3>
+          <p class="color-description">Used for interactive elements, highlights, and call-to-actions</p>
+          <div class="color-grid accent-grid">
+            {#each accentColors as color}
+              <!-- svelte-ignore a11y_click_events_have_key_events -->
+              <!-- svelte-ignore a11y_consider_explicit_label -->
+              <button 
+                class="color-swatch-btn {selectedAccentColor === color.name ? 'selected' : ''}" 
+                style="background-color: {color.value};"
+                onclick={() => {
+                  selectedAccentColor = color.name;
+                  $baseColor = color.value;
+                  primaryRgb = hexToRgb(color.value);
+                }}
+                title={color.description}
+              ></button>
+            {/each}
+          </div>
+          
+          <div class="color-input-wrapper mt-3">
             <button 
               class="color-preview-button" 
               style="background-color: {$baseColor};" 
-              aria-label="Select primary color"
+              aria-label="Select custom accent color"
               onclick={togglePrimaryPicker}
             ></button>
             <input 
@@ -387,13 +465,31 @@
           </div>
         </div>
         
-        <div class="control-group">
-          <label for="secondaryColor">Secondary Color</label>
-          <div class="color-input-wrapper">
+        <div class="color-section">
+          <h3>Base Color</h3>
+          <p class="color-description">Used for backgrounds, overlays, and UI structure</p>
+          <div class="color-grid base-grid">
+            {#each baseColors as color}
+              <!-- svelte-ignore a11y_click_events_have_key_events -->
+              <!-- svelte-ignore a11y_consider_explicit_label -->
+              <button 
+                class="color-swatch-btn {selectedBaseColor === color.name ? 'selected' : ''}" 
+                style="background-color: {color.value};"
+                onclick={() => {
+                  selectedBaseColor = color.name;
+                  $secondaryColor = color.value;
+                  secondaryRgb = hexToRgb(color.value);
+                }}
+                title={color.description}
+              ></button>
+            {/each}
+          </div>
+          
+          <div class="color-input-wrapper mt-3">
             <button 
               class="color-preview-button" 
               style="background-color: {$secondaryColor};" 
-              aria-label="Select secondary color"
+              aria-label="Select custom base color"
               onclick={toggleSecondaryPicker}
             ></button>
             <input 
@@ -405,9 +501,9 @@
           </div>
         </div>
         
-        <div class="flex flex-row min-w-[100%] items-center justify-center gap-2">
+        <div class="flex flex-row min-w-[100%] items-center justify-center gap-2 mt-4">
           <div class="scale-preview flex-1">
-            <div class="scale-preview-header">Primary Scale</div>
+            <div class="scale-preview-header">Accent</div>
             {#each colorScale as color}
               <!-- svelte-ignore a11y_click_events_have_key_events -->
               <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -422,7 +518,7 @@
           </div>
           
           <div class="scale-preview flex-1">
-            <div class="scale-preview-header">Secondary Scale</div>
+            <div class="scale-preview-header">Base</div>
             {#each secondaryColorScale as color}
               <!-- svelte-ignore a11y_click_events_have_key_events -->
               <!-- svelte-ignore a11y_no_static_element_interactions -->
@@ -447,7 +543,7 @@
       </div>
     </aside>
     
-    <main style="background-color: {colorScale[1]?.value};" class="components-preview">
+    <main style="background-color: {secondaryColorScale[1]?.value};" class="components-preview">
       <div class="preview-content">
         <div class="component-group">
           <h2>Component Previews</h2>
@@ -456,24 +552,24 @@
           <!-- Buttons Section -->
           <h3>Buttons</h3>
           <div class="component-row">
-            <button class="demo-button primary" style="--button-bg: {colorScale[8]?.value}">
+            <button class="demo-button primary" style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)}; --button-hover: {colorScale[7]?.value};">
               Primary Button
             </button>
-            <button class="demo-button secondary" style="--button-border: {colorScale[6]?.value}; --button-hover: {colorScale[3]?.value}">
+            <button class="demo-button secondary" style="--button-border: {secondaryColorScale[5]?.value}; --button-bg: {secondaryColorScale[2]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}">
               Secondary Button
             </button>
-            <button class="demo-button subtle" style="--button-hover: {colorScale[1]?.value}; --button-text: {colorScale[10]?.value}">
+            <button class="demo-button subtle" style="--button-hover: {secondaryColorScale[2]?.value}; --button-text: {secondaryColorScale[10]?.value}">
               Text Button
             </button>
           </div>
           <div class="component-row">
-            <button class="demo-button accent" style="--button-bg: {secondaryColorScale[8]?.value}">
+            <button class="demo-button accent" style="--button-bg: {colorScale[5]?.value}; --button-text: {colorScale[11]?.value}; --button-border: {colorScale[8]?.value}; --button-hover: {colorScale[6]?.value}">
               Accent Button
             </button>
-            <button class="demo-button accent-outline" style="--button-border: {secondaryColorScale[6]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[9]?.value}">
+            <button class="demo-button accent-outline" style="--button-border: {colorScale[8]?.value}; --button-hover: {colorScale[2]?.value}; --button-text: {colorScale[9]?.value}">
               Accent Outline
             </button>
-            <button class="demo-button accent-subtle" style="--button-hover: {secondaryColorScale[2]?.value}; --button-text: {secondaryColorScale[10]?.value}">
+            <button class="demo-button accent-subtle" style="--button-hover: {colorScale[2]?.value}; --button-text: {colorScale[9]?.value}">
               Accent Text
             </button>
           </div>
@@ -481,41 +577,44 @@
           <!-- Cards Section -->
           <h3>Cards</h3>
           <div class="cards-container">
-            <div class="demo-card" style="--card-bg: {colorScale[1]?.value}; --card-border: {colorScale[5]?.value}">
-              <h3 style="color: {colorScale[11]?.value}">Card Title</h3>
-              <p style="color: {colorScale[10]?.value}">Card content with custom colors applied based on your selected color scheme.</p>
-              <button class=" px-4 py-2 bg-[--button-bg] text-[--button-text] " style="--button-bg: {colorScale[8]?.value}">
+            <div class="demo-card" style="--card-bg: {secondaryColorScale[1]?.value}; --card-border: {secondaryColorScale[4]?.value}">
+              <h3 style="color: {secondaryColorScale[11]?.value}">Card Title</h3>
+              <p style="color: {secondaryColorScale[10]?.value}">Card content with custom colors applied based on your selected color scheme.</p>
+              <button class="demo-button small primary" style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)}">
                 Button
               </button>
             </div>
             
-            <div class="demo-card elevated" style="--card-bg: {colorScale[2]?.value}; --card-shadow: {colorScale[6]?.value}">
-              <h3 style="color: {colorScale[11]?.value}">Elevated Card</h3>
-              <p style="color: {colorScale[10]?.value}">Card with elevation using custom shadow colors.</p>
-              <button class="demo-button small primary" style="--button-bg: {colorScale[8]?.value}">
-                Button
-              </button>
+            <div class="demo-card elevated" style="--card-bg: {secondaryColorScale[2]?.value}; --card-shadow: {secondaryColorScale[4]?.value}">
+              <div class="card-accent-bar" style="background-color: {colorScale[8]?.value}"></div>
+              <div class="card-content">
+                <h3 style="color: {secondaryColorScale[11]?.value}">Elevated Card</h3>
+                <p style="color: {secondaryColorScale[10]?.value}">Card with elevation using custom shadow colors and accent highlight.</p>
+                <button class="demo-button small secondary" style="--button-border: {secondaryColorScale[5]?.value}; --button-bg: {secondaryColorScale[2]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}">
+                  Button
+                </button>
+              </div>
             </div>
             
             <!-- Profile Card -->
-            <div class="profile-card" style="--card-bg: {colorScale[1]?.value}; --card-border: {colorScale[5]?.value}">
+            <div class="profile-card" style="--card-bg: {secondaryColorScale[1]?.value}; --card-border: {secondaryColorScale[4]?.value}">
               <div class="profile-header">
-                <div class="avatar" style="--avatar-bg: {colorScale[4]?.value}; color: {getContrastColor(colorScale[4]?.value)}">
+                <div class="avatar" style="--avatar-bg: {colorScale[5]?.value}; color: {getContrastColor(colorScale[5]?.value)}">
                   JD
                 </div>
                 <div class="profile-info">
-                  <h4 style="color: {colorScale[11]?.value}">John Doe</h4>
-                  <p style="color: {colorScale[10]?.value}">Product Designer</p>
+                  <h4 style="color: {secondaryColorScale[11]?.value}">John Doe</h4>
+                  <p style="color: {secondaryColorScale[10]?.value}">Product Designer</p>
                 </div>
               </div>
               <div class="profile-body">
-                <p style="color: {colorScale[10]?.value}">Created 15 projects with 5 team members in the last month.</p>
+                <p style="color: {secondaryColorScale[10]?.value}">Created 15 projects with 5 team members in the last month.</p>
               </div>
-              <div class="profile-footer" style="--footer-border: {colorScale[4]?.value}">
-                <button class="demo-button small secondary" style="--button-border: {colorScale[6]?.value}; --button-hover: {colorScale[3]?.value}">
+              <div class="profile-footer" style="--footer-border: {secondaryColorScale[4]?.value}">
+                <button class="demo-button small secondary" style="--button-border: {secondaryColorScale[5]?.value}; --button-bg: {secondaryColorScale[2]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}">
                   View Profile
                 </button>
-                <button class="demo-button small accent" style="--button-bg: {secondaryColorScale[8]?.value}">
+                <button class="demo-button small accent" style="--button-bg: {colorScale[5]?.value}; --button-text: {colorScale[11]?.value}; --button-border: {colorScale[8]?.value}; --button-hover: {colorScale[6]?.value}">
                   Connect
                 </button>
               </div>
@@ -526,29 +625,29 @@
           <h3>Form Elements</h3>
           <div class="form-elements">
             <div class="input-group">
-              <label for="demo-input" style="color: {colorScale[11]?.value}">Text Input</label>
+              <label for="demo-input" style="color: {secondaryColorScale[11]?.value}">Text Input</label>
               <input 
                 type="text" 
                 id="demo-input" 
                 placeholder="Type something..." 
                 class="demo-input" 
-                style="--input-border: {colorScale[5]?.value}; --input-bg: {colorScale[1]?.value}; --input-focus: {colorScale[8]?.value}"
+                style="--input-border: {secondaryColorScale[5]?.value}; --input-bg: {secondaryColorScale[1]?.value}; --input-focus: {colorScale[8]?.value}"
               />
             </div>
             
             <div class="input-group">
-              <label for="demo-input-accent" style="color: {colorScale[11]?.value}">Accent Input</label>
+              <label for="demo-input-accent" style="color: {secondaryColorScale[11]?.value}">Accent Input</label>
               <input 
                 type="text" 
                 id="demo-input-accent" 
                 placeholder="Type something..." 
                 class="demo-input accent" 
-                style="--input-border: {secondaryColorScale[5]?.value}; --input-bg: {colorScale[1]?.value}; --input-focus: {secondaryColorScale[8]?.value}"
+                style="--input-border: {secondaryColorScale[5]?.value}; --input-bg: {secondaryColorScale[1]?.value}; --input-focus: {colorScale[8]?.value}"
               />
             </div>
             
             <div class="input-group">
-              <label style="color: {colorScale[11]?.value}">Checkbox</label>
+              <label style="color: {secondaryColorScale[11]?.value}">Checkbox</label>
               <div class="checkbox-wrapper">
                 <input 
                   type="checkbox" 
@@ -556,21 +655,21 @@
                   class="demo-checkbox" 
                   style="--checkbox-color: {colorScale[8]?.value}"
                 />
-                <label for="demo-checkbox" style="color: {colorScale[10]?.value}">Primary check</label>
+                <label for="demo-checkbox" style="color: {secondaryColorScale[10]?.value}">Primary check</label>
               </div>
               <div class="checkbox-wrapper">
                 <input 
                   type="checkbox" 
                   id="demo-checkbox-accent" 
                   class="demo-checkbox" 
-                  style="--checkbox-color: {secondaryColorScale[8]?.value}"
+                  style="--checkbox-color: {colorScale[8]?.value}"
                 />
-                <label for="demo-checkbox-accent" style="color: {colorScale[10]?.value}">Accent check</label>
+                <label for="demo-checkbox-accent" style="color: {secondaryColorScale[10]?.value}">Accent check</label>
               </div>
             </div>
             
             <div class="input-group">
-              <label style="color: {colorScale[11]?.value}">Radio Buttons</label>
+              <label style="color: {secondaryColorScale[11]?.value}">Radio Buttons</label>
               <div class="radio-wrapper">
                 <input 
                   type="radio" 
@@ -580,7 +679,7 @@
                   checked
                   style="--radio-color: {colorScale[8]?.value}"
                 />
-                <label for="radio1" style="color: {colorScale[10]?.value}">Primary option</label>
+                <label for="radio1" style="color: {secondaryColorScale[10]?.value}">Primary option</label>
               </div>
               <div class="radio-wrapper">
                 <input 
@@ -588,9 +687,9 @@
                   id="radio2" 
                   name="demo-radio" 
                   class="demo-radio" 
-                  style="--radio-color: {secondaryColorScale[8]?.value}"
+                  style="--radio-color: {colorScale[8]?.value}"
                 />
-                <label for="radio2" style="color: {colorScale[10]?.value}">Accent option</label>
+                <label for="radio2" style="color: {secondaryColorScale[10]?.value}">Secondary option</label>
               </div>
             </div>
           </div>
@@ -601,8 +700,8 @@
   
   <!-- MOVED: CSS Export Panel - Now positioned above the color tables -->
   {#if showCssExport}
-    <section class="css-export-panel" style="--panel-bg: {colorScale[1]?.value}; --panel-border: {colorScale[5]?.value}">
-      <div class="export-header">
+    <section transition:slide class="css-export-panel" style="--panel-bg: {secondaryColorScale[1]?.value}; --panel-border: {secondaryColorScale[5]?.value}; --panel-header-bg: {colorScale[3]?.value}; --panel-header-text: {colorScale[11]?.value};">
+      <div class="export-header" style="background: linear-gradient(to right, {colorScale[2]?.value}, {colorScale[3]?.value});">
         <h2>Export Color System</h2>
         <div class="export-options">
           <label>
@@ -611,7 +710,7 @@
               name="export-format" 
               value="css" 
               checked={exportFormat === 'css'} 
-              onclick={() => { exportFormat = 'css'; updateCssCode(); }}
+              onclick={() => handleFormatChange('css')}
             />
             CSS Variables
           </label>
@@ -621,22 +720,37 @@
               name="export-format" 
               value="scss" 
               checked={exportFormat === 'scss'} 
-              onclick={() => { exportFormat = 'scss'; updateCssCode(); }}
+              onclick={() => handleFormatChange('scss')}
             />
             SCSS Variables
           </label>
         </div>
       </div>
       
-      <div class="code-container">
+      <div class="code-container" style="background-color: {secondaryColorScale[0]?.value};">
         <pre>{cssCode}</pre>
       </div>
       
       <div class="export-actions">
-        <button class="demo-button primary" onclick={copyCssCode} style="--button-bg: {colorScale[8]?.value}">
+        <button 
+          class="demo-button primary" 
+          onclick={copyCssCode} 
+          style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)};"
+        >
           Copy to Clipboard
         </button>
-        <button class="demo-button secondary" onclick={() => toggleCssExportPanel()} style="--button-border: {colorScale[6]?.value}; --button-hover: {colorScale[3]?.value}">
+        <button 
+          class="demo-button accent" 
+          onclick={downloadCssCode} 
+          style="--button-bg: {colorScale[5]?.value}; --button-text: {colorScale[11]?.value}; --button-border: {colorScale[8]?.value}; --button-hover: {colorScale[6]?.value}"
+        >
+          Download File
+        </button>
+        <button 
+          class="demo-button secondary" 
+          onclick={() => toggleCssExportPanel()} 
+          style="--button-border: {secondaryColorScale[5]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}"
+        >
           Close
         </button>
       </div>
@@ -676,7 +790,7 @@
                   onclick={() => copyColorCode(color, 'hex')}
                   aria-label="Copy hex code"
                 >
-                  Copy
+                  HEX
                 </button>
                 <button 
                   class="copy-button" 
@@ -726,7 +840,7 @@
                   onclick={() => copyColorCode(color, 'hex')}
                   aria-label="Copy hex code"
                 >
-                  Copy
+                  HEX
                 </button>
                 <button 
                   class="copy-button" 
@@ -1001,34 +1115,38 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
   
   .demo-button.small {
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
-    background-color: var(--button-bg, var(--primary-color));
-    border: 0px;
+    background-color: var(--button-bg, transparent);
+    border: 0;
     color: var(--button-text, var(--text-color));
   }
   
   .demo-button.primary {
     background-color: var(--button-bg, var(--primary-color));
     border: none;
-    color: white;
+    color: var(--button-text, white);
   }
   
   .demo-button.primary:hover {
-    opacity: 0.9;
+    background-color: var(--button-hover, var(--button-bg));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
   .demo-button.secondary {
-    background-color: transparent;
+    background-color: var(--button-bg, transparent);
     border: 1px solid var(--button-border, var(--border-color));
-    color: var(--text-color);
+    color: var(--button-text, var(--text-color));
   }
   
   .demo-button.secondary:hover {
     background-color: var(--button-hover, var(--surface-color));
+    transform: translateY(-1px);
   }
   
   .demo-button.subtle {
@@ -1043,29 +1161,32 @@
   
   /* Accent button styles */
   .demo-button.accent {
-    background-color: var(--button-bg, orange);
-    border: none;
-    color: white;
+    background-color: var(--button-bg, transparent);
+    border: 1px solid var(--button-border, var(--accent-color));
+    color: var(--button-text, var(--accent-color));
   }
   
   .demo-button.accent:hover {
-    opacity: 0.9;
+    background-color: var(--button-hover, var(--button-bg));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
   }
   
   .demo-button.accent-outline {
     background-color: transparent;
-    border: 1px solid var(--button-border, orange);
-    color: var(--button-text, orange);
+    border: 1px solid var(--button-border, var(--accent-color));
+    color: var(--button-text, var(--accent-color));
   }
   
   .demo-button.accent-outline:hover {
     background-color: var(--button-hover, var(--surface-color));
+    transform: translateY(-1px);
   }
   
   .demo-button.accent-subtle {
     background-color: transparent;
     border: none;
-    color: var(--button-text, orange);
+    color: var(--button-text, var(--accent-color));
   }
   
   .demo-button.accent-subtle:hover {
@@ -1082,18 +1203,41 @@
   
   .demo-card {
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: 12px;
     background-color: var(--card-bg, var(--surface-color));
     border: 1px solid var(--card-border, var(--border-color));
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .demo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.06);
   }
   
   .demo-card.elevated {
     border: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--card-shadow, var(--border-color));
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .card-accent-bar {
+    height: 4px;
+    width: 100%;
+  }
+  
+  .card-content {
+    padding: 1.5rem;
+  }
+  
+  .demo-card.elevated:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--card-shadow, var(--border-color));
   }
   
   .demo-card h3 {
     margin-bottom: 0.75rem;
+    font-weight: 600;
   }
   
   .demo-card p {
@@ -1105,9 +1249,15 @@
   /* Profile Card */
   .profile-card {
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: 12px;
     background-color: var(--card-bg, var(--surface-color));
     border: 1px solid var(--card-border, var(--border-color));
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .profile-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.06);
   }
   
   .profile-header {
@@ -1178,35 +1328,58 @@
   }
   
   .demo-input {
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
+    padding: 0.85rem 1rem;
+    border-radius: 8px;
     border: 1px solid var(--input-border, var(--border-color));
     background-color: var(--input-bg, var(--background-color));
     font-family: var(--font-sans);
     transition: all 0.2s ease;
+    width: 100%;
+    font-size: 0.95rem;
   }
   
   .demo-input:focus {
     outline: none;
     border-color: var(--input-focus, var(--primary-color));
-    box-shadow: 0 0 0 2px rgba(76, 110, 245, 0.1);
+    box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.15);
   }
   
   .demo-input.accent:focus {
-    border-color: var(--input-focus, orange);
-    box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.1);
+    border-color: var(--input-focus, var(--accent-color));
+    box-shadow: 0 0 0 2px rgba(76, 110, 245, 0.1);
   }
   
   .checkbox-wrapper, .radio-wrapper {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.7rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+  }
+  
+  .checkbox-wrapper:hover, .radio-wrapper:hover {
+    background-color: var(--hover-bg, rgba(0, 0, 0, 0.03));
   }
   
   .demo-checkbox, .demo-radio {
     accent-color: var(--checkbox-color, var(--primary-color));
     width: 18px;
     height: 18px;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    margin: 0;
+  }
+  
+  .demo-checkbox:hover, .demo-radio:hover {
+    transform: scale(1.1);
+  }
+  
+  .checkbox-wrapper label, .radio-wrapper label {
+    cursor: pointer;
+    font-size: 0.95rem;
+    user-select: none;
   }
   
   /* Color Scale Table */
@@ -1259,8 +1432,13 @@
   }
   
   .actions {
+    
+    gap: 1rem;
+    height: 100%;
+    min-height: 100%;
     display: flex;
-    gap: 0.5rem;
+    flex-direction: column;
+    justify-content: center;
   }
   
   .copy-button {
@@ -1274,6 +1452,8 @@
     align-items: center;
     transition: all 0.2s ease;
     color: var(--text-color);
+    width: 100%;
+    justify-content: center;
   }
   
   .copy-button:hover {
@@ -1376,5 +1556,154 @@
 
   .close-picker:hover {
     background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  /* Color grid styles */
+  .color-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .color-section h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+  }
+
+  .color-description {
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-muted, #777);
+  }
+
+  .color-grid {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .accent-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .base-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .swatch-label {
+    color: var(--text-muted, #777);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-transform: capitalize;
+  }
+
+  .swatch-label.selected {
+    font-weight: 500;
+    color: var(--text-color, #333);
+  }
+
+  .color-swatch-btn {
+    width: 40px;
+    height: 40px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .color-swatch-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .color-swatch-btn.selected {
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+  }
+
+  .mt-3 {
+    margin-top: 0.75rem;
+  }
+
+  .mt-4 {
+    margin-top: 1rem;
+  }
+
+  /* CSS Export Panel */
+  .css-export-panel {
+    background-color: var(--panel-bg, #f8f9fa);
+    border: 1px solid var(--panel-border, #e2e2e2);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .export-header {
+    background-color: var(--panel-header-bg, #f0f0f0);
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--panel-border, #e2e2e2);
+  }
+  
+  .export-header h2 {
+    margin: 0 0 1rem;
+    color: var(--panel-header-text, #333);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .export-options {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .export-options label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    cursor: pointer;
+    color: var(--panel-header-text, #333);
+    font-weight: 500;
+  }
+  
+  .export-options input[type="radio"] {
+    accent-color: var(--button-bg, #4c6ef5);
+  }
+  
+  .code-container {
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    overflow-x: auto;
+    max-height: 600px;
+    overflow-y: auto;
+    width: 100%;
+    border-radius: 0;
+  }
+  
+  .code-container pre {
+    margin: 0;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    white-space: pre;
+    color: var(--text-color, #333);
+  }
+  
+  .export-actions {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    border-top: 1px solid var(--panel-border, #e2e2e2);
+    background-color: var(--panel-bg, #f8f9fa);
   }
 </style> 

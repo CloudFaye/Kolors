@@ -19,16 +19,16 @@
 	let logoClass = '';
 
 	const navClasses = cn(
-		'fixed text-white top-0 left-0 w-full z-50 bg-transparent border-b border-zinc-800  backdrop-blur-sm',
+		'fixed top-0 left-0 w-full z-50 bg-transparent border-b border-zinc-200 dark:border-zinc-800 backdrop-blur-sm',
 		className
 	);
 
 	const navItemClasses = cn(
-		'text-sm font-medium text-zinc-800 lg:text-zinc-300 md:text-zinc-300 sm:text-zinc-300    transition-colors hover:text-zinc-400 lg:hover:animate-bounce ',
+		'text-sm font-medium text-zinc-800 dark:text-zinc-300 transition-colors hover:text-zinc-600 dark:hover:text-zinc-100',
 		navItemClass
 	);
 
-	const logoClasses = cn('text-[1.1em]  font-bold tracking-normal ', logoClass);
+	const logoClasses = cn('text-[1.1em] font-bold tracking-normal text-zinc-900 dark:text-white', logoClass);
 
 	let isMobileMenuOpen = $state(false);
 	let mobileNav: HTMLDivElement;
@@ -78,7 +78,7 @@
 
 <div class="content-wrapper">
 	<nav class={navClasses}>
-		<div class=" relative flex h-14 flex-row items-center justify-between px-3 lg:px-10">
+		<div class="relative flex h-14 flex-row items-center justify-between px-3 lg:px-10">
 			<!-- Logo Section -->
 			<div class="flex items-center">
 				{#each logo as { name, href }}
@@ -97,12 +97,12 @@
 					
 				{/each}
 
-				<ThemeToggle  />
+				<ThemeToggle />
 
 			</div>
 
 			<!-- Mobile Navigation Button -->
-			<button class="p-2  md:hidden" onclick={toggleMobileMenu} aria-label="Toggle mobile menu">
+			<button class="p-2 text-zinc-800 dark:text-zinc-200 md:hidden" onclick={toggleMobileMenu} aria-label="Toggle mobile menu">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="24"
@@ -136,14 +136,14 @@
 			easing: quintOut
 		}}
 		class="fixed right-0 top-[57px] z-50 h-[calc(100vh-57px)]
-               w-[280px] transform border-l border-neutral-200 bg-white
+               w-[280px] transform border-l border-neutral-200 bg-white dark:bg-zinc-900 dark:border-zinc-700
                shadow-xl transition-transform duration-300"
 	>
 		<div class="flex flex-col items-start space-y-6 p-6">
 			{#each rightItems as { name, href }}
 				<a
 					{href}
-					class={cn(navItemClasses, '  w-full')}
+					class={cn(navItemClasses, 'w-full')}
 					onclick={() => {
 						isMobileMenuOpen = false;
 					}}
