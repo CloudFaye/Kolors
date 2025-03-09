@@ -1,5 +1,18 @@
 <script lang="ts">
   import { colorSystems } from '$lib/data/colorSystems';
+
+  // Function to count unique colors (hex values) in a color system
+  function countUniqueColors(system: { id?: string; name?: string; description?: string; url?: string; colorGroups: any; }) {
+    const uniqueColors = new Set();
+    
+    system.colorGroups.forEach((group: { shades: any[]; }) => {
+      group.shades.forEach((shade: { value: string; }) => {
+        uniqueColors.add(shade.value.toLowerCase());
+      });
+    });
+    
+    return uniqueColors.size;
+  }
 </script>
 
 <svelte:head>
@@ -22,6 +35,11 @@
             <h2>{system.name}</h2>
             <p>{system.description}</p>
           </div>
+          
+          <div class="color-meta">
+            <span class="color-count">{countUniqueColors(system)} unique colors</span>
+          </div>
+          
           <div class="color-preview">
             {#each system.colorGroups.slice(0, 2) as group}
               <div class="preview-group">
@@ -31,7 +49,6 @@
               </div>
             {/each}
           </div>
-        
         </a>
       </li>
     {/each}
@@ -95,7 +112,7 @@
   }
   
   .system-info {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
   }
   
   .system-info h2 {
@@ -113,17 +130,33 @@
     line-height: 1.5;
   }
   
+  .color-meta {
+    margin-bottom: 1rem;
+  }
+  
+  .color-count {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    background-color: rgba(76, 110, 245, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    display: inline-block;
+  }
+  
   .color-preview {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    gap: 0.4rem;
+    margin-bottom: 0.5rem;
+    margin-top: auto;
   }
   
   .preview-group {
     display: flex;
-    height: 20px;
-    border-radius: 4px;
+    height: 12px;
+    border-radius: 6px;
     overflow: hidden;
   }
   
