@@ -753,13 +753,14 @@
             
             <!-- Group 10: Quote -->
             <div class="component-container">
+               
               <blockquote class="fancy-quote" style="--quote-bg: {secondaryColorScale[2]?.value}; --quote-border: {colorScale[5]?.value}; --quote-text: {secondaryColorScale[11]?.value};">
                 <div class="quote-image-container">
-                  <div class="quote-image" style="background-color: {colorScale[4]?.value};"></div>
+                  <img class='w-full h-full grayscale object-cover rounded-md ' src="Cat.jpg" alt="">
                 </div>
                 <div class="quote-content">
-                  <p style="color: {secondaryColorScale[11]?.value};">"Design is not just what it looks like and feels like. Design is how it works."</p>
-                  <footer style="color: {secondaryColorScale[10]?.value};">— Steve Jobs</footer>
+                  <p style="color: {secondaryColorScale[11]?.value};">"Design is not just what it looks like and feels like. Design is how it works. — Steve Jobs"</p>
+                  
                 </div>
               </blockquote>
             </div>
@@ -2152,9 +2153,8 @@
   .fancy-quote {
     display: flex;
     background-color: var(--quote-bg);
-    border-left: 4px solid var(--quote-border);
-    border-radius: 0 8px 8px 0;
-    padding: 0;
+    border-radius: 12px;
+    padding: 12px;
     margin: 1.5rem 0;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -2165,21 +2165,19 @@
     width: 120px;
     flex-shrink: 0;
     overflow: hidden;
-    filter: saturate(0.8) contrast(1.1);
+    filter: saturate(0.8) contrast(1.1) ;
   }
 
   .quote-image {
     height: 100%;
     width: 100%;
-    background-color: #ccc;
-    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+    
   }
 
   .quote-content {
-    padding: 1.5rem;
+    padding: 0 0.5rem;
     position: relative;
   }
 
