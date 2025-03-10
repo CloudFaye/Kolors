@@ -3,12 +3,12 @@
 </script>
 
 <div class="about-page">
-  <h1>About ColorSystems</h1>
+  <h1>Maker notes</h1>
   
   <div class="card about-section">
-    <h2>What is ColorSystems?</h2>
+    <h2>Kolors?</h2>
     <p>
-      ColorSystems is a tool designed to help designers, developers, and creatives explore and compare color systems
+      Pronounced 'colors' is designed to help designers, developers, and creatives explore and compare color systems
       from popular design systems and brand guidelines. Our goal is to provide a clean, intuitive interface for
       accessing these color palettes in one place. <br><br>
 
