@@ -17,7 +17,7 @@ let { children } = $props()
 
 <footer>
   <div class="">
-    <p>© {new Date().getFullYear()} ColorSystems - Explore design system colors by <a href="https://github.com/cloudfaye">Faye Seun</a></p>
+    <p>© {new Date().getFullYear()} Kolors by <a href="https://github.com/cloudfaye">Faye Seun</a></p>
   </div>
 </footer>
 
