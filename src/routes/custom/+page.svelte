@@ -21,7 +21,7 @@
      { name: "teal", value: "#006b7e", description: "Teal accent"},
      { name: "magenta", value: "#6b264b", description: "Magenta accent"},
      { name: "lapis-blue", value: "#004b8d", description: "Lapis Blue accent"},
-     { name: "aura-orange", value: "#b4262a", description: "Aura Orange accent"},
+     { name: "white", value: "#ffffff", description: "White"},
   ];
   
   const baseColors = [
@@ -155,12 +155,42 @@
   function generateColorScale(baseHexColor: string, isDarkMode: boolean) {
     const hsl = hexToHSL(baseHexColor);
     
+    // Special handling for white accent color
+    const isWhiteAccent = baseHexColor.toLowerCase() === '#ffffff';
+    
     return scaleSteps.map(step => {
       let adjustedLightness = step.lightness * 100;
       
       // Invert lightness for dark mode
       if (isDarkMode) {
         adjustedLightness = 100 - adjustedLightness;
+      }
+      
+      // For white accent, adjust the scale to provide better contrast
+      if (isWhiteAccent && !isDarkMode) {
+        const stepNum = parseInt(step.name);
+        if (stepNum <= 7) {
+          // Steps 1-7: Keep very light but with slight gradations
+          // This creates a subtle gradient from pure white to very light gray
+          adjustedLightness = 100 - ((stepNum - 1) * 1.5); // 100%, 98.5%, 97%, etc.
+        } else {
+          // For steps 8-12, gradually shift from light gray to dark gray for better contrast
+          const darknessFactor = (stepNum - 7) / 5; // 0.2, 0.4, 0.6, 0.8, 1.0
+          adjustedLightness = 90 - (darknessFactor * 30); // 90%, 84%, 78%, 72%, 66%
+        }
+      }
+      
+      // For white accent in dark mode, improve contrast with better gradation
+      if (isWhiteAccent && isDarkMode) {
+        const stepNum = parseInt(step.name);
+        if (stepNum >= 6) {
+          // Create a better gradient for darker steps
+          adjustedLightness = 10 - (stepNum - 6) * 1.5; // 10%, 8.5%, 7%, etc.
+        } else {
+          // For steps 1-5, gradually shift from dark gray to medium gray
+          const lightnessFactor = stepNum / 5; // 0.2, 0.4, 0.6, 0.8, 1.0
+          adjustedLightness = lightnessFactor * 25; // 5%, 10%, 15%, 20%, 25%
+        }
       }
       
       const hex = HSLToHex(hsl.h, hsl.s, adjustedLightness);
@@ -195,6 +225,16 @@
       return '#000000'; // Default to black text
     }
     
+    // Special case for white - always use dark text
+    if (hexColor.toLowerCase() === '#ffffff') {
+      return '#000000';
+    }
+    
+    // Special case for black - always use white text
+    if (hexColor.toLowerCase() === '#000000') {
+      return '#ffffff';
+    }
+    
     const hex = hexColor.replace('#', '');
     const r = parseInt(hex.slice(0, 2), 16);
     const g = parseInt(hex.slice(2, 4), 16);
@@ -208,6 +248,26 @@
     const luminance = 0.2126 * r/255 + 0.7152 * g/255 + 0.0722 * b/255;
     
     return luminance > 0.5 ? '#000000' : '#ffffff';
+  }
+  
+  // Helper function to get proper button styles for white accent/base
+  function getButtonStyles(isWhite: boolean, isPrimary: boolean) {
+    if (isWhite && isPrimary) {
+      return {
+        bg: '#ffffff',
+        text: '#000000',
+        hover: '#f5f5f5',
+        border: '1px solid #e2e2e2'
+      };
+    } else if (isWhite) {
+      return {
+        bg: 'transparent',
+        text: '#333333',
+        hover: '#f5f5f5',
+        border: '1px solid #e2e2e2'
+      };
+    }
+    return {};
   }
   
   // Update colors when base color or theme changes
@@ -660,25 +720,45 @@
             <!-- Group 1: Buttons -->
             <div class="component-container">
               <div class="component-row">
-                <button class="demo-button primary" style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)}; --button-hover: {colorScale[7]?.value};">
+                <button class="demo-button primary" style="
+                  --button-bg: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, true).bg : colorScale[8]?.value}; 
+                  --button-text: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, true).text : getContrastColor(colorScale[8]?.value)}; 
+                  --button-hover: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, true).hover : colorScale[7]?.value}; 
+                  {$baseColor.toLowerCase() === '#ffffff' ? 'border: 1px solid #e2e2e2;' : ''}">
                   Primary
                 </button>
-                <button class="demo-button secondary" style="--button-border: {secondaryColorScale[5]?.value}; --button-bg: {secondaryColorScale[2]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}">
+                <button class="demo-button secondary" style="
+                  --button-border: {$secondaryColor.toLowerCase() === '#ffffff' ? '#e2e2e2' : secondaryColorScale[5]?.value}; 
+                  --button-bg: {$secondaryColor.toLowerCase() === '#ffffff' ? '#f0f0f0' : secondaryColorScale[2]?.value}; 
+                  --button-hover: {$secondaryColor.toLowerCase() === '#ffffff' ? '#e8e8e8' : secondaryColorScale[3]?.value}; 
+                  --button-text: {$secondaryColor.toLowerCase() === '#ffffff' ? '#333333' : secondaryColorScale[11]?.value}">
                   Secondary
                 </button>
-                <button class="demo-button subtle" style="--button-hover: {secondaryColorScale[2]?.value}; --button-text: {secondaryColorScale[10]?.value}">
+                <button class="demo-button subtle" style="
+                  --button-hover: {$secondaryColor.toLowerCase() === '#ffffff' ? '#f5f5f5' : secondaryColorScale[2]?.value}; 
+                  --button-text: {$secondaryColor.toLowerCase() === '#ffffff' ? '#333333' : secondaryColorScale[10]?.value}">
                   Text
                 </button>
               </div>
               
               <div class="component-row">
-                <button class="demo-button accent" style="--button-bg: {colorScale[5]?.value}; --button-text: {colorScale[11]?.value}; --button-border: {colorScale[8]?.value}; --button-hover: {colorScale[6]?.value}">
+                <button class="demo-button accent" style="
+                  --button-bg: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, false).bg : colorScale[5]?.value}; 
+                  --button-text: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, false).text : colorScale[11]?.value}; 
+                  --button-border: {$baseColor.toLowerCase() === '#ffffff' ? '#e2e2e2' : colorScale[8]?.value}; 
+                  --button-hover: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, false).hover : colorScale[6]?.value}; 
+                  {$baseColor.toLowerCase() === '#ffffff' ? 'border: 1px solid #e2e2e2;' : ''}">
                   Accent
                 </button>
-                <button class="demo-button accent-outline" style="--button-border: {colorScale[8]?.value}; --button-hover: {colorScale[2]?.value}; --button-text: {colorScale[9]?.value}">
+                <button class="demo-button accent-outline" style="
+                  --button-border: {$baseColor.toLowerCase() === '#ffffff' ? '#e2e2e2' : colorScale[8]?.value}; 
+                  --button-hover: {$baseColor.toLowerCase() === '#ffffff' ? '#f5f5f5' : colorScale[2]?.value}; 
+                  --button-text: {$baseColor.toLowerCase() === '#ffffff' ? '#333333' : colorScale[9]?.value}">
                   Outline
                 </button>
-                <button class="demo-button accent-subtle" style="--button-hover: {colorScale[2]?.value}; --button-text: {colorScale[9]?.value}">
+                <button class="demo-button accent-subtle" style="
+                  --button-hover: {$baseColor.toLowerCase() === '#ffffff' ? '#f5f5f5' : colorScale[2]?.value}; 
+                  --button-text: {$baseColor.toLowerCase() === '#ffffff' ? '#333333' : colorScale[9]?.value}">
                   Subtle
                 </button>
               </div>
@@ -687,12 +767,28 @@
             <!-- Group 2: Badges -->
             <div class="component-container">
               <div class="component-row">
-                <span class="demo-badge primary" style="--badge-bg: {colorScale[8]?.value}; --badge-text: {getContrastColor(colorScale[8]?.value)};">Primary</span>
-                <span class="demo-badge secondary" style="--badge-bg: {secondaryColorScale[4]?.value}; --badge-text: {secondaryColorScale[11]?.value};">Secondary</span>
-                <span class="demo-badge outline" style="--badge-border: {colorScale[8]?.value}; --badge-text: {colorScale[9]?.value};">Outline</span>
-                <span class="demo-badge subtle" style="--badge-bg: {colorScale[3]?.value}; --badge-text: {colorScale[10]?.value};">Subtle</span>
-                <span class="demo-badge pill" style="--badge-bg: {colorScale[5]?.value}; --badge-text: {colorScale[11]?.value};">Pill</span>
-                <span class="demo-badge with-dot" style="--badge-bg: {secondaryColorScale[3]?.value}; --badge-text: {secondaryColorScale[11]?.value}; --dot-color: {colorScale[8]?.value};">
+                <span class="demo-badge primary" style="
+                  --badge-bg: {$baseColor.toLowerCase() === '#ffffff' ? '#ffffff' : colorScale[8]?.value}; 
+                  --badge-text: {$baseColor.toLowerCase() === '#ffffff' ? '#000000' : getContrastColor(colorScale[8]?.value)}; 
+                  {$baseColor.toLowerCase() === '#ffffff' ? 'border: 1px solid #e2e2e2;' : ''}">Primary</span>
+                <span class="demo-badge secondary" style="
+                  --badge-bg: {$secondaryColor.toLowerCase() === '#ffffff' ? '#f0f0f0' : secondaryColorScale[4]?.value}; 
+                  --badge-text: {$secondaryColor.toLowerCase() === '#ffffff' ? '' : secondaryColorScale[11]?.value};">Secondary</span>
+                <span class="demo-badge outline" style="
+                  --badge-border: {$baseColor.toLowerCase() === '#ffffff' ? '#e2e2e2' : colorScale[8]?.value}; 
+                  --badge-text: {$baseColor.toLowerCase() === '#ffffff' ? '#333333' : colorScale[9]?.value};">Outline</span>
+                <span class="demo-badge subtle" style="
+                  --badge-bg: {$baseColor.toLowerCase() === '#ffffff' ? '#f5f5f5' : colorScale[3]?.value}; 
+                  --badge-text: {$baseColor.toLowerCase() === '#ffffff' ? '#333333' : colorScale[10]?.value}; 
+                  {$baseColor.toLowerCase() === '#ffffff' ? 'border: 1px solid #e2e2e2;' : ''}">Subtle</span>
+                <span class="demo-badge pill" style="
+                  --badge-bg: {$baseColor.toLowerCase() === '#ffffff' ? '#ffffff' : colorScale[5]?.value}; 
+                  --badge-text: {$baseColor.toLowerCase() === '#ffffff' ? '#333333' : colorScale[11]?.value}; 
+                  {$baseColor.toLowerCase() === '#ffffff' ? 'border: 1px solid #e2e2e2;' : ''}">Pill</span>
+                <span class="demo-badge with-dot" style="
+                  --badge-bg: {$secondaryColor.toLowerCase() === '#ffffff' ? '#f0f0f0' : secondaryColorScale[3]?.value}; 
+                  --badge-text: {$secondaryColor.toLowerCase() === '#ffffff' ? '#333333' : secondaryColorScale[11]?.value}; 
+                  --dot-color: {$baseColor.toLowerCase() === '#ffffff' ? '#333333' : colorScale[8]?.value};">
                   <span class="badge-dot"></span>Status
                 </span>
               </div>
@@ -722,7 +818,7 @@
                 </div>
               </div>
               
-              <div class="slider-container mt-4" style="--slider-track: {secondaryColorScale[5]?.value}; --slider-fill: {colorScale[8]?.value}; --slider-thumb: {colorScale[8]?.value};">
+              <div class="slider-container mt-4" style="--slider-track: {secondaryColorScale[5]?.value}; --slider-fill: {$baseColor.toLowerCase() === '#ffffff' ? '#e2e2e2' : colorScale[8]?.value}; --slider-thumb: {$baseColor.toLowerCase() === '#ffffff' ? '#f0f0f0' : colorScale[8]?.value};">
                 <input 
                   type="range" 
                   min="0" 
@@ -789,17 +885,32 @@
             <div class="component-container">
               <div class="component-row center-items">
                 <div class="tooltip-container">
-                  <button class="demo-button secondary" style="--button-border: {secondaryColorScale[5]?.value}; --button-bg: {secondaryColorScale[2]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}">
+                  <button class="demo-button secondary" style="
+                    --button-border: {$secondaryColor.toLowerCase() === '#ffffff' ? '#e2e2e2' : secondaryColorScale[5]?.value}; 
+                    --button-bg: {$secondaryColor.toLowerCase() === '#ffffff' ? '#f0f0f0' : secondaryColorScale[2]?.value}; 
+                    --button-hover: {$secondaryColor.toLowerCase() === '#ffffff' ? '#e8e8e8' : secondaryColorScale[3]?.value}; 
+                    --button-text: {$secondaryColor.toLowerCase() === '#ffffff' ? '#333333' : secondaryColorScale[11]?.value}">
                     Hover Me
                   </button>
-                  <span class="tooltip tooltip-top" style="--tooltip-bg: {secondaryColorScale[9]?.value}; --tooltip-text: {getContrastColor(secondaryColorScale[9]?.value)};">Tooltip information</span>
+                  <span class="tooltip tooltip-top" style="
+                    --tooltip-bg: {$secondaryColor.toLowerCase() === '#ffffff' ? '#f0f0f0' : secondaryColorScale[9]?.value}; 
+                    --tooltip-text: {$secondaryColor.toLowerCase() === '#ffffff' ? '#333333' : getContrastColor(secondaryColorScale[9]?.value)};">
+                    Tooltip information
+                  </span>
                 </div>
                 
                 <div class="tooltip-container">
-                  <button class="demo-button primary" style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)}; --button-hover: {colorScale[7]?.value};">
+                  <button class="demo-button primary" style="
+                    --button-bg: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, true).bg : colorScale[8]?.value}; 
+                    --button-text: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, true).text : getContrastColor(colorScale[8]?.value)}; 
+                    --button-hover: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, true).hover : colorScale[7]?.value};">
                     Hover Me
                   </button>
-                  <span class="tooltip tooltip-bottom" style="--tooltip-bg: {colorScale[9]?.value}; --tooltip-text: {getContrastColor(colorScale[9]?.value)};">Accent tooltip</span>
+                  <span class="tooltip tooltip-bottom" style="
+                    --tooltip-bg: {$baseColor.toLowerCase() === '#ffffff' ? '#f0f0f0' : colorScale[9]?.value}; 
+                    --tooltip-text: {$baseColor.toLowerCase() === '#ffffff' ? '#333333' : getContrastColor(colorScale[9]?.value)};">
+                    Accent tooltip
+                  </span>
                 </div>
               </div>
             </div>
@@ -809,7 +920,9 @@
               <div class="demo-card" style="--card-bg: {secondaryColorScale[1]?.value}; --card-border: {secondaryColorScale[4]?.value}">
                 <h3 style="color: {secondaryColorScale[11]?.value}">Card Title</h3>
                 <p style="color: {secondaryColorScale[10]?.value}">Card with custom colors based on your selected scheme.</p>
-                <button class="demo-button small primary" style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)}">
+                <button class="demo-button small primary" style="
+                  --button-bg: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, true).bg : colorScale[8]?.value}; 
+                  --button-text: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, true).text : getContrastColor(colorScale[8]?.value)}">
                   Action
                 </button>
               </div>
@@ -933,7 +1046,7 @@
             <div class="component-container">
               <div class="feature-card" style="--card-bg: {secondaryColorScale[1]?.value}; --card-border: {secondaryColorScale[4]?.value}; --card-accent: {colorScale[5]?.value}; --card-text: {secondaryColorScale[11]?.value}; --card-text-secondary: {secondaryColorScale[10]?.value};">
                 <div class="feature-card-inner">
-                  <div class="feature-icon-wrapper" style="background-color: {colorScale[3]?.value}; color: {colorScale[9]?.value};">
+                  <div class="feature-icon-wrapper" style="background-color: {colorScale[3]?.value}; color: {colorScale[9]?.value}; {$baseColor.toLowerCase() === '#ffffff' ? 'border: 1px solid #e2e2e2;' : ''}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
                       <path d="M2 17l10 5 10-5"></path>
@@ -945,7 +1058,7 @@
                     <p class="feature-description">Connect with your favorite tools and services with just a few clicks.</p>
                   </div>
                   <div class="feature-footer">
-                    <button class="feature-button" style="color: {colorScale[9]?.value};">
+                    <button class="feature-button" style="color: {$baseColor.toLowerCase() === '#ffffff' ? '#333333' : colorScale[9]?.value};">
                       Learn more
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14"></path>
@@ -959,7 +1072,13 @@
             
             <!-- Group 15: WYSIWYG Editor Actions -->
             <div class="component-container">
-              <div class="wysiwyg-editor" style="--editor-bg: {secondaryColorScale[1]?.value}; --editor-border: {secondaryColorScale[5]?.value}; --editor-btn-hover: {secondaryColorScale[3]?.value}; --editor-btn-active: {colorScale[3]?.value}; --editor-icon: {secondaryColorScale[10]?.value}; --editor-icon-active: {colorScale[9]?.value};">
+              <div class="wysiwyg-editor" style="
+                --editor-bg: {secondaryColorScale[1]?.value}; 
+                --editor-border: {secondaryColorScale[5]?.value}; 
+                --editor-btn-hover: {secondaryColorScale[3]?.value}; 
+                --editor-btn-active: {$baseColor.toLowerCase() === '#ffffff' ? '#f5f5f5' : colorScale[3]?.value}; 
+                --editor-icon: {secondaryColorScale[10]?.value}; 
+                --editor-icon-active: {$baseColor.toLowerCase() === '#ffffff' ? '#333333' : colorScale[9]?.value};">
                 <div class="editor-toolbar">
                   <div class="toolbar-group">
                     <button class="toolbar-button active">
@@ -1056,7 +1175,7 @@
                   </div>
                 </div>
                 <div class="editor-content" style="--editor-content-bg: {secondaryColorScale[0]?.value}; --editor-content-border: {secondaryColorScale[4]?.value}; --editor-text: {secondaryColorScale[11]?.value};">
-                  <p style="margin-bottom: 10px;">This is a <span style="color: {colorScale[9]?.value}; font-weight: 500;">rich text editor</span> with custom styling.</p>
+                  <p style="margin-bottom: 10px;">This is a <span style="color: {$baseColor.toLowerCase() === '#ffffff' ? '#333333' : colorScale[9]?.value}; font-weight: 500;">rich text editor</span> with custom styling.</p>
                   <p style="margin-bottom: 10px;">You can format text with <span style="font-weight: bold;">bold</span>, <span style="font-style: italic;">italic</span>, or <span style="text-decoration: underline;">underline</span>.</p>
                  
                 </div>
@@ -1067,7 +1186,7 @@
             <div class="component-container">
               <div class="feature-card" style="--card-bg: {secondaryColorScale[1]?.value}; --card-border: {secondaryColorScale[4]?.value}; --card-accent: {colorScale[5]?.value}; --card-text: {secondaryColorScale[11]?.value}; --card-text-secondary: {secondaryColorScale[10]?.value};">
                 <div class="feature-card-inner">
-                  <div class="feature-icon-wrapper" style="background-color: {colorScale[3]?.value}; color: {colorScale[9]?.value};">
+                  <div class="feature-icon-wrapper" style="background-color: {colorScale[3]?.value}; color: {colorScale[9]?.value}; {$baseColor.toLowerCase() === '#ffffff' ? 'border: 1px solid #e2e2e2;' : ''}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                       <circle cx="12" cy="12" r="10"></circle>
                       <path d="M12 16v-4"></path>
@@ -1079,7 +1198,7 @@
                     <p class="feature-description">Get detailed insights and reports to help you make better decisions.</p>
                   </div>
                   <div class="feature-footer">
-                    <button class="feature-button" style="color: {colorScale[9]?.value};">
+                    <button class="feature-button" style="color: {$baseColor.toLowerCase() === '#ffffff' ? '#333333' : colorScale[9]?.value};">
                       View reports
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 12h14"></path>
@@ -1133,21 +1252,31 @@
         <button 
           class="demo-button primary" 
           onclick={copyCssCode} 
-          style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)};"
+          style="
+            --button-bg: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, true).bg : colorScale[8]?.value}; 
+            --button-text: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, true).text : getContrastColor(colorScale[8]?.value)};"
         >
           Copy to Clipboard
         </button>
         <button 
           class="demo-button accent" 
           onclick={downloadCssCode} 
-          style="--button-bg: {colorScale[5]?.value}; --button-text: {colorScale[11]?.value}; --button-border: {colorScale[8]?.value}; --button-hover: {colorScale[6]?.value}"
+          style="
+            --button-bg: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, false).bg : colorScale[5]?.value}; 
+            --button-text: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, false).text : colorScale[11]?.value}; 
+            --button-border: {$baseColor.toLowerCase() === '#ffffff' ? '#e2e2e2' : colorScale[8]?.value}; 
+            --button-hover: {$baseColor.toLowerCase() === '#ffffff' ? getButtonStyles(true, false).hover : colorScale[6]?.value}"
         >
           Download File
         </button>
         <button 
           class="demo-button secondary" 
           onclick={() => toggleCssExportPanel()} 
-          style="--button-border: {secondaryColorScale[5]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}"
+          style="
+            --button-border: {$secondaryColor.toLowerCase() === '#ffffff' ? '#e2e2e2' : secondaryColorScale[5]?.value}; 
+            --button-bg: {$secondaryColor.toLowerCase() === '#ffffff' ? '#f0f0f0' : secondaryColorScale[2]?.value}; 
+            --button-hover: {$secondaryColor.toLowerCase() === '#ffffff' ? '#e8e8e8' : secondaryColorScale[3]?.value}; 
+            --button-text: {$secondaryColor.toLowerCase() === '#ffffff' ? '#333333' : secondaryColorScale[11]?.value}"
         >
           Close
         </button>
@@ -2007,8 +2136,8 @@
   }
 
   .color-swatch-btn {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     aspect-ratio: 1/1;
     border-radius: 50%;
     border: 2px solid transparent;

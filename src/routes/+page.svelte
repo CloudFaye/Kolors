@@ -36,10 +36,10 @@
             <p>{system.description}</p>
           </div>
           
-          <div class="color-meta">
+       <!--  <div class="color-meta">
             <span class="color-count">  {countUniqueColors(system)} unique colors</span>
           </div>
-          
+        -->
           <div class="color-preview">
             {#each system.colorGroups.slice(0, 2) as group}
               <div class="preview-group">
@@ -141,7 +141,7 @@
     padding: 0.25rem 0.75rem;
     border-radius: 12px;
     display: inline-block;
-    color: rgb(245, 163, 133);
+    color: rgb(204, 97, 59);
   }
   
   .color-preview {
