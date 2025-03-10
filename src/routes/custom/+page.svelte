@@ -17,7 +17,11 @@
     { name: "green", value: "#30a46c", description: "Success accent" },
     { name: "red", value: "#e5484d", description: "Error/alert accent" },
     { name: "amber", value: "#ffb224", description: "Warning accent" },
-    { name: "pink", value: "#f670c7", description: "Highlight accent" }
+    { name: "pink", value: "#f670c7", description: "Highlight accent" },
+     { name: "teal", value: "#006b7e", description: "Teal accent"},
+     { name: "magenta", value: "#6b264b", description: "Magenta accent"},
+     { name: "lapis-blue", value: "#004b8d", description: "Lapis Blue accent"},
+     { name: "aura-orange", value: "#b4262a", description: "Aura Orange accent"},
   ];
   
   const baseColors = [
@@ -28,7 +32,9 @@
     { name: "cool", value: "#425466", description: "Deep neutral" },
     { name: "sand", value: "#d2b48c", description: "Sandy neutral" },
     { name: "clay", value: "#9a8478", description: "Clay neutral" },
-    { name: "sage", value: "#8a9a80", description: "Sage neutral" }
+    { name: "sage", value: "#8a9a80", description: "Sage neutral" },
+    { name: "olive-gray", value: "#a6997a", description: "Olive neutral" },
+    { name: "prune", value: "#603749", description: "Prune neutral" }
   ];
   
   // RGB versions of the colors for the color picker
@@ -339,15 +345,40 @@
 
   // Color picker related functions
   function hexToRgb(hex: string): RGB {
-    // Remove # if present
-    hex = hex.replace('#', '');
-    
-    // Parse hex values
-    const r = parseInt(hex.substring(0, 2), 16) / 255;
-    const g = parseInt(hex.substring(2, 4), 16) / 255;
-    const b = parseInt(hex.substring(4, 6), 16) / 255;
-    
-    return { r, g, b };
+    try {
+      // Handle invalid inputs gracefully
+      if (!hex || typeof hex !== 'string') {
+        return { r: 0, g: 0, b: 0 };
+      }
+      
+      // Remove # if present
+      hex = hex.replace('#', '');
+      
+      // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+      if (hex.length === 3) {
+        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+      }
+      
+      // Make sure we have a valid hex value
+      if (hex.length !== 6 || !/^[0-9A-Fa-f]{6}$/.test(hex)) {
+        return { r: 0, g: 0, b: 0 };
+      }
+      
+      // Parse hex values
+      const r = parseInt(hex.substring(0, 2), 16) / 255;
+      const g = parseInt(hex.substring(2, 4), 16) / 255;
+      const b = parseInt(hex.substring(4, 6), 16) / 255;
+      
+      // Check for NaN values and return defaults if necessary
+      if (isNaN(r) || isNaN(g) || isNaN(b)) {
+        return { r: 0, g: 0, b: 0 };
+      }
+      
+      return { r, g, b };
+    } catch (e) {
+      console.error('Error parsing hex color:', e);
+      return { r: 0, g: 0, b: 0 };
+    }
   }
   
   function rgbToHex(rgb: RGB): string {
@@ -419,6 +450,86 @@
   // Remove all presets related functions
 
   updateCssCode();
+
+  // Replace the bidirectional effect hooks with a new approach
+  // Create temporary state variables for input handling
+  let tempBaseColorInput = $state($baseColor);
+  let tempSecondaryColorInput = $state($secondaryColor);
+
+  // Handle hex input changes
+  function handleBaseColorInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    tempBaseColorInput = input.value;
+    
+    // Make sure the input starts with #
+    if (tempBaseColorInput && !tempBaseColorInput.startsWith('#')) {
+      tempBaseColorInput = '#' + tempBaseColorInput;
+    }
+    
+    // Only update the actual base color when the input is a valid hex color
+    if (/^#[0-9A-Fa-f]{6}$/.test(tempBaseColorInput)) {
+      $baseColor = tempBaseColorInput;
+      primaryRgb = hexToRgb(tempBaseColorInput);
+    }
+  }
+
+  function handleSecondaryColorInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    tempSecondaryColorInput = input.value;
+    
+    // Make sure the input starts with #
+    if (tempSecondaryColorInput && !tempSecondaryColorInput.startsWith('#')) {
+      tempSecondaryColorInput = '#' + tempSecondaryColorInput;
+    }
+    
+    // Only update the actual accent color when the input is a valid hex color
+    if (/^#[0-9A-Fa-f]{6}$/.test(tempSecondaryColorInput)) {
+      $secondaryColor = tempSecondaryColorInput;
+      secondaryRgb = hexToRgb(tempSecondaryColorInput);
+    }
+  }
+
+  // Keep the temp inputs in sync when colors change from other sources (like the color picker)
+  $effect(() => {
+    tempBaseColorInput = $baseColor;
+  });
+
+  $effect(() => {
+    tempSecondaryColorInput = $secondaryColor;
+  });
+
+  // Handle RGB changes from the color picker for primary color
+  $effect(() => {
+    const hex = rgbToHex(primaryRgb);
+    if (hex !== $baseColor) {
+      $baseColor = hex;
+      tempBaseColorInput = hex;
+    }
+  });
+
+  // Handle RGB changes from the color picker for secondary color
+  $effect(() => {
+    const hex = rgbToHex(secondaryRgb);
+    if (hex !== $secondaryColor) {
+      $secondaryColor = hex;
+      tempSecondaryColorInput = hex;
+    }
+  });
+
+  // Update the selectAccentColor and selectBaseColor functions
+  function selectAccentColor(colorName: string, colorValue: string) {
+    selectedAccentColor = colorName;
+    $baseColor = colorValue;
+    tempBaseColorInput = colorValue;
+    primaryRgb = hexToRgb(colorValue);
+  }
+
+  function selectBaseColor(colorName: string, colorValue: string) {
+    selectedBaseColor = colorName;
+    $secondaryColor = colorValue;
+    tempSecondaryColorInput = colorValue;
+    secondaryRgb = hexToRgb(colorValue);
+  }
 </script>
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -442,11 +553,7 @@
               <button 
                 class="color-swatch-btn {selectedAccentColor === color.name ? 'selected' : ''}" 
                 style="background-color: {color.value};"
-                onclick={() => {
-                  selectedAccentColor = color.name;
-                  $baseColor = color.value;
-                  primaryRgb = hexToRgb(color.value);
-                }}
+                onclick={() => selectAccentColor(color.name, color.value)}
                 title={color.description}
               ></button>
             {/each}
@@ -462,8 +569,9 @@
             <input 
               type="text" 
               id="baseColor"
-              bind:value={$baseColor} 
+              bind:value={tempBaseColorInput} 
               class="color-text-input"
+              oninput={handleBaseColorInput}
             />
           </div>
         </div>
@@ -478,11 +586,7 @@
               <button 
                 class="color-swatch-btn {selectedBaseColor === color.name ? 'selected' : ''}" 
                 style="background-color: {color.value};"
-                onclick={() => {
-                  selectedBaseColor = color.name;
-                  $secondaryColor = color.value;
-                  secondaryRgb = hexToRgb(color.value);
-                }}
+                onclick={() => selectBaseColor(color.name, color.value)}
                 title={color.description}
               ></button>
             {/each}
@@ -498,8 +602,9 @@
             <input 
               type="text" 
               id="secondaryColor"
-              bind:value={$secondaryColor} 
+              bind:value={tempSecondaryColorInput} 
               class="color-text-input"
+              oninput={handleSecondaryColorInput}
             />
           </div>
         </div>
@@ -820,6 +925,168 @@
                   <button class="demo-button small accent" style="--button-bg: {colorScale[5]?.value}; --button-text: {colorScale[11]?.value}; --button-border: {colorScale[8]?.value}; --button-hover: {colorScale[6]?.value};">
                     Connect
                   </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group 14: Feature Card -->
+            <div class="component-container">
+              <div class="feature-card" style="--card-bg: {secondaryColorScale[1]?.value}; --card-border: {secondaryColorScale[4]?.value}; --card-accent: {colorScale[5]?.value}; --card-text: {secondaryColorScale[11]?.value}; --card-text-secondary: {secondaryColorScale[10]?.value};">
+                <div class="feature-card-inner">
+                  <div class="feature-icon-wrapper" style="background-color: {colorScale[3]?.value}; color: {colorScale[9]?.value};">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                      <path d="M2 17l10 5 10-5"></path>
+                      <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                  </div>
+                  <div class="feature-content">
+                    <h3 class="feature-title">Seamless Integration</h3>
+                    <p class="feature-description">Connect with your favorite tools and services with just a few clicks.</p>
+                  </div>
+                  <div class="feature-footer">
+                    <button class="feature-button" style="color: {colorScale[9]?.value};">
+                      Learn more
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Group 15: WYSIWYG Editor Actions -->
+            <div class="component-container">
+              <div class="wysiwyg-editor" style="--editor-bg: {secondaryColorScale[1]?.value}; --editor-border: {secondaryColorScale[5]?.value}; --editor-btn-hover: {secondaryColorScale[3]?.value}; --editor-btn-active: {colorScale[3]?.value}; --editor-icon: {secondaryColorScale[10]?.value}; --editor-icon-active: {colorScale[9]?.value};">
+                <div class="editor-toolbar">
+                  <div class="toolbar-group">
+                    <button class="toolbar-button active">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 7V4h16v3"></path>
+                        <path d="M9 20h6"></path>
+                        <path d="M12 4v16"></path>
+                      </svg>
+                    </button>
+                    <button class="toolbar-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <path d="M14 2v6h6"></path>
+                        <path d="M12 18v-6"></path>
+                        <path d="M9 15h6"></path>
+                      </svg>
+                    </button>
+                    <button class="toolbar-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                        <path d="M8 7h4"></path>
+                        <path d="M8 11h8"></path>
+                        <path d="M8 15h6"></path>
+                      </svg>
+                    </button>
+                  </div>
+                  
+                  <div class="toolbar-group">
+                    <button class="toolbar-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"></path>
+                      </svg>
+                    </button>
+                    <button class="toolbar-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                      </svg>
+                    </button>
+                    <button class="toolbar-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="8" y1="6" x2="21" y2="6"></line>
+                        <line x1="8" y1="12" x2="21" y2="12"></line>
+                        <line x1="8" y1="18" x2="21" y2="18"></line>
+                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                      </svg>
+                    </button>
+                  </div>
+                  
+                  <div class="toolbar-group">
+                    <button class="toolbar-button active">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 7h16"></path>
+                        <path d="M5 12h14"></path>
+                        <path d="M6 17h12"></path>
+                      </svg>
+                    </button>
+                    <button class="toolbar-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="9" y1="3" x2="9" y2="21"></line>
+                      </svg>
+                    </button>
+                    <button class="toolbar-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 10h-4V4h-4v6H6l6 6 6-6z"></path>
+                        <path d="M18 15v4H6v-4"></path>
+                      </svg>
+                    </button>
+                  </div>
+                  
+                  <div class="toolbar-group">
+                    <button class="toolbar-button active">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
+                        <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
+                      </svg>
+                    </button>
+                    <button class="toolbar-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="4" x2="10" y2="4"></line>
+                        <line x1="14" y1="20" x2="5" y2="20"></line>
+                        <line x1="15" y1="4" x2="9" y2="20"></line>
+                      </svg>
+                    </button>
+                    <button class="toolbar-button">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"></path>
+                        <line x1="4" y1="21" x2="20" y2="21"></line>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="editor-content" style="--editor-content-bg: {secondaryColorScale[0]?.value}; --editor-content-border: {secondaryColorScale[4]?.value}; --editor-text: {secondaryColorScale[11]?.value};">
+                  <p style="margin-bottom: 10px;">This is a <span style="color: {colorScale[9]?.value}; font-weight: 500;">rich text editor</span> with custom styling.</p>
+                  <p style="margin-bottom: 10px;">You can format text with <span style="font-weight: bold;">bold</span>, <span style="font-style: italic;">italic</span>, or <span style="text-decoration: underline;">underline</span>.</p>
+                 
+                </div>
+              </div>
+            </div>
+            
+            <!-- Group 16: Additional Feature Card -->
+            <div class="component-container">
+              <div class="feature-card" style="--card-bg: {secondaryColorScale[1]?.value}; --card-border: {secondaryColorScale[4]?.value}; --card-accent: {colorScale[5]?.value}; --card-text: {secondaryColorScale[11]?.value}; --card-text-secondary: {secondaryColorScale[10]?.value};">
+                <div class="feature-card-inner">
+                  <div class="feature-icon-wrapper" style="background-color: {colorScale[3]?.value}; color: {colorScale[9]?.value};">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M12 16v-4"></path>
+                      <path d="M12 8h.01"></path>
+                    </svg>
+                  </div>
+                  <div class="feature-content">
+                    <h3 class="feature-title">Smart Analytics</h3>
+                    <p class="feature-description">Get detailed insights and reports to help you make better decisions.</p>
+                  </div>
+                  <div class="feature-footer">
+                    <button class="feature-button" style="color: {colorScale[9]?.value};">
+                      View reports
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="M12 5l7 7-7 7"></path>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2265,16 +2532,15 @@
   .components-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: calc(1rem - 1.5rem);
     width: 100%;
   }
 
   .component-container {
     width: 100%;
-    border-radius: 12px;
+    border-radius: 0px;
     padding: 1rem 1.3rem;
-    background-color: var(--surface-color, rgba(255, 255, 255, 0.5));
-    
+    border: 1px solid var(--surface-color, rgba(255, 255, 255, 0.5));
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
@@ -2322,5 +2588,144 @@
       flex-direction: column;
       gap: 1rem;
     }
+  }
+
+  /* Feature Card Styles */
+  .feature-card {
+    border-radius: 12px;
+    background-color: var(--card-bg, white);
+    border: 1px solid var(--card-border, #e2e2e2);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feature-card-inner {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .feature-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .feature-content {
+    flex: 1;
+  }
+
+  .feature-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+    color: var(--card-text, #333);
+  }
+
+  .feature-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 0 1.5rem;
+    color: var(--card-text-secondary, #666);
+  }
+
+  .feature-footer {
+    border-top: 1px solid var(--card-border, #e2e2e2);
+    padding-top: 1rem;
+    margin-top: auto;
+  }
+
+  .feature-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: opacity 0.2s ease;
+  }
+
+  .feature-button:hover {
+    opacity: 0.8;
+  }
+
+  /* WYSIWYG Editor Styles */
+  .wysiwyg-editor {
+    border-radius: 8px;
+    border: 1px solid var(--editor-border, #e2e2e2);
+    background-color: var(--editor-bg, white);
+    overflow: hidden;
+  }
+
+  .editor-toolbar {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--editor-border, #e2e2e2);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .toolbar-group {
+    display: flex;
+    gap: 2px;
+    padding: 0 0.25rem;
+    border-right: 1px solid var(--editor-border, #e2e2e2);
+  }
+
+  .toolbar-group:last-child {
+    border-right: none;
+  }
+
+  .toolbar-button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--editor-icon, #666);
+    transition: all 0.15s ease;
+  }
+
+  .toolbar-button:hover {
+    background-color: var(--editor-btn-hover, #f5f5f5);
+  }
+
+  .toolbar-button.active {
+    background-color: var(--editor-btn-active, #ebf5ff);
+    color: var(--editor-icon-active, #3b82f6);
+  }
+
+  .editor-content {
+    padding: 1rem;
+    min-height: 100px;
+    background-color: var(--editor-content-bg, #fff);
+    border-top: 1px solid var(--editor-content-border, #f0f0f0);
+  }
+
+  .editor-content p {
+    margin: 0;
+    color: var(--editor-text, #333);
+    font-size: 0.95rem;
+    line-height: 1.5;
   }
 </style> 

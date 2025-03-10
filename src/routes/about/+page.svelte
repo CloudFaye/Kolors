@@ -42,7 +42,7 @@
     </p>
     <p class=''>
       If you notice any inaccuracies or have information about recently updated color systems, please let us know so we can keep 
-      this resource as current and valuable as possible. Our goal is to create a living document of color design that evolves alongside 
+      this resource as current and valuable as possible. The main objective is to have a breathing document of color design that evolves alongside 
       industry standards and practices.
     </p>
   </div>
