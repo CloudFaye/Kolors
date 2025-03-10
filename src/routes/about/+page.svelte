@@ -21,16 +21,7 @@
   </div>
 
   
-  <div class="card about-section">
-    <h2>Features</h2>
-    <ul class='text-neutral-300'>
-      <li>Browse color systems from major brands and design guidelines</li>
-      <li>View detailed color information including hex codes</li>
-      <li>One-click copy to clipboard for any color value</li>
-      <li>Clean, accessible interface with responsive design</li>
-      <li>Links to official documentation for each design system</li>
-    </ul>
-  </div>
+
   
   <div class="card about-section">
     <h2>Sources & Attribution</h2>
