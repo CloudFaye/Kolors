@@ -1109,9 +1109,9 @@
   
   /* Demo Components */
   .demo-button {
-    padding: 0.75rem 1.25rem;
+    padding: 0.5rem 1rem;
     border-radius: 6px;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
