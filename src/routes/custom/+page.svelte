@@ -549,7 +549,6 @@
     <main style="background-color: {secondaryColorScale[1]?.value};" class="components-preview">
       <div class="preview-content">
         <div class="component-group">
-          <h3>Component Previews</h3>
          
           
           <div class="components-grid">
@@ -1717,12 +1716,12 @@
   }
 
   .accent-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);
   }
 
   .base-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);
   }
 
