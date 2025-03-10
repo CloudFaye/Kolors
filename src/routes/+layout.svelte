@@ -16,7 +16,7 @@ let { children } = $props()
 </main>
 
 <footer>
-  <div class="">
+  <div class=" flex items-center justify-center">
     <p>© {new Date().getFullYear()} Kolors by <a href="https://github.com/cloudfaye">Faye Seun</a></p>
   </div>
 </footer>
