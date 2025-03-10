@@ -1203,7 +1203,7 @@
   }
   
   .preview-content {
-    padding: 2rem;
+    padding: 0.8rem;
   }
   
   .preview-description {
@@ -2139,7 +2139,7 @@
     color: var(--button-text);
     border: none;
     border-radius: 4px;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.8rem;
     font-size: 0.9rem;
     cursor: pointer;
     transition: opacity 0.2s ease;
@@ -2275,9 +2275,9 @@
   .component-container {
     width: 100%;
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1rem 1.3rem;
     background-color: var(--surface-color, rgba(255, 255, 255, 0.5));
-    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.05));
+    
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
