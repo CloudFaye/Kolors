@@ -8,7 +8,7 @@
 	let rightItems = [
 		{ name: 'Home', href: '/' },
 		{ name: 'Theme builder', href: '/custom' },
-		{ name: 'Convert', href: '/' }
+		{ name: 'About', href: '/about' }
 	];
 
 	let logo = [{ name: '🟣 Kolors', href: '/' }];

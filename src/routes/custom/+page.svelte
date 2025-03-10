@@ -25,7 +25,10 @@
     { name: "gray", value: "#6e6e6e", description: "Balanced neutral" },
     { name: "zinc", value: "#71717a", description: "Modern neutral" },
     { name: "stone", value: "#78716c", description: "Warm neutral" },
-    { name: "cool", value: "#425466", description: "Deep neutral" }
+    { name: "cool", value: "#425466", description: "Deep neutral" },
+    { name: "sand", value: "#d2b48c", description: "Sandy neutral" },
+    { name: "clay", value: "#9a8478", description: "Clay neutral" },
+    { name: "sage", value: "#8a9a80", description: "Sage neutral" }
   ];
   
   // RGB versions of the colors for the color picker
@@ -422,8 +425,8 @@
 <!-- svelte-ignore a11y_no_static_element_interactions -->
 <div class="page-container" onclick={() => {}}>
   <section class="hero">
-    <h1>Custom Color System</h1>
-    <p class="lead">Create your own color system with perfect scaling for light and dark modes.</p>
+    <p class='text-4xl font-semibold'>Theme Builder</p>
+    <p class="">Create your own color system with perfect scaling for light and dark modes.</p>
   </section>
   
   <div class="layout">
@@ -431,7 +434,7 @@
       <div class="controls-container">
         <div class="color-section">
           <h3>Accent Color</h3>
-          <p class="color-description">Used for interactive elements, highlights, and call-to-actions</p>
+          <p class="color-description">Used for interactive elements, highlights, and CTAs</p>
           <div class="color-grid accent-grid">
             {#each accentColors as color}
               <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -467,7 +470,7 @@
         
         <div class="color-section">
           <h3>Base Color</h3>
-          <p class="color-description">Used for backgrounds, overlays, and UI structure</p>
+          <p class="color-description">Used for backgrounds, overlays, and foundation</p>
           <div class="color-grid base-grid">
             {#each baseColors as color}
               <!-- svelte-ignore a11y_click_events_have_key_events -->
@@ -546,150 +549,278 @@
     <main style="background-color: {secondaryColorScale[1]?.value};" class="components-preview">
       <div class="preview-content">
         <div class="component-group">
-          <h2>Component Previews</h2>
-          <p class="preview-description">These components adapt to your custom color scale automatically.</p>
+          <h3>Component Previews</h3>
+         
           
-          <!-- Buttons Section -->
-          <h3>Buttons</h3>
-          <div class="component-row">
-            <button class="demo-button primary" style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)}; --button-hover: {colorScale[7]?.value};">
-              Primary Button
-            </button>
-            <button class="demo-button secondary" style="--button-border: {secondaryColorScale[5]?.value}; --button-bg: {secondaryColorScale[2]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}">
-              Secondary Button
-            </button>
-            <button class="demo-button subtle" style="--button-hover: {secondaryColorScale[2]?.value}; --button-text: {secondaryColorScale[10]?.value}">
-              Text Button
-            </button>
-          </div>
-          <div class="component-row">
-            <button class="demo-button accent" style="--button-bg: {colorScale[5]?.value}; --button-text: {colorScale[11]?.value}; --button-border: {colorScale[8]?.value}; --button-hover: {colorScale[6]?.value}">
-              Accent Button
-            </button>
-            <button class="demo-button accent-outline" style="--button-border: {colorScale[8]?.value}; --button-hover: {colorScale[2]?.value}; --button-text: {colorScale[9]?.value}">
-              Accent Outline
-            </button>
-            <button class="demo-button accent-subtle" style="--button-hover: {colorScale[2]?.value}; --button-text: {colorScale[9]?.value}">
-              Accent Text
-            </button>
-          </div>
-          
-          <!-- Cards Section -->
-          <h3>Cards</h3>
-          <div class="cards-container">
-            <div class="demo-card" style="--card-bg: {secondaryColorScale[1]?.value}; --card-border: {secondaryColorScale[4]?.value}">
-              <h3 style="color: {secondaryColorScale[11]?.value}">Card Title</h3>
-              <p style="color: {secondaryColorScale[10]?.value}">Card content with custom colors applied based on your selected color scheme.</p>
-              <button class="demo-button small primary" style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)}">
-                Button
-              </button>
-            </div>
-            
-            <div class="demo-card elevated" style="--card-bg: {secondaryColorScale[2]?.value}; --card-shadow: {secondaryColorScale[4]?.value}">
-              <div class="card-accent-bar" style="background-color: {colorScale[8]?.value}"></div>
-              <div class="card-content">
-                <h3 style="color: {secondaryColorScale[11]?.value}">Elevated Card</h3>
-                <p style="color: {secondaryColorScale[10]?.value}">Card with elevation using custom shadow colors and accent highlight.</p>
-                <button class="demo-button small secondary" style="--button-border: {secondaryColorScale[5]?.value}; --button-bg: {secondaryColorScale[2]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}">
-                  Button
+          <div class="components-grid">
+            <!-- Group 1: Buttons -->
+            <div class="component-container">
+              <div class="component-row">
+                <button class="demo-button primary" style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)}; --button-hover: {colorScale[7]?.value};">
+                  Primary
+                </button>
+                <button class="demo-button secondary" style="--button-border: {secondaryColorScale[5]?.value}; --button-bg: {secondaryColorScale[2]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}">
+                  Secondary
+                </button>
+                <button class="demo-button subtle" style="--button-hover: {secondaryColorScale[2]?.value}; --button-text: {secondaryColorScale[10]?.value}">
+                  Text
+                </button>
+              </div>
+              
+              <div class="component-row">
+                <button class="demo-button accent" style="--button-bg: {colorScale[5]?.value}; --button-text: {colorScale[11]?.value}; --button-border: {colorScale[8]?.value}; --button-hover: {colorScale[6]?.value}">
+                  Accent
+                </button>
+                <button class="demo-button accent-outline" style="--button-border: {colorScale[8]?.value}; --button-hover: {colorScale[2]?.value}; --button-text: {colorScale[9]?.value}">
+                  Outline
+                </button>
+                <button class="demo-button accent-subtle" style="--button-hover: {colorScale[2]?.value}; --button-text: {colorScale[9]?.value}">
+                  Subtle
                 </button>
               </div>
             </div>
             
-            <!-- Profile Card -->
-            <div class="profile-card" style="--card-bg: {secondaryColorScale[1]?.value}; --card-border: {secondaryColorScale[4]?.value}">
-              <div class="profile-header">
-                <div class="avatar" style="--avatar-bg: {colorScale[5]?.value}; color: {getContrastColor(colorScale[5]?.value)}">
-                  JD
+            <!-- Group 2: Badges -->
+            <div class="component-container">
+              <div class="component-row">
+                <span class="demo-badge primary" style="--badge-bg: {colorScale[8]?.value}; --badge-text: {getContrastColor(colorScale[8]?.value)};">Primary</span>
+                <span class="demo-badge secondary" style="--badge-bg: {secondaryColorScale[4]?.value}; --badge-text: {secondaryColorScale[11]?.value};">Secondary</span>
+                <span class="demo-badge outline" style="--badge-border: {colorScale[8]?.value}; --badge-text: {colorScale[9]?.value};">Outline</span>
+                <span class="demo-badge subtle" style="--badge-bg: {colorScale[3]?.value}; --badge-text: {colorScale[10]?.value};">Subtle</span>
+                <span class="demo-badge pill" style="--badge-bg: {colorScale[5]?.value}; --badge-text: {colorScale[11]?.value};">Pill</span>
+                <span class="demo-badge with-dot" style="--badge-bg: {secondaryColorScale[3]?.value}; --badge-text: {secondaryColorScale[11]?.value}; --dot-color: {colorScale[8]?.value};">
+                  <span class="badge-dot"></span>Status
+                </span>
+              </div>
+            </div>
+            
+            <!-- Group 3: Form Elements -->
+            <div class="component-container">
+              <div class="input-row">
+                <div class="input-group flex-1">
+                  <input 
+                    type="text" 
+                    id="demo-input" 
+                    placeholder="Regular input..." 
+                    class="demo-input" 
+                    style="--input-border: {secondaryColorScale[5]?.value}; --input-bg: {secondaryColorScale[1]?.value}; --input-focus: {colorScale[8]?.value}"
+                  />
                 </div>
-                <div class="profile-info">
-                  <h4 style="color: {secondaryColorScale[11]?.value}">John Doe</h4>
-                  <p style="color: {secondaryColorScale[10]?.value}">Product Designer</p>
+                
+                <div class="input-group flex-1">
+                  <input 
+                    type="text" 
+                    id="demo-input-accent" 
+                    placeholder="Accent input..." 
+                    class="demo-input accent" 
+                    style="--input-border: {secondaryColorScale[5]?.value}; --input-bg: {colorScale[3]?.value}; --input-focus: {colorScale[8]?.value}"
+                  />
                 </div>
               </div>
-              <div class="profile-body">
-                <p style="color: {secondaryColorScale[10]?.value}">Created 15 projects with 5 team members in the last month.</p>
+              
+              <div class="slider-container mt-4" style="--slider-track: {secondaryColorScale[5]?.value}; --slider-fill: {colorScale[8]?.value}; --slider-thumb: {colorScale[8]?.value};">
+                <input 
+                  type="range" 
+                  min="0" 
+                  max="100" 
+                  value="50" 
+                  class="demo-slider"
+                />
+                <div class="slider-value">50</div>
               </div>
-              <div class="profile-footer" style="--footer-border: {secondaryColorScale[4]?.value}">
-                <button class="demo-button small secondary" style="--button-border: {secondaryColorScale[5]?.value}; --button-bg: {secondaryColorScale[2]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}">
-                  View Profile
+            </div>
+
+            <!-- Group 4: Checkboxes and Radio -->
+            <div class="component-container">
+              <div class="controls-flex-row">
+                <div class="controls-group">
+                  <div class="checkbox-wrapper">
+                    <input 
+                      type="checkbox" 
+                      id="demo-checkbox" 
+                      class="demo-checkbox" 
+                      checked
+                      style="--checkbox-color: {colorScale[8]?.value}"
+                    />
+                    <label for="demo-checkbox" style="color: {secondaryColorScale[10]?.value}">Option 1</label>
+                  </div>
+                  <div class="checkbox-wrapper">
+                    <input 
+                      type="checkbox" 
+                      id="demo-checkbox-accent" 
+                      class="demo-checkbox" 
+                      style="--checkbox-color: {colorScale[8]?.value}"
+                    />
+                    <label for="demo-checkbox-accent" style="color: {secondaryColorScale[10]?.value}">Option 2</label>
+                  </div>
+                </div>
+                
+                <div class="controls-group">
+                  <div class="radio-wrapper">
+                    <input 
+                      type="radio" 
+                      id="radio1" 
+                      name="demo-radio" 
+                      class="demo-radio" 
+                      checked
+                      style="--radio-color: {colorScale[8]?.value}"
+                    />
+                    <label for="radio1" style="color: {secondaryColorScale[10]?.value}">Selection 1</label>
+                  </div>
+                  <div class="radio-wrapper">
+                    <input 
+                      type="radio" 
+                      id="radio2" 
+                      name="demo-radio" 
+                      class="demo-radio" 
+                      style="--radio-color: {colorScale[8]?.value}"
+                    />
+                    <label for="radio2" style="color: {secondaryColorScale[10]?.value}">Selection 2</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Group 5: Tooltips -->
+            <div class="component-container">
+              <div class="component-row center-items">
+                <div class="tooltip-container">
+                  <button class="demo-button secondary" style="--button-border: {secondaryColorScale[5]?.value}; --button-bg: {secondaryColorScale[2]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}">
+                    Hover Me
+                  </button>
+                  <span class="tooltip tooltip-top" style="--tooltip-bg: {secondaryColorScale[9]?.value}; --tooltip-text: {getContrastColor(secondaryColorScale[9]?.value)};">Tooltip information</span>
+                </div>
+                
+                <div class="tooltip-container">
+                  <button class="demo-button primary" style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)}; --button-hover: {colorScale[7]?.value};">
+                    Hover Me
+                  </button>
+                  <span class="tooltip tooltip-bottom" style="--tooltip-bg: {colorScale[9]?.value}; --tooltip-text: {getContrastColor(colorScale[9]?.value)};">Accent tooltip</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Group 6: Card -->
+            <div class="component-container">
+              <div class="demo-card" style="--card-bg: {secondaryColorScale[1]?.value}; --card-border: {secondaryColorScale[4]?.value}">
+                <h3 style="color: {secondaryColorScale[11]?.value}">Card Title</h3>
+                <p style="color: {secondaryColorScale[10]?.value}">Card with custom colors based on your selected scheme.</p>
+                <button class="demo-button small primary" style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)}">
+                  Action
                 </button>
-                <button class="demo-button small accent" style="--button-bg: {colorScale[5]?.value}; --button-text: {colorScale[11]?.value}; --button-border: {colorScale[8]?.value}; --button-hover: {colorScale[6]?.value}">
-                  Connect
-                </button>
               </div>
             </div>
-          </div>
-          
-          <!-- Form Elements Section -->
-          <h3>Form Elements</h3>
-          <div class="form-elements">
-            <div class="input-group">
-              <label for="demo-input" style="color: {secondaryColorScale[11]?.value}">Text Input</label>
-              <input 
-                type="text" 
-                id="demo-input" 
-                placeholder="Type something..." 
-                class="demo-input" 
+            
+            <!-- Group 7: Elevated Card -->
+            <div class="component-container">
+              <div class="demo-card elevated" style="--card-bg: {secondaryColorScale[2]?.value}; --card-shadow: {secondaryColorScale[4]?.value}">
+                <div class="card-accent-bar" style="background-color: {colorScale[8]?.value}"></div>
+                <div class="card-content">
+                  <h3 style="color: {secondaryColorScale[11]?.value}">Elevated Card</h3>
+                  <p style="color: {secondaryColorScale[10]?.value}">Card with custom shadow and accent highlight.</p>
+                  <button class="demo-button small secondary" style="--button-border: {secondaryColorScale[5]?.value}; --button-bg: {secondaryColorScale[2]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value}">
+                    Action
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Group 8: Star Rating -->
+            <div class="component-container center-content">
+              <div class="star-rating" style="--star-color: {colorScale[8]?.value}; --star-inactive: {secondaryColorScale[4]?.value};">
+                <span class="star active">★</span>
+                <span class="star active">★</span>
+                <span class="star active">★</span>
+                <span class="star active">★</span>
+                <span class="star">★</span>
+                <span class="rating-text" style="color: {secondaryColorScale[10]?.value};">4.0</span>
+              </div>
+            </div>
+            
+            <!-- Group 9: Timer -->
+            <div class="component-container center-content">
+              <div class="timer" style="--timer-bg: {secondaryColorScale[2]?.value}; --timer-border: {secondaryColorScale[4]?.value}; --timer-text: {secondaryColorScale[11]?.value};">
+                <div class="timer-display">00:03:45</div>
+                <div class="timer-controls">
+                  <button class="timer-button" style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)};">
+                    Start
+                  </button>
+                  <button class="timer-button" style="--button-bg: {secondaryColorScale[5]?.value}; --button-text: {secondaryColorScale[11]?.value};">
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Group 10: Quote -->
+            <div class="component-container">
+              <blockquote class="fancy-quote" style="--quote-bg: {secondaryColorScale[2]?.value}; --quote-border: {colorScale[5]?.value}; --quote-text: {secondaryColorScale[11]?.value};">
+                <div class="quote-image-container">
+                  <div class="quote-image" style="background-color: {colorScale[4]?.value};"></div>
+                </div>
+                <div class="quote-content">
+                  <p style="color: {secondaryColorScale[11]?.value};">"Design is not just what it looks like and feels like. Design is how it works."</p>
+                  <footer style="color: {secondaryColorScale[10]?.value};">— Steve Jobs</footer>
+                </div>
+              </blockquote>
+            </div>
+            
+            <!-- Group 11: Audio Player -->
+            <div class="component-container">
+              <div class="audio-player" style="--player-bg: {secondaryColorScale[2]?.value}; --player-border: {secondaryColorScale[4]?.value}; --waveform-bg: {secondaryColorScale[4]?.value}; --waveform-fill: {colorScale[8]?.value};">
+                <div class="audio-controls">
+                  <button class="audio-button play" style="--button-bg: {colorScale[8]?.value}; --button-text: {getContrastColor(colorScale[8]?.value)};">
+                    ▶
+                  </button>
+                  <div class="audio-info" style="color: {secondaryColorScale[11]?.value};">
+                    <div class="audio-title">Audio Track</div>
+                    <div class="audio-time" style="color: {secondaryColorScale[10]?.value};">0:45 / 3:30</div>
+                  </div>
+                </div>
+                <div class="waveform">
+                  <div class="waveform-bars">
+                    {#each Array(30) as _, i}
+                      <div class="waveform-bar" style="height: {30 + Math.sin(i * 0.4) * 25}%; background-color: {i < 10 ? colorScale[8]?.value : secondaryColorScale[4]?.value};"></div>
+                    {/each}
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Group 12: Textarea -->
+            <div class="component-container">
+              <textarea 
+                id="demo-textarea" 
+                placeholder="Type multiple lines of text here..." 
+                class="demo-textarea" 
                 style="--input-border: {secondaryColorScale[5]?.value}; --input-bg: {secondaryColorScale[1]?.value}; --input-focus: {colorScale[8]?.value}"
-              />
+                rows="3"
+              ></textarea>
             </div>
             
-            <div class="input-group">
-              <label for="demo-input-accent" style="color: {secondaryColorScale[11]?.value}">Accent Input</label>
-              <input 
-                type="text" 
-                id="demo-input-accent" 
-                placeholder="Type something..." 
-                class="demo-input accent" 
-                style="--input-border: {secondaryColorScale[5]?.value}; --input-bg: {secondaryColorScale[1]?.value}; --input-focus: {colorScale[8]?.value}"
-              />
-            </div>
-            
-            <div class="input-group">
-              <label style="color: {secondaryColorScale[11]?.value}">Checkbox</label>
-              <div class="checkbox-wrapper">
-                <input 
-                  type="checkbox" 
-                  id="demo-checkbox" 
-                  class="demo-checkbox" 
-                  style="--checkbox-color: {colorScale[8]?.value}"
-                />
-                <label for="demo-checkbox" style="color: {secondaryColorScale[10]?.value}">Primary check</label>
-              </div>
-              <div class="checkbox-wrapper">
-                <input 
-                  type="checkbox" 
-                  id="demo-checkbox-accent" 
-                  class="demo-checkbox" 
-                  style="--checkbox-color: {colorScale[8]?.value}"
-                />
-                <label for="demo-checkbox-accent" style="color: {secondaryColorScale[10]?.value}">Accent check</label>
-              </div>
-            </div>
-            
-            <div class="input-group">
-              <label style="color: {secondaryColorScale[11]?.value}">Radio Buttons</label>
-              <div class="radio-wrapper">
-                <input 
-                  type="radio" 
-                  id="radio1" 
-                  name="demo-radio" 
-                  class="demo-radio" 
-                  checked
-                  style="--radio-color: {colorScale[8]?.value}"
-                />
-                <label for="radio1" style="color: {secondaryColorScale[10]?.value}">Primary option</label>
-              </div>
-              <div class="radio-wrapper">
-                <input 
-                  type="radio" 
-                  id="radio2" 
-                  name="demo-radio" 
-                  class="demo-radio" 
-                  style="--radio-color: {colorScale[8]?.value}"
-                />
-                <label for="radio2" style="color: {secondaryColorScale[10]?.value}">Secondary option</label>
+            <!-- Group 13: Profile Card -->
+            <div class="component-container">
+              <div class="profile-card" style="--card-bg: {secondaryColorScale[1]?.value}; --card-border: {secondaryColorScale[4]?.value}">
+                <div class="profile-header">
+                  <div class="avatar" style="--avatar-bg: {colorScale[5]?.value}; color: {getContrastColor(colorScale[5]?.value)}">
+                    JD
+                  </div>
+                  <div class="profile-info">
+                    <h4 style="color: {secondaryColorScale[11]?.value}">User Profile</h4>
+                    <p style="color: {secondaryColorScale[10]?.value}">Designer</p>
+                  </div>
+                </div>
+                <div class="profile-body">
+                  <p style="color: {secondaryColorScale[10]?.value};">Created 15 projects with 5 team members recently.</p>
+                </div>
+                <div class="profile-footer" style="--footer-border: {secondaryColorScale[4]?.value};">
+                  <button class="demo-button small secondary" style="--button-border: {secondaryColorScale[5]?.value}; --button-bg: {secondaryColorScale[2]?.value}; --button-hover: {secondaryColorScale[3]?.value}; --button-text: {secondaryColorScale[11]?.value};">
+                    View
+                  </button>
+                  <button class="demo-button small accent" style="--button-bg: {colorScale[5]?.value}; --button-text: {colorScale[11]?.value}; --button-border: {colorScale[8]?.value}; --button-hover: {colorScale[6]?.value};">
+                    Connect
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -758,7 +889,7 @@
   {/if}
   
   <section class="color-scale-table">
-    <h2>Primary Color Scale Reference</h2>
+    <h2>Accent Color Scale Reference</h2>
     <div class="table-container">
       <table>
         <thead>
@@ -767,7 +898,6 @@
             <th>Preview</th>
             <th>Hex</th>
             <th>HSL</th>
-            <th>Usage</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -783,7 +913,6 @@
               </td>
               <td class="color-code">{color.value}</td>
               <td class="color-code">{color.hsl}</td>
-              <td>{color.description}</td>
               <td class="actions">
                 <button 
                   class="copy-button" 
@@ -808,7 +937,7 @@
   </section>
   
   <section class="color-scale-table">
-    <h2>Secondary Color Scale Reference</h2>
+    <h2>Base Color Scale Reference</h2>
     <div class="table-container">
       <table>
         <thead>
@@ -817,7 +946,6 @@
             <th>Preview</th>
             <th>Hex</th>
             <th>HSL</th>
-            <th>Usage</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -833,7 +961,6 @@
               </td>
               <td class="color-code">{color.value}</td>
               <td class="color-code">{color.hsl}</td>
-              <td>{color.description}</td>
               <td class="actions">
                 <button 
                   class="copy-button" 
@@ -915,7 +1042,7 @@
   
   .layout {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 314px 1fr;
     gap: 2rem;
     margin-bottom: 3rem;
   }
@@ -1071,7 +1198,7 @@
   .components-preview {
    
     border-radius: 8px;
-    border: 1px solid var(--border-color);
+    
     overflow: hidden;
   }
   
@@ -1318,7 +1445,14 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    max-width: 500px;
+    width: 100%;
+  }
+  
+  .input-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
   }
   
   .input-group {
@@ -1433,11 +1567,11 @@
   
   .actions {
     
-    gap: 1rem;
+    gap: 0.6rem;
     height: 100%;
     min-height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
   }
   
@@ -1589,6 +1723,7 @@
 
   .base-grid {
     grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
   }
 
   .swatch-label {
@@ -1705,5 +1840,490 @@
     gap: 1rem;
     border-top: 1px solid var(--panel-border, #e2e2e2);
     background-color: var(--panel-bg, #f8f9fa);
+  }
+
+  /* Input Row for side-by-side inputs */
+  .input-row {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .flex-1 {
+    flex: 1;
+  }
+
+  /* Textarea Styles */
+  .demo-textarea {
+    padding: 0.85rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--input-border, var(--border-color));
+    background-color: var(--input-bg, var(--background-color));
+    font-family: var(--font-sans);
+    transition: all 0.2s ease;
+    width: 100%;
+    font-size: 0.95rem;
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .demo-textarea:focus {
+    outline: none;
+    border-color: var(--input-focus, var(--primary-color));
+    box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.15);
+  }
+
+  /* Number Input Styles */
+  .number-input-wrapper {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    border: 1px solid var(--input-border);
+    overflow: hidden;
+    background-color: var(--input-bg);
+  }
+
+  .number-control-btn {
+    width: 40px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: opacity 0.2s ease;
+  }
+
+  .number-control-btn:hover {
+    opacity: 0.9;
+  }
+
+  .demo-number-input {
+    flex: 1;
+    border: none;
+    text-align: center;
+    padding: 0.85rem 0;
+    background-color: transparent;
+    font-size: 0.95rem;
+    -moz-appearance: textfield; /* Firefox */
+  }
+
+  .demo-number-input::-webkit-outer-spin-button,
+  .demo-number-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Slider Styles */
+  .slider-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .demo-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background-color: var(--slider-track);
+    outline: none;
+  }
+
+  .demo-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--slider-thumb);
+    cursor: pointer;
+    transition: transform 0.1s ease;
+  }
+
+  .demo-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--slider-thumb);
+    cursor: pointer;
+    border: none;
+    transition: transform 0.1s ease;
+  }
+
+  .demo-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+  }
+
+  .demo-slider::-moz-range-thumb:hover {
+    transform: scale(1.1);
+  }
+
+  .slider-value {
+    min-width: 40px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Badge Styles */
+  .demo-badge {
+    display: inline-block;
+    padding: 0.35em 0.65em;
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 4px;
+    background-color: var(--badge-bg);
+    color: var(--badge-text);
+    transition: transform 0.1s ease;
+  }
+
+  .demo-badge.secondary {
+    background-color: var(--badge-bg);
+    color: var(--badge-text);
+  }
+
+  .demo-badge.outline {
+    background-color: transparent;
+    border: 1px solid var(--badge-border);
+    color: var(--badge-text);
+  }
+
+  .demo-badge.subtle {
+    background-color: var(--badge-bg);
+    color: var(--badge-text);
+  }
+
+  .demo-badge.pill {
+    border-radius: 20px;
+    padding: 0.35em 0.85em;
+  }
+
+  .demo-badge.with-dot {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--dot-color);
+    display: inline-block;
+  }
+
+  .demo-badge:hover {
+    transform: translateY(-1px);
+  }
+
+  /* Tooltip Styles */
+  .tooltip-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip {
+    visibility: hidden;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--tooltip-bg);
+    color: var(--tooltip-text);
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s, visibility 0.2s;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .tooltip::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+  }
+
+  .tooltip-top {
+    bottom: 125%;
+  }
+
+  .tooltip-top::after {
+    top: 100%;
+    border-color: var(--tooltip-bg) transparent transparent transparent;
+  }
+
+  .tooltip-bottom {
+    top: 125%;
+  }
+
+  .tooltip-bottom::after {
+    bottom: 100%;
+    border-color: transparent transparent var(--tooltip-bg) transparent;
+  }
+
+  .tooltip-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* Star Rating Styles */
+  .star-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .star {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--star-inactive);
+    transition: transform 0.1s ease, color 0.2s ease;
+  }
+
+  .star:hover {
+    transform: scale(1.1);
+  }
+
+  .star.active {
+    color: var(--star-color);
+  }
+
+  .rating-text {
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Timer Styles */
+  .timer {
+    background-color: var(--timer-bg);
+    border: 1px solid var(--timer-border);
+    border-radius: 8px;
+    padding: 1.3rem;
+    width: fit-content;
+    max-width: 300px;
+  }
+
+  .timer-display {
+    font-size: 2rem;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--timer-text);
+    font-weight: 600;
+  }
+
+  .timer-controls {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .timer-button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .timer-button:hover {
+    opacity: 0.9;
+  }
+
+  /* Quote with Image Styles */
+  .fancy-quote {
+    display: flex;
+    background-color: var(--quote-bg);
+    border-left: 4px solid var(--quote-border);
+    border-radius: 0 8px 8px 0;
+    padding: 0;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+  }
+
+  .quote-image-container {
+    width: 120px;
+    flex-shrink: 0;
+    overflow: hidden;
+    filter: saturate(0.8) contrast(1.1);
+  }
+
+  .quote-image {
+    height: 100%;
+    width: 100%;
+    background-color: #ccc;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 48px;
+  }
+
+  .quote-content {
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .quote-content p {
+    margin: 0 0 0.5rem 0;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .quote-content footer {
+    font-size: 0.9rem;
+    text-align: right;
+  }
+
+  /* Audio Player Styles */
+  .audio-player {
+    background-color: var(--player-bg);
+    border: 1px solid var(--player-border);
+    border-radius: 8px;
+    padding: 1rem;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .audio-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: transform 0.1s ease;
+  }
+
+  .audio-button:hover {
+    transform: scale(1.05);
+  }
+
+  .audio-info {
+    flex: 1;
+  }
+
+  .audio-title {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+
+  .audio-time {
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .waveform {
+    height: 60px;
+    padding: 0.5rem 0;
+  }
+
+  .waveform-bars {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 3px;
+  }
+
+  .waveform-bar {
+    flex: 1;
+    height: 100%;
+    border-radius: 2px;
+    transition: height 0.3s ease;
+  }
+
+  /* Component Grid Layout */
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .component-container {
+    width: 100%;
+    border-radius: 12px;
+    padding: 1.5rem;
+    background-color: var(--surface-color, rgba(255, 255, 255, 0.5));
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.05));
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .component-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+  }
+
+  .center-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .controls-flex-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .controls-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .mt-4 {
+    margin-top: 1rem;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .components-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .controls-flex-row {
+      flex-direction: column;
+      gap: 1rem;
+    }
   }
 </style> 

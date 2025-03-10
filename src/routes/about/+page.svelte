@@ -15,8 +15,8 @@
   </div>
   
   <div class="card about-section">
-    <h2>Why I Built This</h2>
-    <p>
+    <h2>Why I Built This?</h2>
+    <p class='text-neutral-300'>
       Color is a fundamental aspect of design. Major brands and design systems have carefully crafted their color
       palettes to express their identity and ensure accessibility across various platforms. By bringing these 
       systems together, it's easier to see common patterns between different brand colors and general accessible colors in use. 
@@ -33,7 +33,7 @@
   
   <div class="card about-section">
     <h2>Features</h2>
-    <ul>
+    <ul class='text-neutral-300'>
       <li>Browse color systems from major brands and design guidelines</li>
       <li>View detailed color information including hex codes</li>
       <li>One-click copy to clipboard for any color value</li>
@@ -44,14 +44,22 @@
   
   <div class="card about-section">
     <h2>Sources & Attribution</h2>
-    <p>
+    <p class='text-neutral-300'>
       All color systems displayed on this site are based on publicly available information from the respective
       organizations. We provide links to the official documentation for each system. This tool is for educational
       and reference purposes only.
     </p>
-    <p>
+    <p class='text-neutral-300'>
       ColorSystems is not affiliated with any of the brands or organizations whose color systems are showcased.
     </p>
+  </div>
+
+   <div class="card about-section">
+    <h2>Suggestions and Feedback</h2>
+    <p class='text-neutral-300'>
+      I'm always looking for ways to improve ColorSystems. If you have suggestions, feedback, or would like to see a specific brand or design system featured, please let me know. <a href="https://x.com/fayeseun_" target="_blank" rel="noopener noreferrer">Here</a>
+    </p>
+    
   </div>
 </div>
 
