@@ -103,8 +103,10 @@ a:hover {
   width: 100%;
   max-width: 1200px;
   margin: 80px auto;
-  padding: 0 1.5rem;
+  padding: 0 0.8rem;
 }
+
+
 
 /* Flexible Grid */
 .grid {
