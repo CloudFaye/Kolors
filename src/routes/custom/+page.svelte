@@ -1197,7 +1197,7 @@
   /* Components Preview */
   .components-preview {
    
-    border-radius: 8px;
+    border-radius: 18px;
     
     overflow: hidden;
   }

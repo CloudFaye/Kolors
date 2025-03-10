@@ -30,7 +30,7 @@
       and reference purposes only.
     </p>
     <p class=''>
-      ColorSystems is not affiliated with any of the brands or organizations whose color systems are showcased.
+      Kolorss is not affiliated with any of the brands or organizations whose color systems are showcased.
     </p>
   </div>
 
@@ -50,7 +50,7 @@
    <div class="card about-section">
     <h2>Suggestions and Feedback</h2>
     <p class=''>
-      I'm always looking for ways to improve ColorSystems. If you have suggestions, feedback, or would like to see a specific brand or design system featured, please let me know. <a href="https://x.com/fayeseun_" target="_blank" rel="noopener noreferrer">Here</a>
+      Kolors is a WIP. If you have suggestions, feedback, or would like to see a specific brand or design system featured, please let me know. <a class='underline' href="https://x.com/fayeseun_" target="_blank" rel="noopener noreferrer">Here</a>
     </p>
     
   </div>
