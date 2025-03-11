@@ -4,8 +4,37 @@ import '$lib/styles/global.css';
 import ToastContainer from '$lib/components/ToastContainer.svelte';
 import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 import Navbar from '$lib/components/Navbar.svelte';
+import { onMount } from 'svelte';
 
 let { children } = $props()
+
+// SEO: Add structured data for rich snippets
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ColorSystems",
+  "description": "Explore color systems from popular design systems and brand guidelines",
+  "applicationCategory": "DesignApplication",
+  "operatingSystem": "Web",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Faye Seun"
+  },
+  "url": "https://colorsystems.netlify.app/"
+};
+
+// Insert structured data into the document head
+onMount(() => {
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.text = JSON.stringify(structuredData);
+  document.head.appendChild(script);
+});
 </script>
 
 <Navbar />

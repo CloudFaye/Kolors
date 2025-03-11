@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Allow crawling of all content
+Disallow:
+
+# Sitemap location
+Sitemap: https://colorsystems.netlify.app/sitemap.xml 
