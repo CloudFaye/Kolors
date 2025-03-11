@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-  <title>{system.name} | ColorSystems</title>
+  <title>{system.name}</title>
 </svelte:head>
 
 <div class="system-container">

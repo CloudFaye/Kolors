@@ -9,8 +9,23 @@
   "icons": [
     {
       "src": "./favicon.png",
-      "sizes": "32x32",
-      "type": "image/png"
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./Desktop.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "./Mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
     }
   ]
 } 
