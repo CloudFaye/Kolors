@@ -28,16 +28,17 @@ export function applyTheme(newTheme: Theme) {
   // Save to localStorage
   localStorage.setItem('theme', newTheme);
   
+  // Clear existing theme classes first
+  document.documentElement.classList.remove('light', 'dark');
+  
   // Apply the appropriate class to document
   if (newTheme === 'system') {
     // Use system preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(prefersDark ? 'dark' : 'light');
     document.documentElement.style.colorScheme = prefersDark ? 'dark' : 'light';
   } else {
     // Use explicit theme setting
-    document.documentElement.classList.remove('light', 'dark');
     document.documentElement.classList.add(newTheme);
     document.documentElement.style.colorScheme = newTheme;
   }
@@ -45,8 +46,10 @@ export function applyTheme(newTheme: Theme) {
 
 // Initialize theme on page load
 if (browser) {
-  const initialTheme = getInitialTheme();
-  applyTheme(initialTheme);
+  // No need to immediately apply the theme on initialization
+  // since we're now handling it with inline script in the HTML
+  // Just make sure the store has the correct value
+  theme.set(getInitialTheme());
   
   // Watch for system preference changes
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {

@@ -1,7 +1,7 @@
 {
-  "name": "ColorSystems",
-  "short_name": "ColorSystems",
-  "description": "Explore color systems from popular design systems and brand guidelines",
+  "name": "Kolors - Color System Explorer",
+  "short_name": "Kolors",
+  "description": "Explore color systems from popular design systems and brand guidelines for inspiration and comparison",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

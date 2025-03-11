@@ -628,50 +628,182 @@ export const colorSystems: ColorSystem[] = [
     description: "Adobe's design system for creating cohesive experiences",
     url: "",
     colorGroups: [
-      {
-        name: "Blue",
-        shades: [
-          { name: "100", value: "#E1F2FF" },
-          { name: "200", value: "#BADED9" },
-          { name: "300", value: "#89CBDF" },
-          { name: "400", value: "#55B8E3" },
-          { name: "500", value: "#1D9DE8" },
-          { name: "600", value: "#1581D3" },
-          { name: "700", value: "#0866B0" },
-          { name: "800", value: "#084F8D" },
-          { name: "900", value: "#003969" }
-        ]
-      },
-      {
-        name: "Red",
-        shades: [
-          { name: "100", value: "#FFEDEB" },
-          { name: "200", value: "#FFD6D2" },
-          { name: "300", value: "#FFAE9F" },
-          { name: "400", value: "#FF8370" },
-          { name: "500", value: "#FF5746" },
-          { name: "600", value: "#E93C35" },
-          { name: "700", value: "#C22C31" },
-          { name: "800", value: "#9C1F2A" },
-          { name: "900", value: "#7D1421" }
-        ]
-      },
-      {
-        name: "Gray",
-        shades: [
-          { name: "50", value: "#FFFFFF" },
-          { name: "75", value: "#FAFAFA" },
-          { name: "100", value: "#F5F5F5" },
-          { name: "200", value: "#EAEAEA" },
-          { name: "300", value: "#E1E1E1" },
-          { name: "400", value: "#CACACA" },
-          { name: "500", value: "#B3B3B3" },
-          { name: "600", value: "#8E8E8E" },
-          { name: "700", value: "#6E6E6E" },
-          { name: "800", value: "#4B4B4B" },
-          { name: "900", value: "#2C2C2C" }
-        ]
-      }
+     
+        {
+            name: "",
+            description: "",
+            shades: [
+                { name: "", value: "#fff1f0" },
+                { name: "", value: "#ffccc7" },
+                { name: "", value: "#ffa39e" },
+                { name: "", value: "#ff7875" },
+                { name: "", value: "#ff4d4f" },
+                { name: "", value: "#f5222d" },
+                { name: "", value: "#cf1322" },
+                { name: "", value: "#a8071a" },
+                { name: "", value: "#820014" },
+                { name: "", value: "#5c0011" },
+                { name: "", value: "#fff2e8" },
+                { name: "", value: "#ffd8bf" },
+                { name: "", value: "#ffbb96" },
+                { name: "", value: "#ff9c6e" },
+                { name: "", value: "#ff7a45" },
+                { name: "", value: "#fa541c" },
+                { name: "", value: "#d4380d" },
+                { name: "", value: "#ad2102" },
+                { name: "", value: "#871400" },
+                { name: "", value: "#610b00" },
+                { name: "", value: "#fff7e6" },
+                { name: "", value: "#ffe7ba" },
+                { name: "", value: "#ffd591" },
+                { name: "", value: "#ffc069" },
+                { name: "", value: "#ffa940" },
+                { name: "", value: "#fa8c16" },
+                { name: "", value: "#d46b08" },
+                { name: "", value: "#ad4e00" },
+                { name: "", value: "#873800" },
+                { name: "", value: "#612500" },
+                { name: "", value: "#ffffb8" },
+                { name: "", value: "#fffb8f" },
+                { name: "", value: "#fff566" },
+                { name: "", value: "#ffec3d" },
+                { name: "", value: "#fadb14" },
+                { name: "", value: "#d4b106" },
+                { name: "", value: "#ad8b00" },
+                { name: "", value: "#876800" },
+                { name: "", value: "#614700" },
+                { name: "", value: "#fcffe6" },
+                { name: "", value: "#f4ffb8" },
+                { name: "", value: "#eaff8f" },
+                { name: "", value: "#d3f261" },
+                { name: "", value: "#bae637" },
+                { name: "", value: "#a0d911" },
+                { name: "", value: "#7cb305" },
+                { name: "", value: "#5b8c00" },
+                { name: "", value: "#3f6600" },
+                { name: "", value: "#254000" },
+                { name: "", value: "#f6ffed" },
+                { name: "", value: "#d9f7be" },
+                { name: "", value: "#b7eb8f" },
+                { name: "", value: "#95de64" },
+                { name: "", value: "#73d13d" },
+                { name: "", value: "#52c41a" },
+                { name: "", value: "#389e0d" },
+                { name: "", value: "#237804" },
+                { name: "", value: "#135200" },
+                { name: "", value: "#092b00" },
+                { name: "", value: "#e6fffb" },
+                { name: "", value: "#b5f5ec" },
+                { name: "", value: "#87e8de" },
+                { name: "", value: "#5cdbd3" },
+                { name: "", value: "#36cfc9" },
+                { name: "", value: "#13c2c2" },
+                { name: "", value: "#08979c" },
+                { name: "", value: "#006d75" },
+                { name: "", value: "#00474f" },
+                { name: "", value: "#002329" },
+                { name: "", value: "#e6f4ff" },
+                { name: "", value: "#bae0ff" },
+                { name: "", value: "#91caff" },
+                { name: "", value: "#69b1ff" },
+                { name: "", value: "#4096ff" },
+                { name: "", value: "#1677ff" },
+                { name: "", value: "#0958d9" },
+                { name: "", value: "#003eb3" },
+                { name: "", value: "#002c8c" },
+                { name: "", value: "#001d66" },
+                { name: "", value: "#f0f5ff" },
+                { name: "", value: "#d6e4ff" },
+                { name: "", value: "#adc6ff" },
+                { name: "", value: "#85a5ff" },
+                { name: "", value: "#597ef7" },
+                { name: "", value: "#2f54eb" },
+                { name: "", value: "#1d39c4" },
+                { name: "", value: "#10239e" },
+                { name: "", value: "#061178" },
+                { name: "", value: "#030852" },
+                { name: "", value: "#f9f0ff" },
+                { name: "", value: "#efdbff" },
+                { name: "", value: "#d3adf7" },
+                { name: "", value: "#b37feb" },
+                { name: "", value: "#9254de" },
+                { name: "", value: "#722ed1" },
+                { name: "", value: "#531dab" },
+                { name: "", value: "#391085" },
+                { name: "", value: "#22075e" },
+                { name: "", value: "#120338" },
+                { name: "", value: "#fff0f6" },
+                { name: "", value: "#ffd6e7" },
+                { name: "", value: "#ffadd2" },
+                { name: "", value: "#ff85c0" },
+                { name: "", value: "#f759ab" },
+                { name: "", value: "#eb2f96" },
+                { name: "", value: "#c41d7f" },
+                { name: "", value: "#9e1068" },
+                { name: "", value: "#780650" },
+                { name: "", value: "#520339" },
+                { name: "", value: "#3e2723" },
+                { name: "", value: "#5d4037" },
+                { name: "", value: "#795548" },
+                { name: "", value: "#8d6e63" },
+                { name: "", value: "#9e9e9e" },
+                { name: "", value: "#bdbdbd" },
+                { name: "", value: "#e0e0e0" },
+                { name: "", value: "#f5f5f5" },
+                { name: "", value: "#000000" },
+                { name: "", value: "#ffffff" },
+                { name: "", value: "#f44336" },
+                { name: "", value: "#e91e63" },
+                { name: "", value: "#9c27b0" },
+                { name: "", value: "#673ab7" },
+                { name: "", value: "#3f51b5" },
+                { name: "", value: "#2196f3" },
+                { name: "", value: "#03a9f4" },
+                { name: "", value: "#00bcd4" },
+                { name: "", value: "#009688" },
+                { name: "", value: "#4caf50" },
+                { name: "", value: "#8bc34a" },
+                { name: "", value: "#cddc39" },
+                { name: "", value: "#ffeb3b" },
+                { name: "", value: "#ffc107" },
+                { name: "", value: "#ff9800" },
+                { name: "", value: "#ff5722" },
+                { name: "", value: "#795548" },
+                { name: "", value: "#9e9e9e" },
+                { name: "", value: "#607d8b" },
+                { name: "", value: "#78909c" },
+                { name: "", value: "#90a4ae" },
+                { name: "", value: "#607d8b" },
+                { name: "", value: "#455a64" },
+                { name: "", value: "#263238" },
+                { name: "", value: "#b71c1c" },
+                { name: "", value: "#880e4f" },
+                { name: "", value: "#4a148c" },
+                { name: "", value: "#311b92" },
+                { name: "", value: "#0d47a1" },
+                { name: "", value: "#01579b" },
+                { name: "", value: "#FF5722" },
+                { name: "", value: "#FFC107" },
+                { name: "", value: "#2196F3" },
+                { name: "", value: "#4CAF50" },
+                { name: "", value: "#9C27B0" },
+                { name: "", value: "#E91E63" },
+                { name: "", value: "#FF9800" },
+                { name: "", value: "#00BCD4" },
+                { name: "", value: "#8BC34A" },
+                { name: "", value: "#673AB7" },
+                { name: "", value: "#FFCDD2" },
+                { name: "", value: "#FFECB3" },
+                { name: "", value: "#81C784" },
+                { name: "", value: "#64B5F6" },
+                { name: "", value: "#9575CD" },
+                { name: "", value: "#FFB74D" },
+                { name: "", value: "#AED581" },
+                { name: "", value: "#FF8A65" },
+                { name: "", value: "#4FC3F7" },
+                { name: "", value: "#FFD54F" }
+            ]
+        }
     ]
   },
   {
@@ -1399,6 +1531,297 @@ export const colorSystems: ColorSystem[] = [
           { name: "blackened-pearl", value: "#4d4b50" },
           { name: "odyssey-gray", value: "#434452" },
           { name: "black-onyx", value: "#2b272b" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "pajamas-color-system",
+    name: "Pajamas",
+    description: "GitLab's design system color palette",
+    url: "https://www.colorsandfonts.com/color-systems/pajamas-color-system/",
+    colorGroups: [
+      {
+        name: "Blue",
+        description: "Primary brand color",
+        shades: [
+          { name: "10", value: "#e9f3fc" },
+          { name: "20", value: "#cbe2f9" },
+          { name: "30", value: "#9dc7f1" },
+          { name: "40", value: "#63a6e9" },
+          { name: "50", value: "#428fdc" },
+          { name: "60", value: "#1f75cb" },
+          { name: "70", value: "#1068bf" },
+          { name: "80", value: "#0b5cad" },
+          { name: "90", value: "#064787" },
+          { name: "100", value: "#033464" }
+        ]
+      },
+      {
+        name: "Green",
+        description: "Indicates success",
+        shades: [
+          { name: "10", value: "#ecf4ee" },
+          { name: "20", value: "#c3e6cd" },
+          { name: "30", value: "#91d4a8" },
+          { name: "40", value: "#52b87a" },
+          { name: "50", value: "#2da160" },
+          { name: "60", value: "#108548" },
+          { name: "70", value: "#217645" },
+          { name: "80", value: "#24663b" },
+          { name: "90", value: "#0d532a" },
+          { name: "100", value: "#0a4020" }
+        ]
+      },
+      {
+        name: "Orange",
+        description: "Indicates attention is required",
+        shades: [
+          { name: "10", value: "#fdf1dd" },
+          { name: "20", value: "#f5d9a8" },
+          { name: "30", value: "#e9be74" },
+          { name: "40", value: "#d99530" },
+          { name: "50", value: "#c17d10" },
+          { name: "60", value: "#ab6100" },
+          { name: "70", value: "#9e5400" },
+          { name: "80", value: "#8f4700" },
+          { name: "90", value: "#703800" },
+          { name: "100", value: "#5c2900" }
+        ]
+      },
+      {
+        name: "Red",
+        description: "Indicates a problem",
+        shades: [
+          { name: "10", value: "#fcf1ef" },
+          { name: "20", value: "#fdd4cd" },
+          { name: "30", value: "#fcb5aa" },
+          { name: "40", value: "#f57f6c" },
+          { name: "50", value: "#ec5941" },
+          { name: "60", value: "#dd2b0e" },
+          { name: "70", value: "#c91c00" },
+          { name: "80", value: "#ae1800" },
+          { name: "90", value: "#8d1300" },
+          { name: "100", value: "#660e00" }
+        ]
+      },
+      {
+        name: "Purple",
+        description: "Associated with the GitLab brand",
+        shades: [
+          { name: "10", value: "#f4f0ff" },
+          { name: "20", value: "#e1d8f9" },
+          { name: "30", value: "#cbbbf2" },
+          { name: "40", value: "#ac93e6" },
+          { name: "50", value: "#9475db" },
+          { name: "60", value: "#7b58cf" },
+          { name: "70", value: "#694cc0" },
+          { name: "80", value: "#5943b6" },
+          { name: "90", value: "#453894" },
+          { name: "100", value: "#2f2a6b" }
+        ]
+      },
+      {
+        name: "Neutral",
+        description: "Primarily used for surfaces and hierarchy differentiation",
+        shades: [
+          { name: "10", value: "#ffffff" },
+          { name: "20", value: "#fbfafd" },
+          { name: "30", value: "#ececef" },
+          { name: "40", value: "#dcdcde" },
+          { name: "50", value: "#bfbfc3" },
+          { name: "60", value: "#a4a3a8" },
+          { name: "70", value: "#89888d" },
+          { name: "80", value: "#737278" },
+          { name: "90", value: "#626168" },
+          { name: "100", value: "#4c4b51" },
+          { name: "110", value: "#3a383f" },
+          { name: "120", value: "#28272d" }
+        ]
+      },
+      {
+        name: "Indigo",
+        description: "Used for vibrant accents and highlights",
+        shades: [
+          { name: "10", value: "#f8f8ff" },
+          { name: "20", value: "#f1f1ff" },
+          { name: "30", value: "#dbdbf8" },
+          { name: "40", value: "#c7c7f2" },
+          { name: "50", value: "#a2a2e6" },
+          { name: "60", value: "#8181d7" },
+          { name: "70", value: "#6666c4" },
+          { name: "80", value: "#5252b5" },
+          { name: "90", value: "#41419f" },
+          { name: "100", value: "#303083" },
+          { name: "110", value: "#222261" },
+          { name: "120", value: "#14143d" }
+        ]
+      },
+      {
+        name: "Light Blue",
+        description: "Used for softer, calming accents",
+        shades: [
+          { name: "10", value: "#eef3f7" },
+          { name: "20", value: "#dde6ee" },
+          { name: "30", value: "#c1d4e6" },
+          { name: "40", value: "#a0bedc" },
+          { name: "50", value: "#74a3d3" },
+          { name: "60", value: "#4f8bc7" },
+          { name: "70", value: "#3476b9" },
+          { name: "80", value: "#2268ae" },
+          { name: "90", value: "#145aa1" },
+          { name: "100", value: "#0e4d8d" },
+          { name: "110", value: "#0c4277" },
+          { name: "120", value: "#0a3764" }
+        ]
+      },
+      {
+        name: "Light Red",
+        description: "Used for softer, warm accents",
+        shades: [
+          { name: "10", value: "#fdf9f8" },
+          { name: "20", value: "#faf2f1" },
+          { name: "30", value: "#f6d9d5" },
+          { name: "40", value: "#ebada2" },
+          { name: "50", value: "#e07f6f" },
+          { name: "60", value: "#d36250" },
+          { name: "70", value: "#c24b38" },
+          { name: "80", value: "#b53a26" },
+          { name: "90", value: "#a02e1c" },
+          { name: "100", value: "#8b2212" },
+          { name: "110", value: "#751709" },
+          { name: "120", value: "#5c1105" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "vitamin-color-system",
+    name: "Vitamin",
+    description: "Decathlon's design system color palette",
+    url: "https://www.colorsandfonts.com/color-systems/vitamin-color-system/",
+    colorGroups: [
+      {
+        name: "Purple",
+        description: "Primary brand color",
+        shades: [
+          { name: "10", value: "#2C202D" },
+          { name: "20", value: "#49354B" },
+          { name: "30", value: "#5B415D" },
+          { name: "40", value: "#6C4E6F" },
+          { name: "50", value: "#966F9A" },
+          { name: "60", value: "#AC8DAF" },
+          { name: "70", value: "#DCCFDD" },
+          { name: "80", value: "#F2EDF2" }
+        ]
+      },
+      {
+        name: "Blue",
+        description: "Secondary brand color",
+        shades: [
+          { name: "10", value: "#012B49" },
+          { name: "20", value: "#00537D" },
+          { name: "30", value: "#00689D" },
+          { name: "40", value: "#007DBC" },
+          { name: "50", value: "#3D9ACC" },
+          { name: "60", value: "#7EBEE0" },
+          { name: "70", value: "#BEDEEF" },
+          { name: "80", value: "#E7F3F9" }
+        ]
+      },
+      {
+        name: "Green",
+        description: "Indicates success",
+        shades: [
+          { name: "10", value: "#006F43" },
+          { name: "20", value: "#017F5C" },
+          { name: "30", value: "#029E73" },
+          { name: "40", value: "#02BE8A" },
+          { name: "50", value: "#21CE9C" },
+          { name: "60", value: "#7CDFC4" },
+          { name: "70", value: "#BEEFE2" },
+          { name: "80", value: "#E4F9F3" }
+        ]
+      },
+      {
+        name: "Conifer Green",
+        description: "Used for natural accents",
+        shades: [
+          { name: "10", value: "#256C1D" },
+          { name: "20", value: "#378D2E" },
+          { name: "30", value: "#41A036" },
+          { name: "40", value: "#23A942" },
+          { name: "50", value: "#74C76A" },
+          { name: "60", value: "#88D77F" },
+          { name: "70", value: "#CBF0C7" },
+          { name: "80", value: "#EAFBE8" }
+        ]
+      },
+      {
+        name: "Yellow",
+        description: "Indicates attention is required",
+        shades: [
+          { name: "10", value: "#67611B" },
+          { name: "20", value: "#999028" },
+          { name: "30", value: "#BCB02C" },
+          { name: "40", value: "#FFEA28" },
+          { name: "50", value: "#FFF370" },
+          { name: "60", value: "#FFF58D" },
+          { name: "70", value: "#FFFBC7" },
+          { name: "80", value: "#FFFFE0" }
+        ]
+      },
+      {
+        name: "Orange",
+        description: "Indicates a warning",
+        shades: [
+          { name: "10", value: "#673216" },
+          { name: "20", value: "#9A4B21" },
+          { name: "30", value: "#C15E29" },
+          { name: "40", value: "#FF600A" },
+          { name: "50", value: "#FA9C69" },
+          { name: "60", value: "#FAC3A5" },
+          { name: "70", value: "#FFE4D6" },
+          { name: "80", value: "#FFEF3D" }
+        ]
+      },
+      {
+        name: "Red",
+        description: "Indicates a problem",
+        shades: [
+          { name: "10", value: "#5A0005" },
+          { name: "20", value: "#870007" },
+          { name: "30", value: "#AB0009" },
+          { name: "40", value: "#E3262F" },
+          { name: "50", value: "#FD7278" },
+          { name: "60", value: "#FD9297" },
+          { name: "70", value: "#FEC9CB" },
+          { name: "80", value: "#FEECED" }
+        ]
+      },
+      {
+        name: "Grey",
+        description: "Used for neutral accents",
+        shades: [
+          { name: "10", value: "#001018" },
+          { name: "20", value: "#142129" },
+          { name: "30", value: "#1A2A34" },
+          { name: "40", value: "#344450" },
+          { name: "50", value: "#4E5D6B" },
+          { name: "60", value: "#687787" },
+          { name: "70", value: "#8996A2" },
+          { name: "80", value: "#B3BAC3" },
+          { name: "90", value: "#D9DDE1" },
+          { name: "100", value: "#EFF1F3" },
+          { name: "110", value: "#F7F8F9" }
+        ]
+      },
+      {
+        name: "Black/White",
+        description: "Primary text and background colors",
+        shades: [
+          { name: "10", value: "#001018" },
+          { name: "20", value: "#FFFFFF" }
         ]
       }
     ]

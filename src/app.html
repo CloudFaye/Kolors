@@ -5,6 +5,30 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Explore color systems from popular design systems and brands. Compare, contrast, and get inspiration for your next project." />
+		
+		<!-- Theme setup script - prevents flickering -->
+		<script>
+			(function() {
+				// Get theme from localStorage or default to light
+				const storedTheme = localStorage.getItem('theme');
+				let themeToApply = 'light';
+				
+				if (storedTheme && ['light', 'dark', 'system'].includes(storedTheme)) {
+					themeToApply = storedTheme;
+				}
+				
+				// For system preference, check the user's preference
+				if (themeToApply === 'system') {
+					const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+					document.documentElement.classList.add(prefersDark ? 'dark' : 'light');
+					document.documentElement.style.colorScheme = prefersDark ? 'dark' : 'light';
+				} else {
+					document.documentElement.classList.add(themeToApply);
+					document.documentElement.style.colorScheme = themeToApply;
+				}
+			})();
+		</script>
 		
 		<!-- PWA Support -->
 		<link rel="manifest" href="%sveltekit.assets%/manifest.json">
