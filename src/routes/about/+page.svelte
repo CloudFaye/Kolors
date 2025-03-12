@@ -22,8 +22,8 @@
       systems together, it's easier to see common patterns between different brand colors and general accessible colors in use.
     </p>
     <p>
-      This collection is carefully curated, featuring brands with products and digital experiences that serve millions of users.
-      We also include brands that may be less well-known but have unique and interesting color palettes.
+      This is a carefully curated list of color systems, featuring brands with products and digital experiences that serve millions of users.
+      Also included are brands that may be less well-known but have unique and interesting color palettes.
     </p>
   </div>
   
@@ -31,11 +31,8 @@
     <h2 id="sources-heading">Sources & Attribution</h2>
     <p>
       All color systems displayed on this site are based on publicly available information from the respective
-      organizations. We provide links to the official documentation for each system. This tool is for educational
+      organizations. Appropraite links for each color system will be provided. This tool is for educational
       and reference purposes only.
-    </p>
-    <p>
-      Kolors is not affiliated with any of the brands or organizations whose color systems are showcased.
     </p>
   </div>
 
@@ -43,20 +40,15 @@
     <h2 id="disclaimer-heading">Disclaimer</h2>
     <p>
       Please note that some information may be incomplete or outdated as brands update their design systems. 
-      This website is continuously being updated with the latest color systems and interesting new discoveries in the design world.
-    </p>
-    <p>
-      If you notice any inaccuracies or have information about recently updated color systems, please let us know so we can keep 
-      this resource as current and valuable as possible. Our main objective is to maintain a living document of color design that evolves alongside 
-      industry standards and practices.
+      This list is continuously being updated with the latest color systems and interesting new discoveries in the design world.
     </p>
   </div>
 
   <div class="card about-section" aria-labelledby="feedback-heading">
     <h2 id="feedback-heading">Suggestions and Feedback</h2>
     <p>
-      Kolors is a work in progress. If you have suggestions, feedback, or would like to see a specific brand or design system featured, 
-      please <a class='underline' href="https://x.com/fayeseun_" target="_blank" rel="noopener noreferrer" aria-label="Contact Faye Seun on X (formerly Twitter)">reach out to me on X</a>.
+      Kolors is a WIP 🚧. If you have suggestions, feedback, or would like to see a specific brand or design system featured, 
+      please <a class='underline' href="https://x.com/fayeseun_" target="_blank" rel="noopener noreferrer" aria-label="Contact Faye Seun on X (formerly Twitter)">Find me here, Send a DM</a>.
     </p>
   </div>
 </div>
