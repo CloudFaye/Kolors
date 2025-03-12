@@ -7,7 +7,7 @@
   on:click={toggleWipPopup}
   aria-label="Show work in progress updates"
 >
-  <!-- Hammer icon SVG -->
+  
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M15 12l-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9" />
     <path d="M17.64 15 22 10.64" />
@@ -34,20 +34,31 @@
     z-index: 1000;
     transition: transform 0.2s ease, background-color 0.2s ease;
   }
+  
+
+  @media (prefers-color-scheme: dark) {
+    .wip-button {
+      background-color: var(--wip-color, #ffffff8d);
+      color: rgb(122, 120, 120);
+    }
+  }
+
+
+  
 
   .wip-button:hover {
     transform: scale(1.05);
     background-color: var(--primary-hover, #4f46e5);
+    color: rgb(255, 255, 255);
   }
 
   .wip-button:active {
     transform: scale(0.95);
   }
 
-  /* Animation for the button */
   @keyframes pulse {
     0% {
-      box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+      box-shadow: 0 0 0 0 rgba(251, 251, 255, 0.7);
     }
     70% {
       box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
@@ -61,7 +72,6 @@
     animation: pulse 2s infinite;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 768px) {
     .wip-button {
       width: 45px;

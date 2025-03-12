@@ -1,6 +1,8 @@
 <script lang="ts">
   import { wipEntries, isWipPopupOpen, closeWipPopup, type WIPEntry } from '$lib/stores/wipStore';
   import { onMount, onDestroy } from 'svelte';
+  import { browser } from '$app/environment';
+	import { slide } from 'svelte/transition';
   
   let popupRef: HTMLDivElement;
   
@@ -18,21 +20,29 @@
     }
   }
   
-  // Format date to a more readable format
+  // Format date to a more readable format with SSR safety
   function formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
+    try {
+      const date = new Date(dateString);
+      // Check if date is valid
+      if (isNaN(date.getTime())) return dateString;
+      
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    } catch (e) {
+      // Fallback for SSR or any other errors
+      return dateString;
+    }
   }
   
   // Get an icon based on entry type
   function getTypeIcon(type: WIPEntry['type']): string {
     switch(type) {
       case 'feature':
-        return '✅';
+        return ' →';
       case 'improvement':
         return '✅';
       case 'fix':
@@ -44,23 +54,27 @@
     }
   }
   
-  // Add event listeners when component mounts
+  // Add event listeners when component mounts - only in browser environment
   onMount(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keydown', handleKeydown);
+    if (browser) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeydown);
+    }
   });
   
-  // Clean up event listeners when component is destroyed
+  // Clean up event listeners when component is destroyed - only in browser environment
   onDestroy(() => {
-    document.removeEventListener('mousedown', handleClickOutside);
-    document.removeEventListener('keydown', handleKeydown);
+    if (browser) {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeydown);
+    }
   });
 </script>
 
 {#if $isWipPopupOpen}
-  <div class="wip-popup" bind:this={popupRef}>
+  <div transition:slide class="wip-popup" bind:this={popupRef}>
     <div class="wip-popup-header">
-      <h2>🛠️ Progress Log</h2>
+      <h2 class='wip-popup-title'>Todos</h2>
     </div>
     
     <div class="wip-entries">
@@ -69,13 +83,12 @@
           <div class="entry-icon {entry.type}">
             {getTypeIcon(entry.type)}
           </div>
-          <div class="entry-line" class:last-entry={index === $wipEntries.length - 1}></div>
+          
           <div class="entry-content">
             <h3>{entry.title}</h3>
-            <p>{entry.description}</p>
+            <p class='descr'>{entry.description}</p>
             <div class="entry-meta">
               <span class="entry-date">{formatDate(entry.date)}</span>
-              <span class="entry-type {entry.type}">{entry.type}</span>
             </div>
           </div>
         </div>
@@ -103,7 +116,7 @@
   
   .wip-popup-header {
     padding: 16px;
-    border-bottom: 1px solid var(--border-color, #e5e7eb);
+  
     position: sticky;
     top: 0;
     background-color: var(--surface-color, white);
@@ -143,8 +156,8 @@
     flex-shrink: 0;
     margin-right: 12px;
     font-size: 0.9rem;
-    background-color: #dcfce7;
-    color: #166534;
+    background-color: transparent;
+    color: #daa41e;
   }
   
   .entry-icon.announcement {
@@ -158,7 +171,7 @@
     top: 36px; /* Adjusted to align with the icon */
     width: 2px;
     height: calc(100% - 20px);
-    background-color: var(--border-color, #e5e7eb);
+    
     z-index: 1;
   }
   
@@ -177,18 +190,18 @@
     font-weight: 600;
   }
   
-  .entry-content p {
-    margin: 0 0 8px 0;
-    font-size: 0.8rem;
-    color: var(--text-secondary, #4b5563);
-    line-height: 1.4;
-  }
+ .descr {
+  margin: 0 0 8px 0;
+  font-size: 0.8rem;
+  color: var(--descr, #868686);
+  line-height: 1.2;
+ }
   
   .entry-meta {
     display: flex;
     gap: 8px;
     font-size: 0.7rem;
-    color: var(--text-muted, #6b7280);
+    color: var(--text-muted, #3f3f3f);
     flex-wrap: wrap;
   }
   
@@ -228,7 +241,7 @@
   
   /* Scroll styling */
   .wip-popup::-webkit-scrollbar {
-    width: 6px;
+    width: 3px;
   }
   
   .wip-popup::-webkit-scrollbar-track {
@@ -241,12 +254,50 @@
     border: 2px solid var(--surface-color, white);
   }
   
-  /* Responsive adjustments */
+  
   @media (max-width: 500px) {
     .wip-popup {
       width: calc(100% - 40px);
       right: 20px;
       bottom: 70px;
     }
+  }
+  
+
+  @media (prefers-color-scheme: light) {
+    .wip-popup {
+      background-color: var(--surface-color, #1e1e1e);
+      border-color: var(--border-color, #2e2e2e);
+    }
+    
+    .wip-popup-header {
+      background-color: var(--surface-color, #1e1e1e);
+      
+    }
+
+    .entry-icon{
+      color: #ffffff;
+    }
+    
+    .entry-content p {
+      color: var(--text-secondary, #505050);
+    }
+
+    .descr p{
+      color: var(--descr, #646464);
+    }
+    
+    .entry-line {
+      background-color: var(--border-color, #2e2e2e);
+    }
+    
+    .wip-popup::-webkit-scrollbar-thumb {
+      background-color: var(--border-color, #2e2e2e);
+      border: 2px solid var(--surface-color, #1e1e1e);
+    }
+  }
+
+  .wip-popup-title{
+    font-size: 0.8rem;
   }
 </style> 
