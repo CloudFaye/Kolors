@@ -53,8 +53,7 @@ onMount(() => {
 </footer>
 
 <ToastContainer />
-<WIPButton />
-<WIPPopup />
+
 
 <style>
   /* Header styling */
