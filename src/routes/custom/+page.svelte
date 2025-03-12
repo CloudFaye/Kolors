@@ -1285,7 +1285,7 @@
   {/if}
   
   <section class="color-scale-table">
-    <h2>Accent Color Scale Reference</h2>
+    <p class='text-2xl font-bold'>Accent Color Scale Reference</p>
     <div class="table-container">
       <table>
         <thead>
@@ -1333,7 +1333,7 @@
   </section>
   
   <section class="color-scale-table">
-    <h2>Base Color Scale Reference</h2>
+    <p class='text-2xl font-bold'>Base Color Scale Reference</p>
     <div class="table-container">
       <table>
         <thead>
@@ -1389,7 +1389,7 @@
   >
     <div class="color-picker-container">
       <div class="picker-header">
-        <span>Select Primary Color</span>
+        <span>Accent</span>
         <button class="close-picker" onclick={() => showPrimaryPicker = false}>×</button>
       </div>
       <ColorSelect 
@@ -1407,7 +1407,7 @@
   >
     <div class="color-picker-container">
       <div class="picker-header">
-        <span>Select Secondary Color</span>
+        <span>Base</span>
         <button class="close-picker" onclick={() => showSecondaryPicker = false}>×</button>
       </div>
       <ColorSelect 
@@ -1446,14 +1446,14 @@
   /* Color Controls Panel */
   .color-controls {
     position: sticky;
-    top: 2rem;
+    top: 4rem;
     height: fit-content;
     
   }
   
   .controls-container {
     background: var(--surface-color);
-    border-radius: 8px;
+    border-radius: 12px;
     border: 1px solid var(--border-color);
     padding: 1.5rem;
     
@@ -1608,7 +1608,7 @@
   }
   
   .component-group {
-    margin-bottom: 2rem;
+    gap: 1rem;
   }
   
   .component-group h2 {
@@ -1923,6 +1923,8 @@
   
   .table-container {
     overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
   }
   
   table {
@@ -2660,7 +2662,7 @@
   /* Component Grid Layout */
   .components-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: calc(1rem - 1.5rem);
     width: 100%;
   }
@@ -2669,8 +2671,9 @@
     width: 100%;
     border-radius: 0px;
     padding: 1rem 1.3rem;
-    border: 1px solid var(--surface-color, rgba(255, 255, 255, 0.5));
+    background-color: var(--surface-color);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 12px;
   }
 
   .component-container:hover {

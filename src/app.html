@@ -18,7 +18,7 @@
 					themeToApply = storedTheme;
 				}
 				
-				// For system preference, check the user's preference
+				// check user system preference 
 				if (themeToApply === 'system') {
 					const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 					document.documentElement.classList.add(prefersDark ? 'dark' : 'light');
@@ -28,6 +28,16 @@
 					document.documentElement.style.colorScheme = themeToApply;
 				}
 			})();
+		</script>
+		
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-HMB4BXBWZ8"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-HMB4BXBWZ8');
 		</script>
 		
 		<!-- PWA Support -->
