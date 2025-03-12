@@ -716,7 +716,7 @@
         <div class="component-group">
          
           
-          <div class="components-grid">
+          <div class="components-gridd">
             <!-- Group 1: Buttons -->
             <div class="component-container">
               <div class="component-row">
@@ -1512,7 +1512,7 @@
   
   :global(.custom-color-picker) {
     width: 100%;
-    height: 240px;
+    height: 100px;
     border-radius: 12px;
     overflow: visible !important;
     pointer-events: auto;
@@ -2049,7 +2049,7 @@
     background-color: var(--background-color, white);
     border: 1px solid var(--border-color, #e2e2e2);
     border-radius: 16px;
-    padding: 10px;
+    padding: 18px 16px;
     width: fit-content;
     overflow: visible;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -2060,8 +2060,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
-    padding-bottom: 8px;
+    justify-items: center;
+    padding-left: 0.8rem;
+   
    
   }
 
@@ -2671,7 +2672,7 @@
     width: 100%;
     border-radius: 0px;
     padding: 1rem 1.3rem;
-    background-color: var(--surface-color);
+    background-color: var(--card-bg, rgba(255, 255, 255, 0.01));
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     border-radius: 12px;
   }
@@ -2859,5 +2860,12 @@
     color: var(--editor-text, #333);
     font-size: 0.95rem;
     line-height: 1.5;
+  }
+
+  .components-gridd {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: calc(1rem - 0.5rem);
+    
   }
 </style> 
