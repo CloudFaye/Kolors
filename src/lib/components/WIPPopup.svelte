@@ -115,7 +115,7 @@
   }
   
   .wip-popup-header {
-    padding: 16px;
+    padding:  12px 16px;
   
     position: sticky;
     top: 0;
@@ -134,7 +134,7 @@
   }
   
   .wip-entries {
-    padding: 12px 16px 16px;
+    padding: 1px 12px;
     display: flex;
     flex-direction: column;
   }
