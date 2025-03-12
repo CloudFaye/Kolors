@@ -4,6 +4,8 @@ import '$lib/styles/global.css';
 import ToastContainer from '$lib/components/ToastContainer.svelte';
 import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 import Navbar from '$lib/components/Navbar.svelte';
+import WIPButton from '$lib/components/WIPButton.svelte';
+import WIPPopup from '$lib/components/WIPPopup.svelte';
 import { onMount } from 'svelte';
 
 let { children } = $props()
@@ -51,6 +53,8 @@ onMount(() => {
 </footer>
 
 <ToastContainer />
+<WIPButton />
+<WIPPopup />
 
 <style>
   /* Header styling */
