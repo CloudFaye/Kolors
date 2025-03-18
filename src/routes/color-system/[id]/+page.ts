@@ -11,7 +11,17 @@ export const load: PageLoad = ({ params }) => {
     });
   }
   
+  // Ensure the image path is correctly prefixed
+  const imagePath = system.image.startsWith('./images/') 
+    ? system.image.replace('./images/', '/images/') 
+    : system.image.startsWith('/images/') 
+      ? system.image 
+      : `/images/${system.image}`;
+  
   return {
-    system
+    system: {
+      ...system,
+      image: imagePath
+    }
   };
 }; 

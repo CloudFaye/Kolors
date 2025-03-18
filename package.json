@@ -20,6 +20,7 @@
 		"@sveltejs/adapter-netlify": "^4.4.2",
 		"@sveltejs/kit": "^2.16.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
+		"@types/node": "^22.13.10",
 		"autoprefixer": "^10.4.20",
 		"clsx": "^2.1.1",
 		"eslint": "^9.18.0",
@@ -40,6 +41,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"colorizr": "^3.0.7",
 		"svelte-color-select": "^0.0.14"
 	}
 }
