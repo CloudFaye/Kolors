@@ -14,13 +14,14 @@
 <div class="system-container">
   <header class="system-header">
     <div class="header-content">
+       <div class="header-image">
+        <img class='size-8 mb-2' src={system.image} alt={`${system.name} design system`} />
+      </div>
       <div class="header-text">
         <h1 id="system-title">{system.name}</h1>
         <p class="system-description">{system.description}</p>
       </div>
-      <div class="header-image">
-        <img src={system.image} alt={`${system.name} design system`} />
-      </div>
+     
     </div>
   </header>
   
@@ -50,18 +51,13 @@
     border-bottom: 1px solid var(--border-color);
   }
   
-  .header-content {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
-  
+ 
   .header-text {
     flex: 1;
   }
   
   .header-image {
-    flex-shrink: 0;
+    
   }
   
   .header-image img {
@@ -123,16 +119,13 @@
     .header-content {
       flex-direction: column;
       gap: 1rem;
-    }
+         }
     
     .header-text {
       width: 100%;
     }
     
-    .header-image img {
-      max-width: 30px;
-      margin: 0 auto;
-    }
+   
     
     .system-header h1 {
       font-size: 1.75rem;
