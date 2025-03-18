@@ -17,43 +17,49 @@
   
   <div class="color-grid">
     {#each group.shades as shade}
-      <ColorCard shade={shade} />
+      <ColorCard shade={shade} size="small" />
     {/each}
   </div>
 </div>
 
 <style>
   .color-group {
-    margin-bottom: 2rem;
-    padding: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem;
     border-radius: 6px;
-    background-color: var(--background-color);
+    background-color: var(--surface-color, #1e1e1e);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
   
   .group-header {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
   
   .group-header h3 {
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
     font-weight: 600;
+    font-size: 1rem;
   }
   
   .description {
     color: var(--text-muted);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin-bottom: 0;
   }
   
   .color-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
   }
   
   @media (max-width: 768px) {
-    .color-grid {
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    .group-header h3 {
+      font-size: 0.9rem;
     }
   }
 </style> 

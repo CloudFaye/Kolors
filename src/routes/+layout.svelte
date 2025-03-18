@@ -7,6 +7,7 @@ import Navbar from '$lib/components/Navbar.svelte';
 import WIPButton from '$lib/components/WIPButton.svelte';
 import WIPPopup from '$lib/components/WIPPopup.svelte';
 import { onMount } from 'svelte';
+import { page } from '$app/stores';
 
 let { children } = $props()
 

@@ -9,7 +9,8 @@
   }>();
   
   let textColor = $state('');
-  let colorInfo = $state('');
+  let hexValue = $state('');
+  let rgbValue = $state('');
   
   onMount(() => {
     // Calculate contrast color for text (simple version)
@@ -24,13 +25,14 @@
     textColor = luminance > 0.5 ? '#000000' : '#ffffff';
     
     // Get color info
-    colorInfo = shade.value.toUpperCase();
+    hexValue = shade.value.toUpperCase();
+    rgbValue = `RGB(${r}, ${g}, ${b})`;
   });
   
-  function copyToClipboard() {
-    navigator.clipboard.writeText(shade.value)
+  function copyToClipboard(value: string, type: string) {
+    navigator.clipboard.writeText(value)
       .then(() => {
-        addToast(`Copied ${shade.value.toUpperCase()} to clipboard!`, 'success');
+        addToast(`Copied ${type} value: ${value} to clipboard!`, 'success');
       })
       .catch(() => {
         addToast('Failed to copy to clipboard', 'error');
@@ -40,62 +42,74 @@
 
 <div class="color-card {size}" style="background-color: {shade.value}; color: {textColor}">
   <div class="card-content">
-    <div class="color-info">
-      <span class="color-name">{shade.name}</span>
-      <span class="color-value">{colorInfo}</span>
+    <div class="color-name">{shade.name}</div>
+    <div class="copy-options">
+      <div class="copy-option">
+        <span class="label">Hex</span>
+        <button class="copy-button" on:click={() => copyToClipboard(hexValue, 'HEX')}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="copy-option">
+        <span class="label">RGB</span>
+        <button class="copy-button" on:click={() => copyToClipboard(rgbValue, 'RGB')}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </button>
+      </div>
     </div>
-    <button class="copy-button" onclick={copyToClipboard} aria-label="Copy color code">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-      </svg>
-    </button>
   </div>
 </div>
 
 <style>
   .color-card {
-    margin-bottom: 8px;
-    border-radius: 6px;
+    margin-bottom: 0;
+    border-radius: 0;
     position: relative;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease;
     user-select: none;
-  }
-  
-  .color-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1;
+    display: flex;
+    flex-direction: column;
   }
   
   .card-content {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    align-items: end;
-    padding: 0.8rem;
+    align-items: center;
+    padding: 0.6rem;
     height: 100%;
-    
-  }
-  
-  .color-info {
-    display: flex;
-    flex-direction: column;
   }
   
   .color-name {
     font-weight: 400;
     font-size: 0.75rem;
-    transition: font-size 0.2s ease;
-    
   }
   
-  .color-value {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
+  .copy-options {
+    display: flex;
+    gap: 0.5rem;
     opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.2s ease, max-height 0.2s ease;
+    transition: opacity 0.2s ease;
+  }
+  
+  .color-card:hover .copy-options {
+    opacity: 1;
+  }
+  
+  .copy-option {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  .label {
+    font-size: 0.7rem;
   }
   
   .copy-button {
@@ -103,38 +117,43 @@
     border: none;
     color: inherit;
     cursor: pointer;
-    opacity: 0;
-    padding: 0.25rem;
+    padding: 0.2rem;
     border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
     transition: opacity 0.2s ease;
-    transform: scale(0.8);
   }
   
-  .color-card:hover .color-value {
+  .copy-option:hover .copy-button {
     opacity: 0.8;
-    max-height: 20px;
-  }
-  
-  .color-card:hover .copy-button {
-    opacity: 0.7;
-    transform: scale(1);
   }
   
   .copy-button:hover {
     opacity: 1 !important;
-    background-color: rgba(255, 255, 255, 0.1);
   }
   
   /* Size variants */
   .small {
-    height: 60px;
+    height: 40px;
   }
   
   .medium {
-    height: 80px;
+    height: 100px;
   }
   
   .large {
-    height: 100px;
+    height: 150px;
+  }
+  
+  @media (max-width: 768px) {
+    .small {
+      height: 40px;
+    }
+    
+    .medium {
+      height: 100px;
+    }
   }
 </style> 

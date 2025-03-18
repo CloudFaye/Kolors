@@ -13,14 +13,26 @@
 
 <div class="system-container">
   <header class="system-header">
-    <h1 id="system-title">{system.name}</h1>
-    <p class="system-description">{system.description}</p>
+    <div class="header-content">
+      <div class="header-text">
+        <h1 id="system-title">{system.name}</h1>
+        <p class="system-description">{system.description}</p>
+      </div>
+      <div class="header-image">
+        <img src={system.image} alt={`${system.name} design system`} />
+      </div>
+    </div>
   </header>
   
-  <div class="color-groups" aria-labelledby="system-title">
-    {#each system.colorGroups as group}
-      <ColorGroup group={group} />
-    {/each}
+  <div class="palette-section">
+    
+    <div class="color-groups" aria-labelledby="system-title">
+      {#each system.colorGroups as group, i (group.name)}
+        <div class="group-wrapper">
+          <ColorGroup group={group} />
+        </div>
+      {/each}
+    </div>
   </div>
 </div>
 
@@ -33,57 +45,105 @@
   
   /* Header section styling */
   .system-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid var(--border-color);
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .header-text {
+    flex: 1;
+  }
+  
+  .header-image {
+    flex-shrink: 0;
+  }
+  
+  .header-image img {
+    display: block;
+    max-width: 48px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
   
   .system-header h1 {
     font-family: 'Inter', sans-serif;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
   
   .system-description {
     font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.5;
     color: var(--text-muted);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     max-width: 800px;
   }
   
-  /* External link styling (kept for future use) */
-  .system-link {
-    font-family: 'Inter', sans-serif;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 500;
+  /* Palette section */
+  .palette-section {
+    margin-bottom: 2rem;
   }
   
-  .system-link:hover {
-    text-decoration: underline;
+  .palette-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
   }
   
-  /* Color groups grid layout */
+  /* Color groups layout - 3-column grid */
   .color-groups {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .group-wrapper {
+     /* Prevents flex items from overflowing */
+    display: flex;
+    width: 100%;
   }
   
   /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .color-groups {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
   @media (max-width: 768px) {
+    .header-content {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .header-text {
+      width: 100%;
+    }
+    
+    .header-image img {
+      max-width: 150px;
+      margin: 0 auto;
+    }
+    
     .system-header h1 {
-      font-size: 2rem;
+      font-size: 1.75rem;
     }
     
     .system-description {
-      font-size: 1rem;
+      font-size: 0.9rem;
+    }
+    
+    .color-groups {
+      grid-template-columns: 1fr;
     }
   }
 </style> 

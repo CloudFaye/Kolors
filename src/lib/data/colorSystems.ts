@@ -16,6 +16,7 @@ export type ColorSystem = {
   description: string;
   url: string;
   colorGroups: ColorGroup[];
+  image: string;
 };
 
 export const colorSystems: ColorSystem[] = [
@@ -24,6 +25,7 @@ export const colorSystems: ColorSystem[] = [
     name: "IBM Carbon",
     description: "IBM's open-source design system for products and digital experiences",
     url: "",
+    image: "./images/IBM carbon.png",
     colorGroups: [
       {
         name: "Blue",
@@ -74,6 +76,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Material Design 3",
     description: "Google's open-source design system",
     url: "",
+    image: "./images/material.png",
     colorGroups: [
       {
         name: "Primary",
@@ -118,6 +121,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Apple Design",
     description: "Apple's Human Interface Guidelines colors",
     url: "",
+    image: "./images/Apple.png",
     colorGroups: [
       {
         name: "Light Mode",
@@ -159,7 +163,8 @@ export const colorSystems: ColorSystem[] = [
     id: "radix-ui",
     name: "Radix UI Colors",
     description: "A gorgeous, accessible color system for building functional and beautiful apps",
-    url: "",
+    url: "https://www.radix-ui.com/colors",
+    image: "./images/radix.png",
     colorGroups: [
       {
         name: "Gray",
@@ -188,11 +193,96 @@ export const colorSystems: ColorSystem[] = [
           { name: "5", value: "#e9e8ea" },
           { name: "6", value: "#e4e2e4" },
           { name: "7", value: "#dcdbdd" },
-          { name: "8", value: "#c8c7cb" },
-          { name: "9", value: "#908e96" },
-          { name: "10", value: "#86848d" },
-          { name: "11", value: "#6f6e77" },
-          { name: "12", value: "#1a1523" }
+          { name: "8", value: "#bcbac7" },
+          { name: "9", value: "#8e8c99" },
+          { name: "10", value: "#84828e" },
+          { name: "11", value: "#65636d" },
+          { name: "12", value: "#211f26" }
+        ]
+      },
+      {
+        name: "Slate",
+        shades: [
+          { name: "1", value: "#fcfcfd" },
+          { name: "2", value: "#f8f9fa" },
+          { name: "3", value: "#f1f3f5" },
+          { name: "4", value: "#eceef0" },
+          { name: "5", value: "#e6e8eb" },
+          { name: "6", value: "#dfe3e6" },
+          { name: "7", value: "#d7dbdf" },
+          { name: "8", value: "#c1c8cd" },
+          { name: "9", value: "#889096" },
+          { name: "10", value: "#7e868c" },
+          { name: "11", value: "#687076" },
+          { name: "12", value: "#11181c" }
+        ]
+      },
+      {
+        name: "Sage",
+        shades: [
+          { name: "1", value: "#fbfdfc" },
+          { name: "2", value: "#f8faf9" },
+          { name: "3", value: "#f1f4f3" },
+          { name: "4", value: "#ecefed" },
+          { name: "5", value: "#e6e9e8" },
+          { name: "6", value: "#dfe4e2" },
+          { name: "7", value: "#d7dcda" },
+          { name: "8", value: "#c2c9c6" },
+          { name: "9", value: "#8a918e" },
+          { name: "10", value: "#808784" },
+          { name: "11", value: "#6a736f" },
+          { name: "12", value: "#141917" }
+        ]
+      },
+      {
+        name: "Olive",
+        shades: [
+          { name: "1", value: "#fcfdfc" },
+          { name: "2", value: "#f8faf8" },
+          { name: "3", value: "#f2f4f2" },
+          { name: "4", value: "#ecefec" },
+          { name: "5", value: "#e6e9e6" },
+          { name: "6", value: "#dfe4df" },
+          { name: "7", value: "#d8ddd7" },
+          { name: "8", value: "#c3c8c2" },
+          { name: "9", value: "#8b918a" },
+          { name: "10", value: "#818780" },
+          { name: "11", value: "#6b726a" },
+          { name: "12", value: "#141e12" }
+        ]
+      },
+      {
+        name: "Sand",
+        shades: [
+          { name: "1", value: "#fdfdfc" },
+          { name: "2", value: "#f9f9f8" },
+          { name: "3", value: "#f3f3f2" },
+          { name: "4", value: "#eeeeec" },
+          { name: "5", value: "#e9e9e6" },
+          { name: "6", value: "#e3e3e0" },
+          { name: "7", value: "#dbdbd7" },
+          { name: "8", value: "#c8c7c1" },
+          { name: "9", value: "#90908c" },
+          { name: "10", value: "#868682" },
+          { name: "11", value: "#706f6c" },
+          { name: "12", value: "#1b1b18" }
+        ]
+      },
+      {
+        name: "Tomato",
+        shades: [
+          { name: "1", value: "#fffcfc" },
+          { name: "2", value: "#fff8f7" },
+          { name: "3", value: "#fff0ee" },
+          { name: "4", value: "#ffe6e2" },
+          { name: "5", value: "#fdd8d3" },
+          { name: "6", value: "#fac7be" },
+          { name: "7", value: "#f3b0a2" },
+          { name: "8", value: "#ea9280" },
+          { name: "9", value: "#e54d2e" },
+          { name: "10", value: "#db4324" },
+          { name: "11", value: "#ca3214" },
+          { name: "12", value: "#341711" }
         ]
       },
       {
@@ -230,6 +320,74 @@ export const colorSystems: ColorSystem[] = [
         ]
       },
       {
+        name: "Ruby",
+        shades: [
+          { name: "1", value: "#fffcfd" },
+          { name: "2", value: "#fff7f9" },
+          { name: "3", value: "#feeff3" },
+          { name: "4", value: "#fce5eb" },
+          { name: "5", value: "#f9d8e2" },
+          { name: "6", value: "#f4c6d7" },
+          { name: "7", value: "#edadc8" },
+          { name: "8", value: "#e58fb1" },
+          { name: "9", value: "#e93d82" },
+          { name: "10", value: "#df3478" },
+          { name: "11", value: "#cb1d63" },
+          { name: "12", value: "#43121d" }
+        ]
+      },
+      {
+        name: "Crimson",
+        shades: [
+          { name: "1", value: "#fffcfd" },
+          { name: "2", value: "#fff7fb" },
+          { name: "3", value: "#feeff6" },
+          { name: "4", value: "#fce5f0" },
+          { name: "5", value: "#f9d8e7" },
+          { name: "6", value: "#f4c6db" },
+          { name: "7", value: "#edadcc" },
+          { name: "8", value: "#e58fb6" },
+          { name: "9", value: "#e93d82" },
+          { name: "10", value: "#df3478" },
+          { name: "11", value: "#cb1d63" },
+          { name: "12", value: "#43121d" }
+        ]
+      },
+      {
+        name: "Pink",
+        shades: [
+          { name: "1", value: "#fffcfe" },
+          { name: "2", value: "#fff7fc" },
+          { name: "3", value: "#feeef8" },
+          { name: "4", value: "#fce5f3" },
+          { name: "5", value: "#f9d8ec" },
+          { name: "6", value: "#f3c6e2" },
+          { name: "7", value: "#ecadd4" },
+          { name: "8", value: "#e38ec3" },
+          { name: "9", value: "#d6409f" },
+          { name: "10", value: "#d23197" },
+          { name: "11", value: "#cd1d8d" },
+          { name: "12", value: "#3b0a2a" }
+        ]
+      },
+      {
+        name: "Plum",
+        shades: [
+          { name: "1", value: "#fefcff" },
+          { name: "2", value: "#fdf8fe" },
+          { name: "3", value: "#f9f1fe" },
+          { name: "4", value: "#f5e8fc" },
+          { name: "5", value: "#efdbf9" },
+          { name: "6", value: "#e7ccf4" },
+          { name: "7", value: "#dcb8ee" },
+          { name: "8", value: "#cda0e5" },
+          { name: "9", value: "#ab4aba" },
+          { name: "10", value: "#a144af" },
+          { name: "11", value: "#953ea3" },
+          { name: "12", value: "#341237" }
+        ]
+      },
+      {
         name: "Green",
         shades: [
           { name: "1", value: "#fbfefc" },
@@ -264,20 +422,54 @@ export const colorSystems: ColorSystem[] = [
         ]
       },
       {
-        name: "Amber",
+        name: "Violet",
         shades: [
-          { name: "1", value: "#fefdfb" },
-          { name: "2", value: "#fff9ed" },
-          { name: "3", value: "#fff4d5" },
-          { name: "4", value: "#ffecbc" },
-          { name: "5", value: "#ffe3a2" },
-          { name: "6", value: "#ffd386" },
-          { name: "7", value: "#f3ba63" },
-          { name: "8", value: "#ee9d2b" },
-          { name: "9", value: "#ffb224" },
-          { name: "10", value: "#ffa01c" },
-          { name: "11", value: "#ad5700" },
-          { name: "12", value: "#4e2009" }
+          { name: "1", value: "#fdfcfe" },
+          { name: "2", value: "#fbfaff" },
+          { name: "3", value: "#f5f2ff" },
+          { name: "4", value: "#ede9fe" },
+          { name: "5", value: "#e4defc" },
+          { name: "6", value: "#d7cff9" },
+          { name: "7", value: "#c4b8f3" },
+          { name: "8", value: "#aa99ec" },
+          { name: "9", value: "#6e56cf" },
+          { name: "10", value: "#644fc1" },
+          { name: "11", value: "#5746af" },
+          { name: "12", value: "#20134b" }
+        ]
+      },
+      {
+        name: "Iris",
+        shades: [
+          { name: "1", value: "#fdfdff" },
+          { name: "2", value: "#fafbff" },
+          { name: "3", value: "#f5f7ff" },
+          { name: "4", value: "#eff1ff" },
+          { name: "5", value: "#e5e9ff" },
+          { name: "6", value: "#d9e0ff" },
+          { name: "7", value: "#c6d1ff" },
+          { name: "8", value: "#aabbff" },
+          { name: "9", value: "#5b5bd6" },
+          { name: "10", value: "#5151cd" },
+          { name: "11", value: "#4646c6" },
+          { name: "12", value: "#1d1d4d" }
+        ]
+      },
+      {
+        name: "Indigo",
+        shades: [
+          { name: "1", value: "#fdfdfe" },
+          { name: "2", value: "#f8faff" },
+          { name: "3", value: "#f0f4ff" },
+          { name: "4", value: "#e6edfe" },
+          { name: "5", value: "#d9e2fc" },
+          { name: "6", value: "#c6d4f9" },
+          { name: "7", value: "#aec0f5" },
+          { name: "8", value: "#8da4ef" },
+          { name: "9", value: "#3e63dd" },
+          { name: "10", value: "#3a5ccc" },
+          { name: "11", value: "#3451b2" },
+          { name: "12", value: "#101d46" }
         ]
       },
       {
@@ -298,20 +490,241 @@ export const colorSystems: ColorSystem[] = [
         ]
       },
       {
-        name: "Violet",
+        name: "Teal",
         shades: [
-          { name: "1", value: "#fdfcfe" },
-          { name: "2", value: "#fbfaff" },
-          { name: "3", value: "#f5f2ff" },
-          { name: "4", value: "#ede9fe" },
-          { name: "5", value: "#e4defc" },
-          { name: "6", value: "#d7cff9" },
-          { name: "7", value: "#c4b8f3" },
-          { name: "8", value: "#aa99ec" },
-          { name: "9", value: "#6e56cf" },
-          { name: "10", value: "#644fc1" },
-          { name: "11", value: "#5746af" },
-          { name: "12", value: "#20134b" }
+          { name: "1", value: "#fafefd" },
+          { name: "2", value: "#f1fcfa" },
+          { name: "3", value: "#e7f9f5" },
+          { name: "4", value: "#d9f3ee" },
+          { name: "5", value: "#c7ebe5" },
+          { name: "6", value: "#afdfd7" },
+          { name: "7", value: "#8dcec3" },
+          { name: "8", value: "#53b9ab" },
+          { name: "9", value: "#12a594" },
+          { name: "10", value: "#0e9888" },
+          { name: "11", value: "#067a6f" },
+          { name: "12", value: "#10302b" }
+        ]
+      },
+      {
+        name: "Jade",
+        shades: [
+          { name: "1", value: "#fbfefd" },
+          { name: "2", value: "#f2fcf8" },
+          { name: "3", value: "#e8f8f3" },
+          { name: "4", value: "#ddf3ec" },
+          { name: "5", value: "#ceece2" },
+          { name: "6", value: "#b9e2d6" },
+          { name: "7", value: "#9dd4c5" },
+          { name: "8", value: "#72c2af" },
+          { name: "9", value: "#30a58e" },
+          { name: "10", value: "#2b9a81" },
+          { name: "11", value: "#1d8a6e" },
+          { name: "12", value: "#153b35" }
+        ]
+      },
+      {
+        name: "Grass",
+        shades: [
+          { name: "1", value: "#fbfefb" },
+          { name: "2", value: "#f3fcf3" },
+          { name: "3", value: "#ebf9eb" },
+          { name: "4", value: "#dff3df" },
+          { name: "5", value: "#ceebcf" },
+          { name: "6", value: "#b7dfba" },
+          { name: "7", value: "#97cf9c" },
+          { name: "8", value: "#65ba75" },
+          { name: "9", value: "#46a758" },
+          { name: "10", value: "#3d9a50" },
+          { name: "11", value: "#297c3b" },
+          { name: "12", value: "#162919" }
+        ]
+      },
+      {
+        name: "Bronze",
+        shades: [
+          { name: "1", value: "#fdfcfc" },
+          { name: "2", value: "#fdf8f6" },
+          { name: "3", value: "#f8f1ee" },
+          { name: "4", value: "#f3e9e5" },
+          { name: "5", value: "#ece0db" },
+          { name: "6", value: "#e4d6cd" },
+          { name: "7", value: "#dcc9bd" },
+          { name: "8", value: "#cbb7a8" },
+          { name: "9", value: "#a18072" },
+          { name: "10", value: "#957160" },
+          { name: "11", value: "#7d5e4d" },
+          { name: "12", value: "#3e2f28" }
+        ]
+      },
+      {
+        name: "Gold",
+        shades: [
+          { name: "1", value: "#fdfdfc" },
+          { name: "2", value: "#faf9f4" },
+          { name: "3", value: "#f5f2e9" },
+          { name: "4", value: "#f0ebdd" },
+          { name: "5", value: "#eae1ce" },
+          { name: "6", value: "#e2d7be" },
+          { name: "7", value: "#d8ccac" },
+          { name: "8", value: "#cebf95" },
+          { name: "9", value: "#978b63" },
+          { name: "10", value: "#8c825a" },
+          { name: "11", value: "#776d41" },
+          { name: "12", value: "#3b3520" }
+        ]
+      },
+      {
+        name: "Brown",
+        shades: [
+          { name: "1", value: "#fefdfc" },
+          { name: "2", value: "#fcf9f6" },
+          { name: "3", value: "#f8f1ec" },
+          { name: "4", value: "#f4e9e1" },
+          { name: "5", value: "#eddfd3" },
+          { name: "6", value: "#e5d4c4" },
+          { name: "7", value: "#dcc6b3" },
+          { name: "8", value: "#cdb49a" },
+          { name: "9", value: "#a18072" },
+          { name: "10", value: "#967566" },
+          { name: "11", value: "#7c5e54" },
+          { name: "12", value: "#3e2f28" }
+        ]
+      },
+      {
+        name: "Amber",
+        shades: [
+          { name: "1", value: "#fefdfb" },
+          { name: "2", value: "#fff9ed" },
+          { name: "3", value: "#fff4d5" },
+          { name: "4", value: "#ffecbc" },
+          { name: "5", value: "#ffe3a2" },
+          { name: "6", value: "#ffd386" },
+          { name: "7", value: "#f3ba63" },
+          { name: "8", value: "#ee9d2b" },
+          { name: "9", value: "#ffb224" },
+          { name: "10", value: "#ffa01c" },
+          { name: "11", value: "#ad5700" },
+          { name: "12", value: "#4e2009" }
+        ]
+      },
+      {
+        name: "Orange",
+        shades: [
+          { name: "1", value: "#fefcfb" },
+          { name: "2", value: "#fff8f4" },
+          { name: "3", value: "#ffedd3" },
+          { name: "4", value: "#ffe0c2" },
+          { name: "5", value: "#ffd3ab" },
+          { name: "6", value: "#ffc392" },
+          { name: "7", value: "#ffad6d" },
+          { name: "8", value: "#fa934e" },
+          { name: "9", value: "#f76808" },
+          { name: "10", value: "#ed5f00" },
+          { name: "11", value: "#bd4b00" },
+          { name: "12", value: "#451e11" }
+        ]
+      },
+      {
+        name: "Yellow",
+        shades: [
+          { name: "1", value: "#fdfdf9" },
+          { name: "2", value: "#fffce8" },
+          { name: "3", value: "#fffbd1" },
+          { name: "4", value: "#fff8bb" },
+          { name: "5", value: "#fef2a4" },
+          { name: "6", value: "#f9e68c" },
+          { name: "7", value: "#efd36c" },
+          { name: "8", value: "#ebbc00" },
+          { name: "9", value: "#f5d90a" },
+          { name: "10", value: "#f7ce00" },
+          { name: "11", value: "#946800" },
+          { name: "12", value: "#35290f" }
+        ]
+      },
+      {
+        name: "Lime",
+        shades: [
+          { name: "1", value: "#fcfdfa" },
+          { name: "2", value: "#f9fbe7" },
+          { name: "3", value: "#f1f8d2" },
+          { name: "4", value: "#e9f4bd" },
+          { name: "5", value: "#dfeca6" },
+          { name: "6", value: "#d3e194" },
+          { name: "7", value: "#c3d181" },
+          { name: "8", value: "#a9bc6e" },
+          { name: "9", value: "#8cbc1e" },
+          { name: "10", value: "#82b218" },
+          { name: "11", value: "#62921d" },
+          { name: "12", value: "#2a3514" }
+        ]
+      },
+      {
+        name: "Mint",
+        shades: [
+          { name: "1", value: "#f9fefd" },
+          { name: "2", value: "#effefa" },
+          { name: "3", value: "#e1fbf4" },
+          { name: "4", value: "#d2f7ed" },
+          { name: "5", value: "#c0efe3" },
+          { name: "6", value: "#a5e4d4" },
+          { name: "7", value: "#7ed7c1" },
+          { name: "8", value: "#40c4aa" },
+          { name: "9", value: "#70e1c8" },
+          { name: "10", value: "#3dd9b4" },
+          { name: "11", value: "#26bc98" },
+          { name: "12", value: "#124b45" }
+        ]
+      },
+      {
+        name: "Sky",
+        shades: [
+          { name: "1", value: "#f9feff" },
+          { name: "2", value: "#f1fafd" },
+          { name: "3", value: "#e6f6fc" },
+          { name: "4", value: "#d5f0fa" },
+          { name: "5", value: "#c1e8f7" },
+          { name: "6", value: "#a9def2" },
+          { name: "7", value: "#86d1ec" },
+          { name: "8", value: "#4cbfe3" },
+          { name: "9", value: "#0ba2dc" },
+          { name: "10", value: "#0396cf" },
+          { name: "11", value: "#0078a1" },
+          { name: "12", value: "#003046" }
+        ]
+      },
+      {
+        name: "Black",
+        shades: [
+          { name: "1", value: "#111111" },
+          { name: "2", value: "#191919" },
+          { name: "3", value: "#222222" },
+          { name: "4", value: "#2a2a2a" },
+          { name: "5", value: "#313131" },
+          { name: "6", value: "#3a3a3a" },
+          { name: "7", value: "#484848" },
+          { name: "8", value: "#606060" },
+          { name: "9", value: "#6e6e6e" },
+          { name: "10", value: "#7b7b7b" },
+          { name: "11", value: "#b4b4b4" },
+          { name: "12", value: "#eeeeee" }
+        ]
+      },
+      {
+        name: "White",
+        shades: [
+          { name: "1", value: "#ffffff" },
+          { name: "2", value: "#fcfcfc" },
+          { name: "3", value: "#f9f9f9" },
+          { name: "4", value: "#f4f4f4" },
+          { name: "5", value: "#eeeeee" },
+          { name: "6", value: "#e9e9e9" },
+          { name: "7", value: "#e3e3e3" },
+          { name: "8", value: "#d8d8d8" },
+          { name: "9", value: "#c5c5c5" },
+          { name: "10", value: "#bbbbbb" },
+          { name: "11", value: "#8f8f8f" },
+          { name: "12", value: "#111111" }
         ]
       }
     ]
@@ -321,6 +734,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Atlassian Design System",
     description: "The official color palette from Atlassian's design system",
     url: "",
+    image: "./images/atlassian.svg",
     colorGroups: [
       {
         name: "Blue",
@@ -374,6 +788,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Stripe Colors",
     description: "Colors from Stripe's visual design system",
     url: "",
+    image: "./images/stripe.svg",
     colorGroups: [
       {
         name: "Primary",
@@ -412,6 +827,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Bootstrap 5",
     description: "The official color system from Bootstrap 5",
     url: "",
+    image: "./images/bootstrap.svg",
     colorGroups: [
       {
         name: "Core Colors",
@@ -427,32 +843,157 @@ export const colorSystems: ColorSystem[] = [
         ]
       },
       {
-        name: "Blue Variations",
+        name: "Blue",
         shades: [
-          { name: "Blue", value: "#0d6efd" },
-          { name: "Indigo", value: "#6610f2" },
-          { name: "Purple", value: "#6f42c1" },
-          { name: "Pink", value: "#d63384" },
-          { name: "Red", value: "#dc3545" },
-          { name: "Orange", value: "#fd7e14" },
-          { name: "Yellow", value: "#ffc107" },
-          { name: "Green", value: "#198754" },
-          { name: "Teal", value: "#20c997" },
-          { name: "Cyan", value: "#0dcaf0" }
+          { name: "100", value: "#cfe2ff" },
+          { name: "200", value: "#9ec5fe" },
+          { name: "300", value: "#6ea8fe" },
+          { name: "400", value: "#3d8bfd" },
+          { name: "500", value: "#0d6efd" },
+          { name: "600", value: "#0a58ca" },
+          { name: "700", value: "#084298" },
+          { name: "800", value: "#052c65" },
+          { name: "900", value: "#031633" }
         ]
       },
       {
-        name: "Gray Scale",
+        name: "Indigo",
         shades: [
-          { name: "Gray-100", value: "#f8f9fa" },
-          { name: "Gray-200", value: "#e9ecef" },
-          { name: "Gray-300", value: "#dee2e6" },
-          { name: "Gray-400", value: "#ced4da" },
-          { name: "Gray-500", value: "#adb5bd" },
-          { name: "Gray-600", value: "#6c757d" },
-          { name: "Gray-700", value: "#495057" },
-          { name: "Gray-800", value: "#343a40" },
-          { name: "Gray-900", value: "#212529" }
+          { name: "100", value: "#e0cffc" },
+          { name: "200", value: "#c29ffa" },
+          { name: "300", value: "#a370f7" },
+          { name: "400", value: "#8540f5" },
+          { name: "500", value: "#6610f2" },
+          { name: "600", value: "#520dc2" },
+          { name: "700", value: "#3d0a91" },
+          { name: "800", value: "#290661" },
+          { name: "900", value: "#140330" }
+        ]
+      },
+      {
+        name: "Purple",
+        shades: [
+          { name: "100", value: "#e2d9f3" },
+          { name: "200", value: "#c5b3e6" },
+          { name: "300", value: "#a98eda" },
+          { name: "400", value: "#8c68cd" },
+          { name: "500", value: "#6f42c1" },
+          { name: "600", value: "#59359a" },
+          { name: "700", value: "#432874" },
+          { name: "800", value: "#2c1a4d" },
+          { name: "900", value: "#160d27" }
+        ]
+      },
+      {
+        name: "Pink",
+        shades: [
+          { name: "100", value: "#f7d6e6" },
+          { name: "200", value: "#efadce" },
+          { name: "300", value: "#e685b5" },
+          { name: "400", value: "#de5c9d" },
+          { name: "500", value: "#d63384" },
+          { name: "600", value: "#ab296a" },
+          { name: "700", value: "#801f4f" },
+          { name: "800", value: "#561435" },
+          { name: "900", value: "#2b0a1a" }
+        ]
+      },
+      {
+        name: "Red",
+        shades: [
+          { name: "100", value: "#f8d7da" },
+          { name: "200", value: "#f1aeb5" },
+          { name: "300", value: "#ea868f" },
+          { name: "400", value: "#e35d6a" },
+          { name: "500", value: "#dc3545" },
+          { name: "600", value: "#b02a37" },
+          { name: "700", value: "#842029" },
+          { name: "800", value: "#58151c" },
+          { name: "900", value: "#2c0b0e" }
+        ]
+      },
+      {
+        name: "Orange",
+        shades: [
+          { name: "100", value: "#ffe5d0" },
+          { name: "200", value: "#fecba1" },
+          { name: "300", value: "#feb272" },
+          { name: "400", value: "#fd9843" },
+          { name: "500", value: "#fd7e14" },
+          { name: "600", value: "#ca6510" },
+          { name: "700", value: "#984c0c" },
+          { name: "800", value: "#653208" },
+          { name: "900", value: "#331904" }
+        ]
+      },
+      {
+        name: "Yellow",
+        shades: [
+          { name: "100", value: "#fff3cd" },
+          { name: "200", value: "#ffe69c" },
+          { name: "300", value: "#ffda6a" },
+          { name: "400", value: "#ffcd39" },
+          { name: "500", value: "#ffc107" },
+          { name: "600", value: "#cc9a06" },
+          { name: "700", value: "#997404" },
+          { name: "800", value: "#664d03" },
+          { name: "900", value: "#332701" }
+        ]
+      },
+      {
+        name: "Green",
+        shades: [
+          { name: "100", value: "#d1e7dd" },
+          { name: "200", value: "#a3cfbb" },
+          { name: "300", value: "#75b798" },
+          { name: "400", value: "#479f76" },
+          { name: "500", value: "#198754" },
+          { name: "600", value: "#146c43" },
+          { name: "700", value: "#0f5132" },
+          { name: "800", value: "#0a3622" },
+          { name: "900", value: "#051b11" }
+        ]
+      },
+      {
+        name: "Teal",
+        shades: [
+          { name: "100", value: "#d2f4ea" },
+          { name: "200", value: "#a6e9d5" },
+          { name: "300", value: "#79dfc1" },
+          { name: "400", value: "#4dd4ac" },
+          { name: "500", value: "#20c997" },
+          { name: "600", value: "#1aa078" },
+          { name: "700", value: "#137858" },
+          { name: "800", value: "#0d5039" },
+          { name: "900", value: "#06281b" }
+        ]
+      },
+      {
+        name: "Cyan",
+        shades: [
+          { name: "100", value: "#cff4fc" },
+          { name: "200", value: "#9eeaf9" },
+          { name: "300", value: "#6edff6" },
+          { name: "400", value: "#3dd5f3" },
+          { name: "500", value: "#0dcaf0" },
+          { name: "600", value: "#0aa2c0" },
+          { name: "700", value: "#087990" },
+          { name: "800", value: "#055160" },
+          { name: "900", value: "#032830" }
+        ]
+      },
+      {
+        name: "Gray",
+        shades: [
+          { name: "100", value: "#f8f9fa" },
+          { name: "200", value: "#e9ecef" },
+          { name: "300", value: "#dee2e6" },
+          { name: "400", value: "#ced4da" },
+          { name: "500", value: "#adb5bd" },
+          { name: "600", value: "#6c757d" },
+          { name: "700", value: "#495057" },
+          { name: "800", value: "#343a40" },
+          { name: "900", value: "#212529" }
         ]
       }
     ]
@@ -462,6 +1003,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Tailwind CSS",
     description: "The default color palette from Tailwind CSS",
     url: "",
+    image: "./images/tailwind.svg",
     colorGroups: [
       {
         name: "Slate",
@@ -518,6 +1060,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Untitled UI",
     description: "A beautiful color system from the Untitled UI design kit",
     url: "",
+    image: "./images/untitled.svg",
     colorGroups: [
       {
         name: "Gray",
@@ -574,6 +1117,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Kromatika",
     description: "A vibrant and accessible color system for digital products",
     url: "",
+    image: "",
     colorGroups: [
       {
         name: "Primary",
@@ -627,6 +1171,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Adobe Spectrum",
     description: "Adobe's design system for creating cohesive experiences",
     url: "",
+    image: "./images/adobe.svg",
     colorGroups: [
      
         {
@@ -811,6 +1356,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Uber Design",
     description: "Uber's design system for building consistent experiences",
     url: "",
+    image: "./images/Ubers Base.png",
     colorGroups: [
       {
         name: "Primary",
@@ -858,6 +1404,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Ant Design",
     description: "An enterprise-class UI design language and React UI library",
     url: "",
+    image: "./images/ant.svg",
     colorGroups: [
       {
         name: "Blue",
@@ -911,6 +1458,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Dell Design System",
     description: "Dell's design system for creating consistent digital experiences",
     url: "",
+    image: "./images/dell.svg",
     colorGroups: [
       {
         name: "Brand",
@@ -955,6 +1503,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Pantone Neutrals",
     description: "Pantone's collection of neutral and light colors widely used in fashion and design",
     url: "",
+    image: "./images/Avatar.png",
     colorGroups: [
       {
         name: "Pure Whites & Off-Whites",
@@ -1540,6 +2089,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Pajamas",
     description: "GitLab's design system color palette",
     url: "https://www.colorsandfonts.com/color-systems/pajamas-color-system/",
+    image: "./images/pajamas.svg",
     colorGroups: [
       {
         name: "Blue",
@@ -1700,6 +2250,7 @@ export const colorSystems: ColorSystem[] = [
     name: "Vitamin",
     description: "Decathlon's design system color palette",
     url: "https://www.colorsandfonts.com/color-systems/vitamin-color-system/",
+    image: "./images/vitamin.svg",
     colorGroups: [
       {
         name: "Purple",

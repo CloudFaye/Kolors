@@ -594,7 +594,7 @@
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
 <!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class="page-container" onclick={() => {}}>
+<div class="page-container animate-item" onclick={() => {}}>
   <section class="hero">
     <p class='text-4xl font-semibold'>Theme Builder</p>
     <p class="">Create your own color system with perfect scaling for light and dark modes.</p>
