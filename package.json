@@ -41,6 +41,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"@rollup/rollup-linux-x64-gnu": "^4.36.0",
 		"colorizr": "^3.0.7",
 		"svelte-color-select": "^0.0.14"
 	}
