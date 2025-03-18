@@ -130,7 +130,7 @@
     }
     
     .header-image img {
-      max-width: 150px;
+      max-width: 30px;
       margin: 0 auto;
     }
     
