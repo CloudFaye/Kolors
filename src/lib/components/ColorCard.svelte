@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { ColorShade } from '$lib/data/colorSystems';
+  import type { ColorShade } from '$lib/types/colorShade';
   import { addToast } from '$lib/stores/toast';
   
   let { shade, size = 'medium' } = $props<{
