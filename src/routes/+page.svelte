@@ -1,7 +1,5 @@
 <script lang="ts">
 	import ColorSystemCard from '$lib/components/ColorSystemCard.svelte';
-	// Import removed as component doesn't exist
-	// import RandomPalettesSection from '$lib/components/RandomPalettesSection.svelte';
 </script>
 
 <svelte:head>
