@@ -49,10 +49,13 @@ const sorted = [...colorSystems].sort((a, b) => a.name.localeCompare(b.name));
     color: inherit;
     transition: transform 0.2s ease;
     padding-bottom: 18px;
+    border-radius: 8px;
   }
   
   .color-card:hover {
     transform: translateY(-4px);
+    background-color: var(--surface-color);
+
   }
   
   .color-preview {
