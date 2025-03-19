@@ -14,9 +14,6 @@
 <div class="system-container">
   <header class="system-header">
     <div class="header-content">
-       <div class="header-image">
-        <img class='size-8 mb-2' src={system.image} alt={`${system.name} design system`} />
-      </div>
       <div class="header-text">
         <h1 id="system-title">{system.name}</h1>
         <p class="system-description">{system.description}</p>
@@ -56,18 +53,8 @@
     flex: 1;
   }
   
-  .header-image {
-    
-  }
-  
-  .header-image img {
-    display: block;
-    max-width: 48px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }
-  
+ 
+
   .system-header h1 {
     font-family: 'Inter', sans-serif;
     font-size: 2rem;
