@@ -35,26 +35,21 @@
 </div>
 
 <style>
-  /* Container styling */
   .system-container {
     max-width: 100%;
     margin: 0 auto;
   }
   
-  /* Header section styling */
   .system-header {
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--border-color);
   }
   
- 
   .header-text {
     flex: 1;
   }
   
- 
-
   .system-header h1 {
     font-family: 'Inter', sans-serif;
     font-size: 2rem;
@@ -71,7 +66,6 @@
     max-width: 800px;
   }
   
-  /* Palette section */
   .palette-section {
     margin-bottom: 2rem;
   }
@@ -82,7 +76,6 @@
     margin-bottom: 1.25rem;
   }
   
-  /* Color groups layout - 3-column grid */
   .color-groups {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -90,12 +83,10 @@
   }
   
   .group-wrapper {
-     /* Prevents flex items from overflowing */
     display: flex;
     width: 100%;
   }
   
-  /* Responsive adjustments */
   @media (max-width: 1024px) {
     .color-groups {
       grid-template-columns: repeat(2, 1fr);
@@ -111,8 +102,6 @@
     .header-text {
       width: 100%;
     }
-    
-   
     
     .system-header h1 {
       font-size: 1.75rem;

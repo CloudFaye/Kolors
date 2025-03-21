@@ -1,5 +1,4 @@
 <script lang="ts">
-  // About page component displaying information about the Kolors project
 </script>
 
 <svelte:head>
@@ -54,13 +53,11 @@
 </div>
 
 <style>
-  /* Main container styling */
   .about-page {
     max-width: 800px;
     margin: 0 auto;
   }
   
-  /* Heading styles */
   h1 {
     margin-bottom: 2rem;
     text-align: center;
@@ -71,12 +68,10 @@
     margin-bottom: 1rem;
   }
   
-  /* Section styling */
   .about-section {
     margin-bottom: 2rem;
   }
   
-  /* List styling (retained for future use) */
   ul {
     margin-left: 2rem;
     margin-bottom: 1rem;
@@ -86,7 +81,6 @@
     margin-bottom: 0.5rem;
   }
   
-  /* Link styling */
   .underline {
     text-decoration: underline;
   }

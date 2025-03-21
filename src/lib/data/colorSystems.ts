@@ -46,8 +46,14 @@ export const colorSystems: ColorSystem[] = [
         shades: [
           {name: "10", value: "#defbe6"},
           {name: "20", value: "#A7F0BA"},
-          {name: "30", value: "#6fdc8c"}
-          
+          {name: "30", value: "#6fdc8c"},
+          {name: "40", value: "#42be65"},
+          {name: "50", value: "#24a148"},
+          {name: "60", value: "#198038"},
+          {name: "70", value: "#0e6027"},
+          {name: "80", value: "#044317"},
+          {name: "90", value: "#022b0d"},
+          {name: "100", value: "#071908"}
         ]
       }
     ]

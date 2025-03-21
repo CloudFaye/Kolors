@@ -11,7 +11,6 @@ import { page } from '$app/stores';
 
 let { children } = $props()
 
-// SEO: Add structured data for rich snippets
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
@@ -31,7 +30,7 @@ const structuredData = {
   "url": "https://colorsystems.netlify.app/"
 };
 
-// Insert structured data into the document head
+
 onMount(() => {
   const script = document.createElement('script');
   script.type = 'application/ld+json';
@@ -56,13 +55,12 @@ onMount(() => {
 <ToastContainer />
 
 <style>
-  /* Header styling */
+
   header {
     padding: 0.8rem 0;
     border-bottom: 1px solid var(--border-color);
   }
   
-  /* Footer styling */
   footer {
     margin-top: 3rem;
     border-top: 1px solid var(--border-color);
@@ -73,14 +71,12 @@ onMount(() => {
     padding-left: 1rem;
   }
   
-  /* Logo styling */
   .logo a {
     font-size: 1.7rem;
     font-weight: 700;
     margin: 0;
   }
   
-  /* Navigation styling */
   nav ul {
     list-style: none;
     display: flex;
@@ -95,13 +91,11 @@ onMount(() => {
     opacity: 0.8;
   }
   
-  /* Main content area */
   main {
     min-height: calc(100vh - 200px);
     padding: 2rem 0;
   }
   
-  /* Responsive adjustments */
   @media (max-width: 768px) {
     .logo h1 {
       font-size: 1.4rem;

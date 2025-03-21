@@ -6,11 +6,11 @@
   import ColorSelect, { type RGB } from 'svelte-color-select'
 	import { fade, fly, slide } from 'svelte/transition';
   
-  // Base colors for customization
+  
   const baseColor = writable('#e5484d'); // Default primary accent color // red
   const secondaryColor = writable('#78716c'); // Default secondary accent color //stone
   
-  // Define pantone accent and base colors for quick selection
+  
   const accentColors = [
     { name: "blue", value: "#4c6ef5", description: "Primary accent" },
     { name: "purple", value: "#8e4ec6", description: "Creative accent" },

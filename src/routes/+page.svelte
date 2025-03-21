@@ -21,12 +21,10 @@
 
 
 <style>
-  /* Base section styling */
   section {
     margin-bottom: 2.5rem;
   }
   
-  /* Hero section styling */
   .hero {
     text-align: center;
     margin-bottom: 3.5rem;
@@ -48,7 +46,6 @@
     line-height: 1.6;
   }
   
-  /* Color systems grid layout */
   .color-systems-list ul {
     list-style: none;
     padding: 0;
@@ -58,7 +55,6 @@
     gap: 1.5rem;
   }
   
-  /* Card styling */
   .system-card {
     display: flex;
     flex-direction: column;
@@ -75,9 +71,6 @@
     padding: 1.5rem;
   }
   
-  
-  
-  /* Media queries for responsive design */
   @media (max-width: 768px) {
     .hero h1 {
       font-size: 2rem;
