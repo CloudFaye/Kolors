@@ -1381,7 +1381,7 @@
   </section>
 </div>
 
-<!-- Color picker popups -->
+
 {#if showPrimaryPicker && primaryButtonPosition}
   <div 
     class="color-picker-popup"
@@ -1630,7 +1630,7 @@
     margin-bottom: 1.5rem;
   }
   
-  /* Demo Components */
+ 
   .demo-button {
     padding: 0.5rem 1rem;
     border-radius: 6px;
@@ -1769,7 +1769,7 @@
     line-height: 1.5;
   }
   
-  /* Profile Card */
+ 
   .profile-card {
     padding: 1.5rem;
     border-radius: 12px;
@@ -1836,7 +1836,7 @@
     gap: 0.75rem;
   }
   
-  /* Form demos */
+ 
   .form-elements {
     display: flex;
     flex-direction: column;
@@ -1912,7 +1912,7 @@
     user-select: none;
   }
   
-  /* Color Scale Table */
+ 
   .color-scale-table {
     margin-top: 3rem;
   }
@@ -2008,7 +2008,7 @@
     }
   }
 
-  /* Export CSS Button */
+
   .export-css-button {
     width: 100%;
     padding: 0.75rem 1rem;
@@ -2055,7 +2055,7 @@
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
 
-  /* Picker header styling */
+
   .picker-header {
     display: flex;
     justify-content: space-between;
@@ -2091,7 +2091,7 @@
     background-color: rgba(0, 0, 0, 0.05);
   }
 
-  /* Color grid styles */
+
   .color-section {
     margin-bottom: 1.5rem;
   }
@@ -2241,7 +2241,7 @@
     background-color: var(--panel-bg, #f8f9fa);
   }
 
-  /* Input Row for side-by-side inputs */
+ 
   .input-row {
     display: flex;
     gap: 1rem;
@@ -2252,7 +2252,7 @@
     flex: 1;
   }
 
-  /* Textarea Styles */
+  
   .demo-textarea {
     padding: 0.85rem 1rem;
     border-radius: 8px;
@@ -2272,7 +2272,7 @@
     box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.15);
   }
 
-  /* Number Input Styles */
+ 
   .number-input-wrapper {
     display: flex;
     align-items: center;
@@ -2317,7 +2317,7 @@
     margin: 0;
   }
 
-  /* Slider Styles */
+
   .slider-container {
     display: flex;
     align-items: center;

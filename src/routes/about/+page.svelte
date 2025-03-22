@@ -46,8 +46,8 @@
   <div class="card about-section" aria-labelledby="feedback-heading">
     <h2 id="feedback-heading">Suggestions and Feedback</h2>
     <p>
-      Kolors is a WIP 🚧. If you have suggestions, feedback, or would like to see a specific brand or design system featured, 
-      please <a class='underline' href="https://x.com/fayeseun_" target="_blank" rel="noopener noreferrer" aria-label="Contact Faye Seun on X (formerly Twitter)">Find me here, Send a DM</a>.
+      Kolors is a WIP 🚧. If you have suggestions, feedback, or would like to see a specific brand or design system featured,
+      <a href="https://mailto:Samuelfaye96@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email Faye Seun">Email me here</a> or send a message on X <a href="https://x.com/fayeseun_" target="_blank" rel="noopener noreferrer" aria-label="Contact Faye Seun on X (formerly Twitter)">here</a>.
     </p>
   </div>
 </div>
