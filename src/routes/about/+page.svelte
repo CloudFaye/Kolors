@@ -13,7 +13,7 @@
 </svelte:head>
 
 <div class="about-page">
-	<h1 id="about-heading">Maker Notes</h1>
+	<h1 class="maker-note" id="about-heading">Maker Notes</h1>
 
 	<div class="card about-section" aria-labelledby="what-is-kolors">
 		<p>
@@ -81,11 +81,15 @@
 	}
 
 	h1 {
-		margin-bottom: 2rem;
+		margin-bottom: 1.5rem;
 		text-align: left;
 		font-weight: 800;
 	}
 
+	.maker-note {
+		font-size: 2.5rem;
+		margin-bottom: 1.5rem;
+	}
 	h2 {
 		font-size: 1.5rem;
 		margin-bottom: 1rem;
